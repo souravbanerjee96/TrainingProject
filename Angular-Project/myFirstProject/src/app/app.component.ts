@@ -18,4 +18,13 @@ export class AppComponent {
     console.log(this.CustomerModel);
     this.CustomerModel=new Customer();
   }
+  customerIdValidator()
+  {
+   if(this.CustomerModel.CustomerCode=='')
+   {
+     alert('Customer Code Cannot Be Empty !! ');
+     return false;
+   } 
+   return true;
+  }
 }

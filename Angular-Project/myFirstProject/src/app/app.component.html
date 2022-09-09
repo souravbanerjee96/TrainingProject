@@ -2,7 +2,7 @@
 Customer Code : <input [(ngModel)]="CustomerModel.CustomerCode" type="text" /><br/><br/>
 Customer Name : <input [(ngModel)]="CustomerModel.CustomerName" type="text" /><br/><br/>
 Customer Salary : <input [(ngModel)]="CustomerModel.CustomerSalary" type="number" /><br/><br/>
-<input type="submit" value="Submit" (click)="showCustomer()" />
+<input type="submit" value="Add-Customers" (click)="customerIdValidator(); showCustomer()" />
 <br><br><br>
 <br /><br />
 <table border="2" bgColor="cyan">
