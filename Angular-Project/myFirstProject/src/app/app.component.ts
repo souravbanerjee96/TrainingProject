@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Customer } from './app.customerModel';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'myFirstProject';
+
+  CustomerModel:Customer=new Customer();
+  CustomerModels:Array<Customer> = new Array<Customer>();
+
+
+  showCustomer(){
+    this.CustomerModels.push(this.CustomerModel);
+    console.log(this.CustomerModel);
+    this.CustomerModel=new Customer();
+  }
 }
