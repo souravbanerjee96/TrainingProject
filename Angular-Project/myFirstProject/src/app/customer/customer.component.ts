@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
-import { Customer } from './app.customerModel';
+import { Component, NgModule } from '@angular/core';
+import { Customer } from './customer.customerModel';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './customer.component.html'
 })
-export class AppComponent {
-  title = 'myFirstProject';
+export class CustomerComponent {
+  title = 'MyFirstProject';
 
   CustomerModel:Customer=new Customer();
   CustomerModels:Array<Customer> = new Array<Customer>();
@@ -17,6 +16,10 @@ export class AppComponent {
     this.CustomerModels.push(this.CustomerModel);
     console.log(this.CustomerModel);
     this.CustomerModel=new Customer();
+  }
+  dropCustomer()
+  {
+    this.CustomerModels.pop();
   }
   customerIdValidator()
   {

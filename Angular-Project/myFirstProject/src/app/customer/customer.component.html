@@ -1,0 +1,20 @@
+<h1>Add Customer</h1>
+Customer Code : <input [(ngModel)]="CustomerModel.CustomerCode" type="text" /><br/><br/>
+Customer Name : <input [(ngModel)]="CustomerModel.CustomerName" type="text" /><br/><br/>
+Customer Salary : <input [(ngModel)]="CustomerModel.CustomerSalary" type="number" /><br/><br/>
+<input type="submit" value="Add-Customers" (click)="customerIdValidator(); showCustomer()" /> &nbsp;
+<input type="submit" value="Drop-Customers" (click)="dropCustomer()" />
+<br><br>
+<h2>Customers List</h2>
+<table border="2" bgColor="cyan" style="float: left;">
+  <tr>
+    <td>Customer Code &nbsp;</td>
+    <td>Customer Name &nbsp;</td>
+    <td>Customer Salary &nbsp;</td>
+  </tr>
+  <tr *ngFor="let cust of CustomerModels" style="color: rgb(93, 30, 165);">
+    <td>{{cust.CustomerCode}}</td>
+    <td><b>{{cust.CustomerName}}</b></td>
+    <td>{{cust.CustomerSalary}}</td>
+  </tr>
+</table>
