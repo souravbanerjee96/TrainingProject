@@ -1,13 +1,12 @@
 <table border="2" bgColor="cyan" style="float: left;">
-    <tr>
-      <td>Customer Code &nbsp;</td>
-      <td>Customer Name &nbsp;</td>
-      <td>Customer Salary &nbsp;</td>
-      <td>Action &nbsp;</td>
-    </tr>
-    <!-- <tr *ngFor="let cust of CustomerModels" style="color: rgb(93, 30, 165);">
-      <td>{{cust.CustomerCode}}</td>
-      <td><b>{{cust.CustomerName}}</b></td>
-      <td>{{cust.CustomerSalary}}</td>
-    </tr> -->
-  </table>
+  <tr>
+    <th *ngFor="let gridcol of gridColumn" style="color: rgb(165, 30, 41);">
+        {{gridcol.colname}} &nbsp;&nbsp;      
+    </th>
+  </tr>
+  <tr *ngFor="let griddat of gridData">
+    <td *ngFor="let gridcol of gridColumn" style="color: rgb(3, 3, 3);">
+    {{griddat[gridcol.colname]}}
+  </td>
+</tr>
+</table>

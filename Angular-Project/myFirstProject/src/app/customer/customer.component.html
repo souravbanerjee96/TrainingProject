@@ -18,4 +18,8 @@ Customer Salary : <input [(ngModel)]="CustomerModel.CustomerSalary" type="number
     <td>{{cust.CustomerSalary}}</td>
   </tr>
 </table> -->
-<app-grid-ui></app-grid-ui>
+<app-grid-ui [grid-columns]="[{'colname':'CustomerCode'},{'colname':'CustomerName'},{'colname':'CustomerSalary'},{'colname':'Action'}]"
+[grid-data]="CustomerModels"
+>
+
+</app-grid-ui>
