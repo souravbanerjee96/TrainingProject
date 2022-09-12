@@ -6,7 +6,7 @@ Customer Salary : <input [(ngModel)]="CustomerModel.CustomerSalary" type="number
 <input type="submit" value="Drop-Customers" (click)="dropCustomer()" />
 <br><br>
 <h2>Customers List</h2>
-<table border="2" bgColor="cyan" style="float: left;">
+<!-- <table border="2" bgColor="cyan" style="float: left;">
   <tr>
     <td>Customer Code &nbsp;</td>
     <td>Customer Name &nbsp;</td>
@@ -17,4 +17,5 @@ Customer Salary : <input [(ngModel)]="CustomerModel.CustomerSalary" type="number
     <td><b>{{cust.CustomerName}}</b></td>
     <td>{{cust.CustomerSalary}}</td>
   </tr>
-</table>
+</table> -->
+<app-grid-ui></app-grid-ui>

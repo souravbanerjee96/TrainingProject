@@ -1,1 +1,21 @@
-<p>supplier works!</p>
+<h1>Add Supplier</h1>
+Supplier Code : <input [(ngModel)]="SupplierModel.SupplierCode" type="text" /><br/><br/>
+Supplier Name : <input [(ngModel)]="SupplierModel.SupplierName" type="text" /><br/><br/>
+Supplier Salary : <input [(ngModel)]="SupplierModel.SupplierSalary" type="number" /><br/><br/>
+<input type="submit" value="Add-Suppliers" (click)="SupplierIdValidator(); showSupplier()" /> &nbsp;
+<input type="submit" value="Drop-Suppliers" (click)="dropSupplier()" />
+<br><br>
+<h2>Suppliers List</h2>
+<!-- <table border="2" bgColor="cyan" style="float: left;">
+  <tr>
+    <td>Supplier Code &nbsp;</td>
+    <td>Supplier Name &nbsp;</td>
+    <td>Supplier Salary &nbsp;</td>
+  </tr>
+  <tr *ngFor="let supp of SupplierModels" style="color: rgb(93, 30, 165);">
+    <td>{{supp.SupplierCode}}</td>
+    <td><b>{{supp.SupplierName}}</b></td>
+    <td>{{supp.SupplierSalary}}</td>
+  </tr>
+</table> -->
+<app-grid-ui></app-grid-ui>
