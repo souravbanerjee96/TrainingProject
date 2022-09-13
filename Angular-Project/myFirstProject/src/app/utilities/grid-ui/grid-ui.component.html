@@ -8,5 +8,8 @@
     <td *ngFor="let gridcol of gridColumn" style="color: rgb(3, 3, 3);">
     {{griddat[gridcol.colname]}}
   </td>
+  <td>
+    <a (click)="SelectGridData(griddat)" class="btn btn-primary">Edit</a>
+  </td>
 </tr>
 </table>

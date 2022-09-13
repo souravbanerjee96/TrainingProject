@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { SupplierComponent } from './supplier.component';
 import { GridUiComponent } from '../utilities/grid-ui/grid-ui.component';
 import { GridUIModule } from '../utilities/grid-ui/grid-ui.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { GridUIModule } from '../utilities/grid-ui/grid-ui.module';
     CommonModule,
     FormsModule,
     RouterModule.forChild(supplierroutes),
-    GridUIModule
+    GridUIModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [SupplierComponent]

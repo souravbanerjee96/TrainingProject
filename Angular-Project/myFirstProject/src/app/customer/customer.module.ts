@@ -7,6 +7,7 @@ import { customerroutes } from '../routing/customerroutes';
 import { CommonModule } from '@angular/common';
 import { GridUiComponent } from '../utilities/grid-ui/grid-ui.component';
 import { GridUIModule } from '../utilities/grid-ui/grid-ui.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { GridUIModule } from '../utilities/grid-ui/grid-ui.module';
     CommonModule,
     FormsModule,
     RouterModule.forChild(customerroutes),
-    GridUIModule
+    GridUIModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [CustomerComponent]

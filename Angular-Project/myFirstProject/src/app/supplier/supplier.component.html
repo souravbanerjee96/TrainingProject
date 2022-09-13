@@ -18,8 +18,8 @@ Supplier Salary : <input [(ngModel)]="SupplierModel.SupplierSalary" type="number
     <td>{{supp.SupplierSalary}}</td>
   </tr>
 </table> -->
-<app-grid-ui [grid-columns]="[{'colname':'SupplierCode'},{'colname':'SupplierName'},{'colname':'SupplierSalary'},{'colname':'Action'}]"
-[grid-data]="SupplierModels"
+<app-grid-ui [grid-columns]="[{'colname':'SupplierCode'},{'colname':'SupplierName'},{'colname':'SupplierSalary'}]"
+[grid-data]="SupplierModels" (grid-selected)="editSupplier($event)"
 >
 
 </app-grid-ui>
