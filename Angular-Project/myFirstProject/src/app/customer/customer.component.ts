@@ -36,6 +36,7 @@ export class CustomerComponent implements OnInit {
   showCustomer() {
     // this.CustomerModels.push(this.CustomerModel);
     // console.log(this.CustomerModel);
+    if(this.CustomerModel.CustomerSalary > 0 && this.CustomerModel.CustomerCode != '' && this.CustomerModel.CustomerName != '')
     this.http.post(this._baseURL,this.CustomerModel).subscribe(res=>this.PostSuccess());
     this.CustomerModel = new Customer();
   }
@@ -58,10 +59,11 @@ export class CustomerComponent implements OnInit {
     this.http.delete(this._baseURL+_input).subscribe(res=>this.GetDataFromServer());
   }
   customerIdValidator() {
-    if (this.CustomerModel.CustomerCode == '') {
+    if (this.CustomerModel.CustomerCode == '')
       alert('Customer Code Cannot Be Empty !! ');
-      return false;
-    }
-    return true;
+    if(this.CustomerModel.CustomerName == '')
+    alert('Customer Name Cannot Be Empty !! ');
+    if(this.CustomerModel.CustomerSalary <= 0)
+    alert('Customer Salary Cannot Be 0 !! ');
   }
 }

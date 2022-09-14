@@ -32,6 +32,7 @@ export class SupplierComponent implements OnInit{
   showSupplier(){
     // this.SupplierModels.push(this.SupplierModel);
     // console.log(this.SupplierModel);
+    if(this.SupplierModel.SupplierSalary > 0 && this.SupplierModel.SupplierCode != '' && this.SupplierModel.SupplierName != '')
     this.http.post(this._baseURL,this.SupplierModel).subscribe(res=>this.postSuccess());
     this.SupplierModel=new Supplier();
   }
@@ -55,12 +56,12 @@ export class SupplierComponent implements OnInit{
   }
   SupplierIdValidator()
   {
-   if(this.SupplierModel.SupplierCode=='')
-   {
-     alert('Supplier Code Cannot Be Empty !! ');
-     return false;
-   } 
-   return true;
+    if (this.SupplierModel.SupplierCode == '')
+    alert('Supplier Code Cannot Be Empty !! ');
+  if(this.SupplierModel.SupplierName == '')
+  alert('Supplier Name Cannot Be Empty !! ');
+  if(this.SupplierModel.SupplierSalary <= 0)
+  alert('Supplier Salary Cannot Be 0 !! ');
   }
 
 }
