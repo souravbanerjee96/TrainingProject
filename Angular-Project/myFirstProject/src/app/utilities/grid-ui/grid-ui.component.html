@@ -10,8 +10,8 @@
       {{griddat[gridcol.colname]}}
     </td>
     <td>
-      <a *ngIf="!ConfirmDelete" (click)="ConfirmEdit=true; SelectGridData(griddat)" class="btn btn-primary">Edit</a>&nbsp;
-      <a *ngIf="!ConfirmDelete && !ConfirmEdit" (click)="ConfirmDelete=true" class="btn btn-primary">Delete</a>
+      <a *ngIf="!ConfirmDelete" (click)="ConfirmEdit=true; SelectGridData(griddat)" class="btn btn-primary" >Edit</a>&nbsp;
+      <a *ngIf="!ConfirmDelete && !ConfirmEdit" (click)="ConfirmDelete=true" class="btn btn-primary" >Delete</a>
     </td>
 
     <span *ngIf="ConfirmDelete">
