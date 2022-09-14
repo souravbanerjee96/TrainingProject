@@ -1,15 +1,24 @@
+<div [ngStyle]="">
 <table border="2" bgColor="cyan" style="float: left;">
   <tr>
     <th *ngFor="let gridcol of gridColumn" style="color: rgb(165, 30, 41);">
-        {{gridcol.colname}} &nbsp;&nbsp;      
+      {{gridcol.colname}} &nbsp;&nbsp;
     </th>
   </tr>
   <tr *ngFor="let griddat of gridData">
     <td *ngFor="let gridcol of gridColumn" style="color: rgb(3, 3, 3);">
-    {{griddat[gridcol.colname]}}
-  </td>
-  <td>
-    <a (click)="SelectGridData(griddat)" class="btn btn-primary">Edit</a>
-  </td>
-</tr>
+      {{griddat[gridcol.colname]}}
+    </td>
+    <td>
+      <a *ngIf="!ConfirmDelete" (click)="ConfirmEdit=true; SelectGridData(griddat)" class="btn btn-primary">Edit</a>&nbsp;
+      <a *ngIf="!ConfirmDelete && !ConfirmEdit" (click)="ConfirmDelete=true" class="btn btn-primary">Delete</a>
+    </td>
+
+    <span *ngIf="ConfirmDelete">
+      <span>&nbsp;&nbsp;Are you sure you want to Delete ? &nbsp;</span>
+      <button class="btn btn-danger" (click)="DeleteGridData(griddat);ConfirmDelete=false">Yes</button>&nbsp;
+      <button class="btn btn-primary" (click)="ConfirmDelete=false">No</button>
+    </span>
+  </tr>
 </table>
+</div>

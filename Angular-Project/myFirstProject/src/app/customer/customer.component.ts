@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Customer } from './customer.customerModel';
+import { CustomerModule } from './customer.module';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,9 @@ import { Customer } from './customer.customerModel';
 })
 export class CustomerComponent implements OnInit {
   title = 'MyFirstProject';
-  private _baseURL = 'http://localhost:3000/customer';
+  private _baseURL = 'http://localhost:3000/customer/';
+  isEditCustomer = false;
+
   ngOnInit(): void {
     this.GetDataFromServer();
   }
@@ -35,11 +39,23 @@ export class CustomerComponent implements OnInit {
     this.http.post(this._baseURL,this.CustomerModel).subscribe(res=>this.PostSuccess());
     this.CustomerModel = new Customer();
   }
-  editCustomer(_input:any) {
+  SelectforEditCustomer(_input:any) {
     this.CustomerModel=_input;
   }
-  dropCustomer() {
-    this.CustomerModels.pop();
+  idCus?:any = undefined;
+  editCustomer(){
+    //console.log(this.CustomerModel);
+    this.idCus = this.CustomerModel;
+    //console.log(this._baseURL+this.idCus.id);
+    this.http.put(this._baseURL+this.idCus.id,this.CustomerModel).subscribe(res=>this.GetDataFromServer());
+    this.isEditCustomer=false;
+  }
+  clearInput(){
+    window.location.reload();
+  }
+  dropCustomer(_input:number) {
+    console.log(this._baseURL+_input);
+    this.http.delete(this._baseURL+_input).subscribe(res=>this.GetDataFromServer());
   }
   customerIdValidator() {
     if (this.CustomerModel.CustomerCode == '') {

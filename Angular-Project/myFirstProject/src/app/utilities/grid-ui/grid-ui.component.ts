@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { __createBinding } from 'tslib';
 
 @Component({
   selector: 'app-grid-ui',
@@ -13,6 +14,8 @@ export class GridUiComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  ConfirmDelete = false;
+  ConfirmEdit = false;
 
   @Input("grid-columns")
   set SetGridColums(_gridcolumn:Array<any>){
@@ -26,8 +29,15 @@ export class GridUiComponent implements OnInit {
   @Output("grid-selected")
   emiemitter:EventEmitter<any>=new EventEmitter<any>();
 
+  @Output("grid-deleted")
+  delemitter:EventEmitter<number>=new EventEmitter<number>();
+
   SelectGridData(_selected:any){
     this.emiemitter.emit(_selected);
+  }
+  DeleteGridData(_selected:any){
+    console.log(_selected);
+    this.delemitter.emit(_selected.id);
   }
 
 }

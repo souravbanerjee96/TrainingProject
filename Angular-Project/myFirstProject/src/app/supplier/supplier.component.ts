@@ -11,7 +11,8 @@ export class SupplierComponent implements OnInit{
   ngOnInit():void{
     this.getSharedData();
   }
-  private _baseURL='http://localhost:3000/supplier';
+  private _baseURL='http://localhost:3000/supplier/';
+  isEditSupplier = false;
   getSharedData(){
     this.http.get(this._baseURL).subscribe(res=>this.getSuccess(res));
   }
@@ -34,12 +35,23 @@ export class SupplierComponent implements OnInit{
     this.http.post(this._baseURL,this.SupplierModel).subscribe(res=>this.postSuccess());
     this.SupplierModel=new Supplier();
   }
-  dropSupplier()
-  {
-    this.SupplierModels.pop();
-  }
-  editSupplier(_input:any){
+  SelectforEditSupplier(_input:any) {
     this.SupplierModel=_input;
+  }
+  idCus?:any = undefined;
+  editSupplier(){
+    //console.log(this.SupplierModel);
+    this.idCus = this.SupplierModel;
+    //console.log(this._baseURL+this.idCus.id);
+    this.http.put(this._baseURL+this.idCus.id,this.SupplierModel).subscribe(res=>this.getSharedData());
+    this.isEditSupplier=false;
+  }
+  clearInput(){
+    window.location.reload();
+  }
+  dropSupplier(_input:number)
+  {
+    this.http.delete(this._baseURL+_input).subscribe(res=>this.getSharedData());
   }
   SupplierIdValidator()
   {

@@ -2,8 +2,9 @@
 Customer Code : <input [(ngModel)]="CustomerModel.CustomerCode" type="text" /><br/><br/>
 Customer Name : <input [(ngModel)]="CustomerModel.CustomerName" type="text" /><br/><br/>
 Customer Salary : <input [(ngModel)]="CustomerModel.CustomerSalary" type="number" /><br/><br/>
-<input type="submit" value="Add-Customers" (click)="customerIdValidator(); showCustomer()" /> &nbsp;
-<input type="submit" value="Drop-Customers" (click)="dropCustomer()" />
+<input *ngIf="!isEditCustomer" type="submit" value="Add-Customers" (click)="customerIdValidator(); showCustomer()" /> &nbsp;
+<button *ngIf="isEditCustomer" class="btn btn-primary" (click)="editCustomer(); clearInput()">Update Customer</button>&nbsp;
+<button *ngIf="isEditCustomer" class="btn btn-danger" (click)="isEditCustomer=false; clearInput()">Cancel Update</button>
 <br><br>
 <h2>Customers List</h2>
 <!-- <table border="2" bgColor="cyan" style="float: left;">
@@ -19,7 +20,9 @@ Customer Salary : <input [(ngModel)]="CustomerModel.CustomerSalary" type="number
   </tr>
 </table> -->
 <app-grid-ui [grid-columns]="[{'colname':'CustomerCode'},{'colname':'CustomerName'},{'colname':'CustomerSalary'}]"
-[grid-data]="CustomerModels" (grid-selected)="editCustomer($event)"
+[grid-data]="CustomerModels" 
+(grid-selected)="SelectforEditCustomer($event); isEditCustomer=true" 
+(grid-deleted)="dropCustomer($event)"
 >
 
 </app-grid-ui>

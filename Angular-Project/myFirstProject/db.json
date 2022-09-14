@@ -20,45 +20,33 @@
     {
       "id": 1,
       "CustomerCode": "100",
-      "CustomerName": "Sourav",
-      "CustomerSalary": "500"
+      "CustomerName": "Sourav B",
+      "CustomerSalary": 502
     },
     {
-      "CustomerCode": "101",
-      "CustomerName": "David",
-      "CustomerSalary": 1000,
+      "CustomerCode": "104",
+      "CustomerName": "Ronaldo S",
+      "CustomerSalary": 1500,
       "id": 2
     },
     {
-      "CustomerCode": "102",
-      "CustomerName": "Jack",
-      "CustomerSalary": 1500,
+      "CustomerCode": "105",
+      "CustomerName": "Mark Z",
+      "CustomerSalary": 5000,
       "id": 3
-    },
-    {
-      "CustomerCode": "",
-      "CustomerName": "",
-      "CustomerSalary": 0,
-      "id": 4
-    },
-    {
-      "CustomerCode": "",
-      "CustomerName": "",
-      "CustomerSalary": 0,
-      "id": 5
     }
   ],
   "supplier": [
     {
       "SupplierCode": "201",
-      "SupplierName": "Lisa",
+      "SupplierName": "Lisa Jain",
       "SupplierSalary": 200,
       "id": 1
     },
     {
       "SupplierCode": "202",
-      "SupplierName": "Emmy",
-      "SupplierSalary": 450,
+      "SupplierName": "Mona S.",
+      "SupplierSalary": 400,
       "id": 2
     }
   ]

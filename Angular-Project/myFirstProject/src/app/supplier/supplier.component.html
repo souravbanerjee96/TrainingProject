@@ -2,8 +2,10 @@
 Supplier Code : <input [(ngModel)]="SupplierModel.SupplierCode" type="text" /><br/><br/>
 Supplier Name : <input [(ngModel)]="SupplierModel.SupplierName" type="text" /><br/><br/>
 Supplier Salary : <input [(ngModel)]="SupplierModel.SupplierSalary" type="number" /><br/><br/>
-<input type="submit" value="Add-Suppliers" (click)="SupplierIdValidator(); showSupplier()" /> &nbsp;
-<input type="submit" value="Drop-Suppliers" (click)="dropSupplier()" />
+<input *ngIf="!isEditSupplier" type="submit" value="Add-Suppliers" (click)="SupplierIdValidator(); showSupplier()" /> &nbsp;
+<button *ngIf="isEditSupplier" class="btn btn-primary" (click)="editSupplier(); clearInput()">Update Supplier</button>&nbsp;
+<button *ngIf="isEditSupplier" class="btn btn-danger" (click)="isEditSupplier=false; clearInput()">Cancel Update</button>
+
 <br><br>
 <h2>Suppliers List</h2>
 <!-- <table border="2" bgColor="cyan" style="float: left;">
@@ -19,7 +21,9 @@ Supplier Salary : <input [(ngModel)]="SupplierModel.SupplierSalary" type="number
   </tr>
 </table> -->
 <app-grid-ui [grid-columns]="[{'colname':'SupplierCode'},{'colname':'SupplierName'},{'colname':'SupplierSalary'}]"
-[grid-data]="SupplierModels" (grid-selected)="editSupplier($event)"
+[grid-data]="SupplierModels" 
+(grid-selected)="SelectforEditSupplier($event); isEditSupplier=true" 
+(grid-deleted)="dropSupplier($event)"
 >
 
 </app-grid-ui>
