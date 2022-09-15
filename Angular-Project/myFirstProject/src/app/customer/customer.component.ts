@@ -10,7 +10,7 @@ import { CustomerModule } from './customer.module';
 })
 export class CustomerComponent implements OnInit {
   title = 'MyFirstProject';
-  private _baseURL = 'http://localhost:3000/customer/';
+  private _baseURL = 'https://localhost:44372/api/CustomerApp/Customer/';
   isEditCustomer = false;
 
   ngOnInit(): void {
@@ -45,10 +45,10 @@ export class CustomerComponent implements OnInit {
   }
   idCus?:any = undefined;
   editCustomer(){
-    //console.log(this.CustomerModel);
+    console.log(this.CustomerModel);
     this.idCus = this.CustomerModel;
-    //console.log(this._baseURL+this.idCus.id);
-    this.http.put(this._baseURL+this.idCus.id,this.CustomerModel).subscribe(res=>this.GetDataFromServer());
+    console.log(this._baseURL+this.idCus.id);
+    this.http.put(this._baseURL+this.idCus.Id,this.CustomerModel).subscribe(res=>this.GetDataFromServer(),res=>console.log(res));
     this.isEditCustomer=false;
   }
   clearInput(){

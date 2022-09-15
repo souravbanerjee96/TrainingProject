@@ -11,7 +11,7 @@ export class SupplierComponent implements OnInit{
   ngOnInit():void{
     this.getSharedData();
   }
-  private _baseURL='http://localhost:3000/supplier/';
+  private _baseURL='https://localhost:44372/api/CustomerApp/Supplier/';
   isEditSupplier = false;
   getSharedData(){
     this.http.get(this._baseURL).subscribe(res=>this.getSuccess(res));
@@ -44,7 +44,7 @@ export class SupplierComponent implements OnInit{
     //console.log(this.SupplierModel);
     this.idCus = this.SupplierModel;
     //console.log(this._baseURL+this.idCus.id);
-    this.http.put(this._baseURL+this.idCus.id,this.SupplierModel).subscribe(res=>this.getSharedData());
+    this.http.put(this._baseURL+this.idCus.Id,this.SupplierModel).subscribe(res=>this.getSharedData());
     this.isEditSupplier=false;
   }
   clearInput(){

@@ -18,6 +18,7 @@ namespace CustomerApp.Models
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,6 +41,17 @@ namespace CustomerApp.Models
                 entity.Property(e => e.CustomerCode).HasMaxLength(50);
 
                 entity.Property(e => e.CustomerName).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Supplier>(entity =>
+            {
+                entity.ToTable("Supplier");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.SupplierCode).HasMaxLength(50);
+
+                entity.Property(e => e.SupplierName).HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);

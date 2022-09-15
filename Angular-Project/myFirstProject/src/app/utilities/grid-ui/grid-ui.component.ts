@@ -37,7 +37,7 @@ export class GridUiComponent implements OnInit {
   }
   DeleteGridData(_selected:any){
     console.log(_selected);
-    this.delemitter.emit(_selected.id);
+    this.delemitter.emit(_selected.Id);
   }
 
 }

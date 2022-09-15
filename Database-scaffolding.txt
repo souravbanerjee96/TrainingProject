@@ -1,0 +1,1 @@
+scaffold-Dbcontext "Data Source=CTSDOTNET858;Initial Catalog=CustomerDB;User ID=sa;Password=pass@word1" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
