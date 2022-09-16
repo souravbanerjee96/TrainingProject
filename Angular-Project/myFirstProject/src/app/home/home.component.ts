@@ -10,5 +10,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  _image:any="../../assets/image/crm.jpg";
 }

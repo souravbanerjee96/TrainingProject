@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace CustomerApp
 {
@@ -25,6 +28,18 @@ namespace CustomerApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+                x => x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = Configuration["jwt:issuer"],
+                    ValidAudience = Configuration["jwt:audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:key"]))
+
+                });
             services.AddControllers()
                 .AddJsonOptions(opts=>opts.JsonSerializerOptions.PropertyNamingPolicy=null);
         }
@@ -42,6 +57,8 @@ namespace CustomerApp
             app.UseRouting();
 
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()) ;
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

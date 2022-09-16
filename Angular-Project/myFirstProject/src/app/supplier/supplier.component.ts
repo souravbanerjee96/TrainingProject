@@ -11,7 +11,7 @@ export class SupplierComponent implements OnInit{
   ngOnInit():void{
     this.getSharedData();
   }
-  private _baseURL='https://localhost:44372/api/CustomerApp/Supplier/';
+  private _baseURL='https://localhost:44372/api/Supplier/';
   isEditSupplier = false;
   getSharedData(){
     this.http.get(this._baseURL).subscribe(res=>this.getSuccess(res));

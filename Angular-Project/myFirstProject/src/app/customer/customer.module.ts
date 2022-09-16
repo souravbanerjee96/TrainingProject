@@ -7,7 +7,9 @@ import { customerroutes } from '../routing/customerroutes';
 import { CommonModule } from '@angular/common';
 import { GridUiComponent } from '../utilities/grid-ui/grid-ui.component';
 import { GridUIModule } from '../utilities/grid-ui/grid-ui.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginServiceService } from '../services/login-service.service';
+import { TokenInceptorService } from '../services/tokeninceptorservice';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     GridUIModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginServiceService,{provide:HTTP_INTERCEPTORS,useClass:TokenInceptorService,multi:true}],
   bootstrap: [CustomerComponent]
 })
 export class CustomerModule { }

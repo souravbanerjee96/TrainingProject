@@ -11,10 +11,19 @@
                     <a class="nav-link active" aria-current="page" [routerLink]="['home']">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['customer/add']">Customer</a>
+                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page" [routerLink]="['register']">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['supplier/add']">Supplier</a>
+                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page" [routerLink]="['login']">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLogin(true)" [routerLink]="['customer/add']">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLogin(true)" [routerLink]="['supplier/add']">Supplier</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLogin(true)" (click)="logoutUser()" [routerLink]="['supplier/add']">Log Out</a>
                 </li>
             </ul>
         </div>

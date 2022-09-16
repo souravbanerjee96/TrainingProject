@@ -10,7 +10,7 @@ import { CustomerModule } from './customer.module';
 })
 export class CustomerComponent implements OnInit {
   title = 'MyFirstProject';
-  private _baseURL = 'https://localhost:44372/api/CustomerApp/Customer/';
+  private _baseURL = 'https://localhost:44372/api/Customer/';
   isEditCustomer = false;
 
   ngOnInit(): void {

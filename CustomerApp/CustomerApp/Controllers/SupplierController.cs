@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CustomerApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CustomerApp.Controllers
 {
-    [Route("api/CustomerApp/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SupplierController : ControllerBase
     {
         CustomerDBContext db = new CustomerDBContext();

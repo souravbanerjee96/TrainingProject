@@ -1,4 +1,5 @@
 ﻿using CustomerApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace CustomerApp.Controllers
 {
-    [Route("api/CustomerApp/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         CustomerDBContext db = new CustomerDBContext();

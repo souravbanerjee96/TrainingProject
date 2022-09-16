@@ -18,6 +18,7 @@ namespace CustomerApp.Models
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomerAuth> CustomerAuths { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -41,6 +42,23 @@ namespace CustomerApp.Models
                 entity.Property(e => e.CustomerCode).HasMaxLength(50);
 
                 entity.Property(e => e.CustomerName).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<CustomerAuth>(entity =>
+            {
+                entity.ToTable("CustomerAuth");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("password");
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("username");
             });
 
             modelBuilder.Entity<Supplier>(entity =>
