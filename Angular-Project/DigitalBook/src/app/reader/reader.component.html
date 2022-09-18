@@ -1,0 +1,32 @@
+<h1 style="text-align: center;">Search Books</h1>
+<div class="mb-3" style="font-size: 16px; font-weight: bolder;">
+Title : <input [(ngModel)]="ReaderModel.Title" type="text" class="form-control" />
+Author : <input [(ngModel)]="ReaderModel.AuthorName" type="text" class="form-control" />
+Publisher : <input [(ngModel)]="ReaderModel.Publisher" type="text" class="form-control" />
+Released Date : <input [(ngModel)]="ReaderModel.ReleasedDate" type="text" class="form-control" /><br/>
+<input *ngIf="!isEditReader" type="submit" value="Search" (click)="GetDataFromServer()" class="btn btn-primary"/> &nbsp;
+<br><br>
+<h2>Books List</h2>
+<!-- <table border="2" bgColor="cyan" style="float: left;">
+  <tr>
+    <td>Reader Code &nbsp;</td>
+    <td>Reader Name &nbsp;</td>
+    <td>Reader Salary &nbsp;</td>
+  </tr>
+  <tr *ngFor="let cust of ReaderModels" style="color: rgb(93, 30, 165);">
+    <td>{{cust.ReaderCode}}</td>
+    <td><b>{{cust.ReaderName}}</b></td>
+    <td>{{cust.ReaderSalary}}</td>
+  </tr>
+</table> -->
+<app-grid-ui [grid-columns]="[{'colname':'Title'},{'colname':'AuthorName'},{'colname':'Publisher'},{'colname':'ReleasedDate'}]"
+[grid-data]="ReaderModels" 
+[read-book-columns]="['Book Id : ','Book Title : ','Author Name : ','Publisher : ','Released Date : ',
+'Category : ','Price : ','<br/><b>Content</b><br/><br/>']"
+>
+
+<!-- (grid-selected)="SelectforEditReader($event); isEditReader=true" 
+(grid-deleted)="dropReader($event)" -->
+
+</app-grid-ui>
+</div>

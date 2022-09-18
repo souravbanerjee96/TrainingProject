@@ -1,0 +1,53 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "customer": [
+    {
+      "id": 1,
+      "CustomerCode": "100",
+      "CustomerName": "Sourav B",
+      "CustomerSalary": 502
+    },
+    {
+      "CustomerCode": "104",
+      "CustomerName": "Ronaldo S",
+      "CustomerSalary": 1500,
+      "id": 2
+    },
+    {
+      "CustomerCode": "105",
+      "CustomerName": "Mark Z",
+      "CustomerSalary": 5000,
+      "id": 3
+    }
+  ],
+  "supplier": [
+    {
+      "SupplierCode": "201",
+      "SupplierName": "Lisa Jain",
+      "SupplierSalary": 200,
+      "id": 1
+    },
+    {
+      "SupplierCode": "202",
+      "SupplierName": "Mona S.",
+      "SupplierSalary": 400,
+      "id": 2
+    }
+  ]
+}

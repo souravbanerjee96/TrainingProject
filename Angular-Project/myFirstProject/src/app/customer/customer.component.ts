@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { LoginServiceService } from '../services/login-service.service';
 import { Customer } from './customer.customerModel';
 import { CustomerModule } from './customer.module';
 
@@ -16,15 +17,22 @@ export class CustomerComponent implements OnInit {
   ngOnInit(): void {
     this.GetDataFromServer();
   }
+
+  constructor(private http: HttpClient,private _loginS:LoginServiceService) {
+
+  }
   GetDataFromServer() {
-    this.http.get(this._baseURL).subscribe(res => this.Success(res));
+    this.http.get(this._baseURL).subscribe(res => this.Success(res),
+    (err)=>{
+      if (err.status == 401)
+      this._loginS.logout();
+    }
+      );
   }
   Success(input: any) {
     this.CustomerModels = input;
   }
-  constructor(private http: HttpClient) {
-
-  }
+  
   PostSuccess(){
     this.GetDataFromServer();
   }

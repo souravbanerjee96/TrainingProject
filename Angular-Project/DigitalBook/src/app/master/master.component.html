@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Digital Book</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 40px;">
+                <!-- <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['home']">Home</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLogin(false)" [routerLink]="['reader/add']">Reader</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLogin(true)" [routerLink]="['supplier/add']">Author</a>
+                </li>
+            </ul>
+            <!-- Right Portion Menu for bootstrap -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="--bs-scroll-height: 40px;">
+                <li class="nav-item me-auto float-end">
+                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page" [routerLink]="['register']">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page" [routerLink]="['login']">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(true)" aria-current="page" [routerLink]="['login']">All My Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLogin(true)" (click)="logoutUser()" [routerLink]="['reader/add']">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+
+    <router-outlet></router-outlet>
+</div>

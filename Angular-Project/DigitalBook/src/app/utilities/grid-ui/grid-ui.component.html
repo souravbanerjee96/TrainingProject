@@ -1,0 +1,59 @@
+<div class="">
+<table border="2" bgColor="grey" style="float: left; align-content: center;" frame=hsides rules=rows>
+  <tr style="text-align: center;">
+    <th *ngFor="let gridcol of gridColumn" style="color: rgb(200, 221, 8);">
+      {{gridcol.colname}} &nbsp;&nbsp;&nbsp;&nbsp;
+    </th>
+  </tr>
+  <tr *ngFor="let griddat of gridData" style="text-align: center;">
+    <td *ngFor="let gridcol of gridColumn" style="color: rgb(3, 3, 3);">
+      {{griddat[gridcol.colname]}}
+    </td>
+
+    <td>
+      <a  class="btn btn-primary" style="color: pink;" (click)="readBook(griddat)" >Read Book</a>&nbsp;
+    </td>
+
+    <!-- <td>
+      <a *ngIf="!ConfirmDelete" (click)="ConfirmEdit=true; SelectGridData(griddat)" class="btn btn-primary" >Edit</a>&nbsp;
+      <a *ngIf="!ConfirmDelete && !ConfirmEdit" (click)="ConfirmDelete=true" class="btn btn-primary" >Delete</a>
+    </td>
+
+    <span *ngIf="ConfirmDelete">
+      <span>&nbsp;&nbsp;Are you sure you want to Delete ? &nbsp;</span>
+      <button class="btn btn-danger" (click)="DeleteGridData(griddat);ConfirmDelete=false">Yes</button>&nbsp;
+      <button class="btn btn-primary" (click)="ConfirmDelete=false">No</button>
+    </span> -->
+  </tr>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Read Book Modal -->
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="color: rgb(39, 53, 37); font-size: 12px; background-color: rgb(96, 165, 244); text-align: center;">
+        <h5 class="modal-title" id="exampleModalToggleLabel"><b>Read Books</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color:black; text-align: center; background-color: rgb(214, 200, 203);" id="ErrorMs">
+        <div [innerHTML]="Readmsg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id = "btnReadBook" style="display: none;" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Read Book</a>
