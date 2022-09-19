@@ -1,4 +1,6 @@
 export class userAuth{
-    username:string='';
+    userName:string='';
     password:string='';
+    userType:string='A';
+    paymentID:string='';
 }

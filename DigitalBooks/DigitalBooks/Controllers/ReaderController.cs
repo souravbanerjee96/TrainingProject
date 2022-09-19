@@ -17,10 +17,10 @@ namespace DigitalBooks.Controllers
         [HttpGet]
         public IEnumerable<object> showBooks(string Title, string AuthorName, string Publisher, string ReleasedDate)
         {
-            var data = db.Books.Where(x => x.Title.Contains(Title) ||
+            var data = db.Books.Where(x => (x.Title.Contains(Title) ||
          x.AuthorName.Contains(AuthorName) ||
          x.Publisher.Contains(Publisher) ||
-         x.ReleasedDate.Contains(ReleasedDate)).Select(p=> new
+         x.ReleasedDate.Contains(ReleasedDate)) && x.IsActive==1 ).Select(p=> new
          {
              p.Id,
              p.Title,

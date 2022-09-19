@@ -8,6 +8,6 @@ export const Mainroutes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'reader', loadChildren: () => import('../reader/reader.module').then(m => m.ReaderModule)},
-  {path: 'supplier', loadChildren :() => import('../supplier/supplier.module').then(m => m.SupplierModule)},
+  {path: 'author', loadChildren :() => import('../author/author.module').then(m => m.AuthorModule)},
   {path: 'home', component: ReaderComponent}
 ]

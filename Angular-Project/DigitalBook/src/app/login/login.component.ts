@@ -14,12 +14,12 @@ export class LoginComponent implements OnInit {
   }
   userA: userAuth = new userAuth();
   Errormsg: any = '';
-
+ 
   loginUser() {
     this.loginService.login(this.userA).subscribe(res => {
       localStorage.setItem('token', res.token);
       //console.log(res);
-      this._router.navigate(['']);
+      this._router.navigate(['author/add']);
     },
       (err) => {
         if (err.status == 401){

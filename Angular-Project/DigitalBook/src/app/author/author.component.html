@@ -1,29 +1,23 @@
-<h1>Add Supplier</h1>
+<div class="container d-flex align-items-center justify-content-center">
+    <div>
+        <h1 style="text-align: center; color: crimson;">Author Page is under Development</h1>
+    </div>
+</div>
+
+<!-- <h1>Add Supplier</h1>
 Supplier Code : <input [(ngModel)]="SupplierModel.SupplierCode" type="text" /><br/><br/>
 Supplier Name : <input [(ngModel)]="SupplierModel.SupplierName" type="text" /><br/><br/>
 Supplier Salary : <input [(ngModel)]="SupplierModel.SupplierSalary" type="number" /><br/><br/>
 <input *ngIf="!isEditSupplier" type="submit" value="Add-Suppliers" (click)="SupplierIdValidator(); showSupplier()" /> &nbsp;
 <button *ngIf="isEditSupplier" class="btn btn-primary" (click)="editSupplier(); clearInput()">Update Supplier</button>&nbsp;
-<button *ngIf="isEditSupplier" class="btn btn-danger" (click)="isEditSupplier=false; clearInput()">Cancel Update</button>
+<button *ngIf="isEditSupplier" class="btsn btn-danger" (click)="isEditSupplier=false; clearInput()">Cancel Update</button>
 
 <br><br>
 <h2>Suppliers List</h2>
-<!-- <table border="2" bgColor="cyan" style="float: left;">
-  <tr>
-    <td>Supplier Code &nbsp;</td>
-    <td>Supplier Name &nbsp;</td>
-    <td>Supplier Salary &nbsp;</td>
-  </tr>
-  <tr *ngFor="let supp of SupplierModels" style="color: rgb(93, 30, 165);">
-    <td>{{supp.SupplierCode}}</td>
-    <td><b>{{supp.SupplierName}}</b></td>
-    <td>{{supp.SupplierSalary}}</td>
-  </tr>
-</table> -->
 <app-grid-ui [grid-columns]="[{'colname':'SupplierCode'},{'colname':'SupplierName'},{'colname':'SupplierSalary'}]"
 [grid-data]="SupplierModels" 
 (grid-selected)="SelectforEditSupplier($event); isEditSupplier=true" 
 (grid-deleted)="dropSupplier($event)"
 >
 
-</app-grid-ui>
+</app-grid-ui> -->

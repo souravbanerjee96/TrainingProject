@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReaderModule } from 'src/app/reader/reader.module';
-import { SupplierModule } from 'src/app/supplier/supplier.module';
+import { AuthorModule } from 'src/app/author/author.module';
 import { GridUiComponent } from './grid-ui.component';
 
 @NgModule({
