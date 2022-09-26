@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -43,8 +42,6 @@ namespace DigitalBooks.Models
                 entity.Property(e => e.AuthorName).HasMaxLength(50);
 
                 entity.Property(e => e.Category).HasMaxLength(50);
-
-                entity.Property(e => e.Image).HasMaxLength(50);
 
                 entity.Property(e => e.IsActive).HasColumnName("isActive");
 

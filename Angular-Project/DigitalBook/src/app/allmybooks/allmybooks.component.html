@@ -1,0 +1,16 @@
+<h1>Your Books</h1>
+
+<div class="container mt-3" style="width: 1366px;">
+
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success d-flex
+        justify-content-between
+        align-items-center" *ngFor="let bks of _allmyBooks">
+            {{bks.Title}}
+            <span class="badge bg-success">
+                X
+            </span>
+        </li>
+    </ul>
+
+</div>

@@ -6,22 +6,11 @@ Publisher : <input [(ngModel)]="ReaderModel.Publisher" type="text" class="form-c
 Released Date : <input [(ngModel)]="ReaderModel.ReleasedDate" type="text" class="form-control" /><br/>
 <input *ngIf="!isEditReader" type="submit" value="Search" (click)="GetDataFromServer()" class="btn btn-primary"/> &nbsp;
 <br><br>
-<h2>Books List</h2>
-<!-- <table border="2" bgColor="cyan" style="float: left;">
-  <tr>
-    <td>Reader Code &nbsp;</td>
-    <td>Reader Name &nbsp;</td>
-    <td>Reader Salary &nbsp;</td>
-  </tr>
-  <tr *ngFor="let cust of ReaderModels" style="color: rgb(93, 30, 165);">
-    <td>{{cust.ReaderCode}}</td>
-    <td><b>{{cust.ReaderName}}</b></td>
-    <td>{{cust.ReaderSalary}}</td>
-  </tr>
-</table> -->
+<h2 *ngIf="ReaderModels.length > 0">Books List</h2>
+
 <app-grid-ui [grid-columns]="[{'colname':'Title'},{'colname':'AuthorName'},{'colname':'Publisher'},{'colname':'ReleasedDate'}]"
 [grid-data]="ReaderModels" 
-[read-book-columns]="['Book Id : ','Book Title : ','Author Name : ','Publisher : ','Released Date : ',
+[read-book-columns]="['//\(oo)/\\<br/>','Book Id : ','Book Title : ','Author Name : ','Publisher : ','Released Date : ',
 'Category : ','Price : ','<br/><b>Content</b><br/><br/>']"
 >
 
@@ -30,3 +19,22 @@ Released Date : <input [(ngModel)]="ReaderModel.ReleasedDate" type="text" class=
 
 </app-grid-ui>
 </div>
+
+
+
+<!-- Book Not Found Modal -->
+
+<div class="modal fade" id="BookNotFound" aria-hidden="true" aria-labelledby="ModalBookNotFound" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="color: rgb(214, 8, 125); font-size: 12px; background-color: rgb(136, 153, 58); text-align: center;">
+        <h5 class="modal-title" id="ModalBookNotFound"><b>Error Searching Book</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color:black; text-align: center; background-color: rgb(214, 200, 203);" id="ErrorBookNotFound">
+        <div [innerHTML]="errmsg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id = "btnNoBook" style="display: none;" data-bs-toggle="modal" href="#BookNotFound" role="button">No Book</a>

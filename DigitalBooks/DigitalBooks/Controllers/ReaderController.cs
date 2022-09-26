@@ -22,6 +22,7 @@ namespace DigitalBooks.Controllers
          x.Publisher.Contains(Publisher) ||
          x.ReleasedDate.Contains(ReleasedDate)) && x.IsActive==1 ).Select(p=> new
          {
+             p.Image,
              p.Id,
              p.Title,
              p.AuthorName,

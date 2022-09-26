@@ -13,11 +13,11 @@ export class LoginServiceService {
 
   login(_input:any){
     //console.log(this._loginURL);
-    return this.http.post<any>(this._loginURL,_input);
+    return this.http.post<any>(this._loginURL+'Validate/',_input);
   }
   register(_input:any){
     console.log(_input);
-    return this.http.post<any>(this._registerURL,_input);
+    return this.http.post<any>(this._registerURL+'Register/',_input);
   }
   gettoken(){
     return localStorage.getItem('token');
@@ -26,7 +26,7 @@ export class LoginServiceService {
     return !!localStorage.getItem('token');
   }
   logout(){
-    localStorage.removeItem('token');
+    localStorage.clear();
     this._router.navigate(['']);
   }
 

@@ -30,12 +30,24 @@ namespace DigitalBooks.Controllers
         }
 
         [HttpPost]
+        [Route("Register")]
+        public IActionResult Register(DigitalBookAuth d)
+        {
+            IActionResult res = Ok(new { status = "Success" });
+            db.DigitalBookAuths.Add(d);
+            db.SaveChanges();
+            return res;
+        }
+        [Route("Validate")]
         public IActionResult Auth(DigitalBookAuth d)
         {
             IActionResult result = Unauthorized();
             var data = validateUser(d.UserName, d.Password);
             if (data != null)
-                result = Ok(new { token = GenerateToken()});
+            {
+                var userId = Convert.ToBase64String(Encoding.UTF8.GetBytes(d.UserName));
+                result = Ok(new { token = GenerateToken(), userId = userId , AuthorId = data.Id });
+            }
             return result;
         }
 

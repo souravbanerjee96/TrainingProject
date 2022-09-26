@@ -7,20 +7,23 @@ import { LoginServiceService } from '../services/login-service.service';
 })
 export class MasterComponent implements OnInit {
 
-  constructor(private _auth:LoginServiceService) { }
-
+  constructor(private _auth: LoginServiceService) { }
+  userName?: string = '';
   ngOnInit(): void {
   }
 
-  isLogin(flag:Boolean):Boolean{
-    if(flag)
-    return this._auth.isLoggedin();
+  isLogin(flag: Boolean): Boolean {
+    if (flag) {
+      var userId=localStorage.getItem('userId');
+      this.userName = atob(userId==null?'':userId);
+      return this._auth.isLoggedin();
+    }
     else
-    return !this._auth.isLoggedin();
+      return !this._auth.isLoggedin();
   }
-  logoutUser(){
+  logoutUser() {
     this._auth.logout();
   }
-  
+
 
 }

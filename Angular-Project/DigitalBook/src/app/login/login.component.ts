@@ -13,25 +13,41 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   userA: userAuth = new userAuth();
-  Errormsg: any = '';
- 
+  Errormsg: any = 'default';
+  Errorflag: any = false;
+
   loginUser() {
     this.loginService.login(this.userA).subscribe(res => {
       localStorage.setItem('token', res.token);
+      localStorage.setItem('userId',res.userId);
+      localStorage.setItem('AuthorId',res.AuthorId);
       //console.log(res);
-      this._router.navigate(['author/add']);
+      this.Errormsg = 'ok';
+      window.setTimeout(() => {
+        this._router.navigate(['author/add']);
+        this.Errorflag=0;
+      }, 1000);
+      //document.getElementById('loginSuccess')?.click();
     },
       (err) => {
-        if (err.status == 401){
+        this.Errorflag=true;
+        if (err.status == 401) {
           this.Errormsg = 'Incorrect Login !! ';
+          //document.getElementById('loginFail')?.click();
         }
-        else{
+        else {
           this.Errormsg = 'Some Error Occurred !! ';
         }
-        document.getElementById('btnErrormsg')?.click();
+        window.setTimeout(() => {
+          this._router.navigate(['login']);
+          this.Errorflag=0;
+        }, 1000);
+        //document.getElementById('btnErrormsg')?.click();
       });
 
   }
+
+
 
 
 
