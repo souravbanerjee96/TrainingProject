@@ -1,16 +1,89 @@
 <h1>Your Books</h1>
 
-<div class="container mt-3" style="width: 1366px;">
-
-    <ul class="list-group">
-        <li class="list-group-item list-group-item-success d-flex
-        justify-content-between
-        align-items-center" *ngFor="let bks of _allmyBooks">
-            {{bks.Title}}
-            <span class="badge bg-success">
-                X
-            </span>
-        </li>
-    </ul>
-
+<div class="row border border-0 border-Secondary p-3 rounded rounded-3">
+    <div *ngFor="let book of _allmyBooks" class="col-sm-6">
+        <div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="container">
+                        <img *ngIf="book.Image!=null && book.Image!=''" class="card-img-top" src="https://localhost:44320/{{book.Image}}"
+                            height="280" style="opacity: 70%;" />
+                        <img *ngIf="book.Image==null || book.Image==''" class="card-img-top"
+                            src="https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
+                            height="280" />
+                        <button class="ebtn"><i class="fa fa-edit" style="font-size:24px"></i></button>&nbsp;
+                        <button class="dbtn"><i class="fa fa-trash" style="font-size:24px;color:red"></i></button>
+                    </div>
+                    <h5 class="card-title"><a [routerLink]=""
+                            style="text-decoration: none;cursor:pointer;color:blue">{{book.Title}}</a></h5>
+                    <div class="card-text">
+                        <span>Publisher: <b>{{book.Publisher}}</b></span><br>
+                        <span>Released On: {{book.ReleasedDate}}</span><br>
+                        <span>Category: {{book.Category}}</span><br>
+                        <span class="list-group-item">Price: {{ book.Price }} INR </span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="_allmyBooks?.length === 0" class="badge bg-primary text-wrap" style="width: 100rem; font-size: large;">
+        You have not added any books yet.
+    </div>
 </div>
+
+
+<!-- Button trigger modal-->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" href="#ConfirmDelete" role="button">Launch
+    modal</button>
+  
+  <!--Modal: modalConfirmDelete-->
+  <div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+      <!--Content-->
+      <div class="modal-content text-center">
+        <!--Header-->
+        <div class="modal-header d-flex justify-content-center">
+          <p class="heading">Are you sure?</p>
+        </div>
+  
+        <!--Body-->
+        <div class="modal-body">
+  
+          <i class="fas fa-times fa-4x animated rotateIn"></i>
+          <div class="icon-box">
+            <i class="bi bi-trash"></i>
+        </div>
+  
+        </div>
+  
+        <!--Footer-->
+        <div class="modal-footer flex-center">
+          <a class="btn  btn-outline-danger">Yes</a>
+          <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+  <!--Modal: modalConfirmDelete-->
+
+
+  <!-- <div class="container d-flex justify-content-center">
+    <button class="btn btn-danger" data-bs-toggle="modal" href="#my-modal" role="button">Confirm Delete</button>
+    <div id="my-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0">   
+                <div class="modal-body p-0">
+                    <div class="card border-0 p-sm-3 p-2 justify-content-center">
+                        <div class="card-header pb-0 bg-white border-0 "><div class="row"><div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div> </div>
+                        <p class="font-weight-bold mb-2"> Are you sure you wanna delete this ?</p><p class="text-muted "> This change will reflect in your portal after an hour.</p>     </div>
+                        <div class="card-body px-sm-4 mb-2 pt-1 pb-0"> 
+                            <div class="row justify-content-end no-gutters"><div class="col-auto"><button type="button" class="btn btn-light text-muted" data-dismiss="modal">Cancel</button></div><div class="col-auto"><button type="button" class="btn btn-danger px-4" data-dismiss="modal">Delete</button></div></div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

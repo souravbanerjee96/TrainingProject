@@ -8,7 +8,7 @@ import { AuthguardService } from "../services/authguard.service"
 export const Mainroutes = [
   { path: '', component: ReaderComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', loadChildren: () => import('../login/login.module').then(m => m.LoginModule) },
   { path: 'reader', loadChildren: () => import('../reader/reader.module').then(m => m.ReaderModule) },
   { path: 'author', canActivate: [AuthguardService], loadChildren: () => import('../author/author.module').then(m => m.AuthorModule) },
   { path: 'allmybooks', canActivate: [AuthguardService], loadChildren:() => import('../allmybooks/allmybooks.module').then(m=>m.AllmyBooksModule) },

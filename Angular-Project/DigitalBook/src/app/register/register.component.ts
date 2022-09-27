@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   regUser(){
     this.loginService.register(this.regData).subscribe(res=>console.log(res));
-    this.router.navigate(['login']);
+    this.router.navigate(['login/auth']);
   }
 
 }

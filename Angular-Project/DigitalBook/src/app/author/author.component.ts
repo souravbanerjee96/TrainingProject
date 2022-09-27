@@ -53,7 +53,10 @@ export class AuthorComponent implements OnInit {
     let bookOBJ = _input.value;
     bookOBJ["AuthorId"] = this.authorModel.AuthorId;
     formdata.append('BookData', JSON.stringify(bookOBJ));
-    formdata.append('BookImg', this.imagedata, this.imagedata.name);
+
+    if(this.imagedata!=null || this.imagedata!=undefined)
+      formdata.append('BookImg', this.imagedata, this.imagedata.name);
+
     //console.log(bookOBJ);
     this.http.post(this._baseURL, formdata).subscribe(res => {
       console.log(res);

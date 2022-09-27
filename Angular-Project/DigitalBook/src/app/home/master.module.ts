@@ -16,7 +16,7 @@ import { HomeComponent } from './home.component';
   declarations: [
     HomeComponent,
     MasterComponent,
-    LoginComponent,
+    
     RegisterComponent
   ],
   imports: [

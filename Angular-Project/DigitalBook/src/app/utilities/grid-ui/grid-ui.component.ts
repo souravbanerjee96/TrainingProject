@@ -57,11 +57,12 @@ export class GridUiComponent implements OnInit {
     this.Readmsg = '';
     //this.Readmsg = '<img class="media-object" src="https://localhost:44320/Images/alice1.jpg" width="75" height="90"/><br/>';
     for (var _i = 0; _i < this.gridBook.length; _i++) {
-      if(keys[_i]=='Image' && values[_i] != null)
+      if(values[_i] != null && values[_i] != ''){
+      if(keys[_i]=='Image')
       values[_i]='<img class="media-object" src="https://localhost:44320/'+values[_i]+'" width="84" height="100"/><br/>';
 
-      if(values[_i] != null)
       this.Readmsg = this.Readmsg + this.gridBook[_i] + values[_i] + '<br/>';
+      }
     }
     console.log(this.Readmsg);
     document.getElementById('btnReadBook')?.click();

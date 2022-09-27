@@ -40,7 +40,7 @@ namespace DigitalBooks.Controllers
                 var pathtoUse = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 lnError = "1";
 
-                if (File.Length > 0)
+                if (File!=null && File.Length > 0)
                 {
                     var filename = ContentDispositionHeaderValue.Parse(File.ContentDisposition).FileName.Trim('"');
                     var newFileName = "Img_" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
