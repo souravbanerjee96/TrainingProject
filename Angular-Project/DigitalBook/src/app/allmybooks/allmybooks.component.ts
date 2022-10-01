@@ -14,7 +14,8 @@ export class AllmybooksComponent implements OnInit {
   constructor(private http: HttpClient, private _loginS: LoginServiceService,private _toast:NgToastService) {
     this.getallmyBooks();
   }
-  private _baseURL = 'https://localhost:44320/api/Author/getallmyBooks/';
+  private _baseURL = 'https://localhost:44320/api/Author/';
+  _deleteBookId:number=0;
   ngOnInit(): void {
   }
   _allmyBooks: Array<allmyBooks> = new Array<allmyBooks>();
@@ -23,7 +24,7 @@ export class AllmybooksComponent implements OnInit {
   getallmyBooks() {
     //console.log('Author Id :: ' + this.myBook.AuthorId);
     var _iObj={"AuthorId":this.myBook.AuthorId};
-    this.http.post<any>(this._baseURL, _iObj).subscribe(res => {
+    this.http.post<any>(this._baseURL+'getallmyBooks/', _iObj).subscribe(res => {
       this._toast.success({ detail: "Success Message", summary: "Book Fetched successfully", duration: 5000});
       this._allmyBooks = res;
       //console.log('Data :: ' + res);
@@ -31,6 +32,22 @@ export class AllmybooksComponent implements OnInit {
       err => {
         console.log(err);
       });
+  }
+  captureidBook(_input:any){
+    //console.log("Captured Data : "+_input);
+    this._deleteBookId=_input;
+    document.getElementById('btnDelBook')?.click();
+  }
+  deleteBook() {
+    console.log("Captured Data : "+this._deleteBookId);
+    this.http.delete(this._baseURL+this._deleteBookId).subscribe(res=>{
+      console.log(res);
+      window.location.reload();
+    },
+    err=>
+    {
+      console.log(err);
+    });
   }
 
 

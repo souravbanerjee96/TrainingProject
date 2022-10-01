@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Digital Book</a>
+        <a class="navbar-brand" href="#">
+            <img src="../../assets/image/app-icon.jpg" width="40" height="40"/>&nbsp;&nbsp;
+            Digital Book
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,6 +14,13 @@
                     <a class="nav-link active" aria-current="page" [routerLink]="['home']">Home</a>
                 </li> -->
                 <li class="nav-item">
+                    <a class="nav-link">
+                        <p style="color: yellow; font-family: cursive;">
+                            {{today | date:'fullDate'}} {{today | date:'h:mm:ss a'}}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" *ngIf="isLogin(false)" [routerLink]="['reader/add']">Reader</a>
                 </li>
                 <li class="nav-item">
@@ -20,11 +30,12 @@
             <!-- Right Portion Menu for bootstrap -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="--bs-scroll-height: 40px;">
                 <li class="nav-item me-auto float-end">
-                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page"
+                    <a class="nav-link active" *ngIf="isLogin(false) && isLoginReader(false)" aria-current="page"
                         [routerLink]="['register']">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page" [routerLink]="['login/auth']">Login
+                    <a class="nav-link active" *ngIf="isLogin(false) && isLoginReader(false)" aria-current="page"
+                        [routerLink]="['login/auth']">Login
                         &nbsp;</a>
                 </li>
                 <li class="nav-item">
@@ -38,7 +49,23 @@
                     <a class="nav-link" *ngIf="isLogin(true)" (click)="logoutUser()" [routerLink]="['reader/add']">Log
                         Out</a>
                 </li>
+
+                <!-- Reader Menu -->
                 <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLoginReader(true)" aria-current="page">Hello , {{userName}}
+                        &nbsp; 🙂 &nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLoginReader(true)" aria-current="page"
+                        [routerLink]="['book/buy']">Purchase History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLoginReader(true)" (click)="logoutUser()"
+                        [routerLink]="['reader/add']">Log
+                        Off</a>
+                </li>
+
+                <!-- <li class="nav-item">
                     <div class="cart largenav col-sm-0">
                         <a class="cart-button" *ngIf="isLogin(false)">
                             <svg class="cart-svg" width="32" height="32" viewBox="0 0 16 16 ">
@@ -48,7 +75,7 @@
                             </svg>
                         </a>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

@@ -18,6 +18,7 @@ namespace DigitalBooks.Models
         }
 
         public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<BookPurchase> BookPurchases { get; set; }
         public virtual DbSet<DigitalBookAuth> DigitalBookAuths { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -52,6 +53,31 @@ namespace DigitalBooks.Models
                 entity.Property(e => e.ReleasedDate).HasMaxLength(50);
 
                 entity.Property(e => e.Title).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<BookPurchase>(entity =>
+            {
+                entity.ToTable("BookPurchase");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Bookid).HasMaxLength(50);
+
+                entity.Property(e => e.InvoiceNo).HasMaxLength(50);
+
+                entity.Property(e => e.IsRefunded)
+                    .HasColumnName("isRefunded")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.PaymentId)
+                    .HasMaxLength(50)
+                    .HasColumnName("PaymentID");
+
+                entity.Property(e => e.PurchaseTime)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Userid).HasMaxLength(50);
             });
 
             modelBuilder.Entity<DigitalBookAuth>(entity =>

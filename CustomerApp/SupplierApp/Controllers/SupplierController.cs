@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CustomerApp.Models;
+using SupplierApp.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace CustomerApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class SupplierController : ControllerBase
     {
         CustomerDBContext db = new CustomerDBContext();

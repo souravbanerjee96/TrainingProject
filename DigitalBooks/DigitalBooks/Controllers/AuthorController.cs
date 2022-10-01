@@ -67,6 +67,20 @@ namespace DigitalBooks.Controllers
             }
 
         }
+
+        [HttpDelete("{Id:int}")]
+        public IActionResult deleteBook(int Id)
+        {
+            var data = db.Books.Where(x => x.Id == Id).SingleOrDefault();
+            if (data != null)
+            {
+                db.Books.Remove(data);
+                db.SaveChanges();
+                return Ok();
+            }
+            else
+                return NotFound(new {Message = "No Data Found"});
+        }
         
 
     }

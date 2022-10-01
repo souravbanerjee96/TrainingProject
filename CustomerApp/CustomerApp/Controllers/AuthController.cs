@@ -14,7 +14,6 @@ namespace CustomerApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
     public class AuthController : ControllerBase
     {
         private IConfiguration _configuration;
@@ -42,6 +41,7 @@ namespace CustomerApp.Controllers
             }
             return res;
         }
+        [HttpPost]
         [Route("Register")]
         public IActionResult RegisterUser(CustomerAuth ca)
         {

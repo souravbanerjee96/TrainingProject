@@ -12,12 +12,20 @@ export class RegisterComponent implements OnInit {
   constructor(private loginService:LoginServiceService,private router:Router) { }
 
   regData:userAuth=new userAuth();
+  Errormsg:any=null;
   ngOnInit(): void {
   }
 
   regUser(){
-    this.loginService.register(this.regData).subscribe(res=>console.log(res));
-    this.router.navigate(['login/auth']);
+    this.loginService.register(this.regData).subscribe(res=>{
+      this.router.navigate(['login/auth']);
+    },
+    err=>{
+      this.Errormsg=err.error.message;
+      window.setTimeout(() => {
+        this.Errormsg=null;
+      }, 2000);
+    });
   }
 
 }

@@ -1,0 +1,148 @@
+
+
+<div class="container px-3 my-5 clearfix">
+    <!-- Shopping cart table -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Shopping Cart</h2>
+            <div class="alert alert-danger position-absolute top-50 start-50 translate-middle" style="padding: 20px;margin-bottom: 15px;" 
+            role="alert" *ngIf="Errormsg!=null">
+                <strong>&nbsp;Error!</strong> {{Errormsg}} 😔
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered m-0">
+                    <thead>
+                        <tr>
+                            <!-- Set columns width -->
+                            <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
+                            <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+                            <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+                            <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
+                            <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#"
+                                    class="shop-tooltip float-none text-light" title=""
+                                    data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="p-4">
+                                <div class="media align-items-center">
+                                    <img src="https://localhost:44320/{{bookImage}}"
+                                        class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                                    <div class="media-body">
+                                        <a href="#" class="d-block text-dark">{{bookName}}</a>
+                                        <small>
+                                            <span class="text-muted">Status:</span>
+                                            <span class="ui-product-color ui-product-color-sm align-text-bottom"
+                                                style="background:#1ee84a;"></span> &nbsp;
+                                            <span class="text-muted">Size: </span> Standard PDF A4 &nbsp;
+                                            <span class="text-muted">Ships from: </span> Digital E-Book
+                                        </small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right font-weight-semibold align-middle p-4">₹{{bookPrice}}</td>
+                            <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"
+                                    disabled></td>
+                            <td class="text-right font-weight-semibold align-middle p-4">₹{{bookPrice}}</td>
+                            <td class="text-center align-middle px-0"><a 
+                                    class="shop-tooltip close float-none text-danger" title=""
+                                    data-original-title="Remove">×</a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- / Shopping cart table -->
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
+                <div class="mt-4">
+                    <label class="text-muted font-weight-normal">Promocode</label>
+                    <input type="text" placeholder="No PromoCode Available" class="form-control" disabled>
+                </div>
+                <div class="d-flex">
+                    <div class="text-right mt-4">
+                        <label class="text-muted font-weight-normal m-0">Total price</label>
+                        <div class="text-large"><strong>₹{{bookPrice}}</strong></div>
+                    </div>
+                </div>
+            </div>
+            <div class="float-start">
+                <label class="text-muted font-weight-normal m-1">Payment Mode</label>
+                        <div class="text-large"><strong>Postpaid E-Book Billing System</strong></div>
+            </div>
+            <div class="float-end">
+                <button type="button" class="btn btn-lg btn-primary mt-2 text-right" (click)="buyBook()">Buy
+                    Now</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<section>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100 text-center">
+            <div class="col">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-light btn-lg" data-bs-toggle="modal" href="#bookBoughtModal"
+                style="display: none;" id="bookBought">
+                     Get information
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="bookBoughtModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header border-bottom-0">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-start text-black p-4">
+
+                                <h4 class="mb-5" style="color: #35558a;">Thanks for your order</h4>
+                                <p class="mb-0" style="color: #35558a;">Payment summary</p>
+                                <hr class="mt-2 mb-4"
+                                    style="height: 0; background-color: transparent; opacity: .75; border-top: 2px dashed #9e9e9e;">
+
+                                <div class="d-flex justify-content-between">
+                                    <p class="fw-bold mb-0">{{bookName}}(Qty:1)</p>
+                                    <p class="text-muted mb-0">₹{{bookPrice}}</p>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <p class="small mb-0">Invoice No</p>
+                                    <p class="small mb-0">{{InvoiceNo}}</p>
+                                </div>
+
+                                <div class="d-flex justify-content-between pb-1">
+                                    <p class="small">Payment ID</p>
+                                    <p class="small">{{PaymentId}}</p>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <p class="fw-bold">Total</p>
+                                    <p class="fw-bold" style="color: #35558a;">₹{{bookPrice}}</p>
+                                </div>
+
+                            </div>
+                            <p class="small">Please Note It Down for Future Reference</p>
+                            <div class="modal-footer d-flex justify-content-center border-top-0 py-4">
+                                <button type="button" class="btn btn-primary btn-lg mb-1"
+                                    style="background-color: #35558a;">
+                                    Track your order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+

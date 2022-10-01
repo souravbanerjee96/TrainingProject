@@ -28,15 +28,46 @@ namespace DigitalBooks.Controllers
         {
             return Ok(new { status = "[Authentication Api Working]" });
         }
+        [HttpPost]
+        [Route("Register-Reader")]
+        public IActionResult RegisterReader(DigitalBookAuth d)
+        {
+            var data = new DigitalBookAuth();
+            IActionResult res = Ok();
+            if (db.DigitalBookAuths.Any(x => x.Password == d.Password))
+                data = db.DigitalBookAuths.Where(y => y.Password==d.Password).FirstOrDefault();
+            if (data != null)
+            {
+                var readerName = Convert.ToBase64String(Encoding.UTF8.GetBytes(data.UserName));
+                res = Ok(new { r_token = GenerateToken(), readerId = data.Id , readerName = readerName });
+                return res;
+            }
+            else
+            {
+                var rData = db.DigitalBookAuths.Add(d);
+                db.SaveChanges();
+                var readerName = Convert.ToBase64String(Encoding.UTF8.GetBytes(d.UserName));
+                res = Ok(new { r_token = GenerateToken(), readerId = d.Id, readerName = readerName });
+                return res;
+            }
+        }
 
         [HttpPost]
         [Route("Register")]
         public IActionResult Register(DigitalBookAuth d)
         {
             IActionResult res = Ok(new { status = "Success" });
-            db.DigitalBookAuths.Add(d);
-            db.SaveChanges();
-            return res;
+            var data = db.DigitalBookAuths.Any(x => x.UserName == d.UserName);
+            if (data == false)
+            {
+                db.DigitalBookAuths.Add(d);
+                db.SaveChanges();
+                return res;
+            }
+            else
+            {
+                return Conflict(new { message = $"An existing record with the id '{d.UserName}' was already found." });
+            }
         }
         [Route("Validate")]
         public IActionResult Auth(DigitalBookAuth d)
@@ -46,7 +77,7 @@ namespace DigitalBooks.Controllers
             if (data != null)
             {
                 var userId = Convert.ToBase64String(Encoding.UTF8.GetBytes(d.UserName));
-                result = Ok(new { token = GenerateToken(), userId = userId , AuthorId = data.Id });
+                result = Ok(new { token = GenerateToken(), userId = userId, AuthorId = data.Id });
             }
             return result;
         }

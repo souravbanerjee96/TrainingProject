@@ -7,14 +7,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi.Models;
+using Common;
 
-namespace CustomerApp
+namespace CustomerAPP
 {
     public class Startup
     {
@@ -28,20 +30,48 @@ namespace CustomerApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
-                x => x.TokenValidationParameters = new TokenValidationParameters
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v2", new OpenApiInfo { Title = "CustomerAPP", Version = "v2" });
+                x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true,
-                    ValidIssuer = Configuration["jwt:issuer"],
-                    ValidAudience = Configuration["jwt:audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:key"]))
-
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Please enter token enter 'bearer' [space] <token>"
                 });
-            services.AddControllers()
-                .AddJsonOptions(opts=>opts.JsonSerializerOptions.PropertyNamingPolicy=null);
+                x.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference=new OpenApiReference
+                            {
+                                Type=ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            }
+                        },
+                        new string[]{ }
+                    }
+                });
+            });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
+                AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["jwt:Issuer"],
+                        ValidAudience = Configuration["jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:Key"]))
+                    };
+                });
+            services.AddControllers();
+            services.AddConsulConfig(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,17 +81,16 @@ namespace CustomerApp
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseConsul(Configuration);
             app.UseHttpsRedirection();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
-
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()) ;
-
             app.UseAuthentication();
-
             app.UseAuthorization();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "Customer app v2");
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
