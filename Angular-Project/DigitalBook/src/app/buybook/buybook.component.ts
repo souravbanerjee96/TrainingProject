@@ -39,7 +39,11 @@ export class BuybookComponent implements OnInit {
       this.InvoiceNo=res.InvoiceNo;
       this.PaymentId=res.PaymentId;
       document.getElementById('bookBought')?.click();
-
+      window.setTimeout(() => {
+        document.getElementById('bookboughtClose')?.click();
+        this._router.navigate(['purchase/history']);
+      }, 10000);
+      
     },
     err=>{
       this.Errormsg=err.error.message;

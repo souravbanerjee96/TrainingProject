@@ -12,6 +12,7 @@ export const Mainroutes = [
   { path: 'login', loadChildren: () => import('../login/login.module').then(m => m.LoginModule) },
   { path: 'reader', loadChildren: () => import('../reader/reader.module').then(m => m.ReaderModule) },
   { path: 'book', canActivate: [ReaderguardService], loadChildren: () => import('../buybook/buybook.module').then(m => m.BuyBookModule) },
+  { path: 'purchase', canActivate: [ReaderguardService], loadChildren: () => import('../purchasehist/purchasehist.module').then(m => m.PurchaseHistModule) },
   { path: 'author', canActivate: [AuthguardService], loadChildren: () => import('../author/author.module').then(m => m.AuthorModule) },
   { path: 'allmybooks', canActivate: [AuthguardService], loadChildren:() => import('../allmybooks/allmybooks.module').then(m=>m.AllmyBooksModule) },
   { path: 'home', component: ReaderComponent }

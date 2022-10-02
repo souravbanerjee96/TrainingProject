@@ -41,6 +41,54 @@ namespace DigitalBooks.Controllers
             else
                 return null;
         }
+        [HttpGet]
+        [Route("orderhist")]
+        public IQueryable<Object> getOrderhistory(string readerID)
+        {
+            try
+            {
+                var data = (from bp in db.BookPurchases
+                            join bd in db.Books on bp.Bookid equals Convert.ToString(bd.Id)
+                            where bp.Userid == readerID
+                            orderby bp.PurchaseTime descending
+                            select new
+                            {
+                                bp.Id,
+                                bd.Title,
+                                bd.Category,
+                                bd.Image,
+                                bd.Price,
+                                bp.InvoiceNo,
+                                bp.PaymentId,
+                                bp.PurchaseTime,
+                                bp.IsRefunded,
+                            });
+
+                return data;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
+        [Route("refund")]
+        public IActionResult refundBook(int purchaseId)
+        {
+            var data = db.BookPurchases.Where(x => x.Id == purchaseId).FirstOrDefault();
+            if(data!=null)
+            {
+                data.IsRefunded = 1;
+                db.SaveChanges();
+                return Ok(new { message = "Order Refunded" });
+            }
+            else
+            {
+                return NotFound(new { message = "Order Not found" });
+            }
+            
+        }
 
         [HttpPost]
         [Route("CreateOrder")]
@@ -51,7 +99,7 @@ namespace DigitalBooks.Controllers
                 Guid myuuid = Guid.NewGuid();
                 bp.InvoiceNo = DateTime.Now.ToString("yyyyMMddHHmmssfff");
                 bp.PaymentId = myuuid.ToString();
-                var data = db.BookPurchases.Any(x => x.Bookid == bp.Bookid && x.Userid == bp.Userid);
+                var data = db.BookPurchases.Any(x => x.Bookid == bp.Bookid && x.Userid == bp.Userid && x.IsRefunded==0);
                 if (!data)
                 {
                     db.BookPurchases.Add(bp);
