@@ -32,7 +32,7 @@ namespace DigitalBooks.Controllers
         [Route("Register-Reader")]
         public IActionResult RegisterReader(DigitalBookAuth d)
         {
-            var data = new DigitalBookAuth();
+            var data = (DigitalBookAuth)null;
             IActionResult res = Ok();
             if (db.DigitalBookAuths.Any(x => x.Password == d.Password))
                 data = db.DigitalBookAuths.Where(y => y.Password==d.Password).FirstOrDefault();

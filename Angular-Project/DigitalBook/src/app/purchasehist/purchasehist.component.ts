@@ -11,16 +11,21 @@ import * as $ from "jquery";
 })
 export class PurchasehistComponent implements OnInit {
 
-  constructor(private http: HttpClient, private _router: Router) { }
+  constructor(private http: HttpClient, private _router: Router) {  }
 
   ngOnInit(): void {
     this.getuserOrder();
   }
+  filtersLoaded: Promise<boolean> | undefined;
   private _baseURL = 'https://localhost:44320/api/Reader/';
   userName: any;
   readerId: any;
   bookIdtoRefund: any;
   purchaseHist: Array<orderDetails> = new Array<orderDetails>();
+
+  refresh() {
+    window.location.reload();
+  }
 
   finddateDiff(_input: any): any {
     var time = Date.now() - new Date(_input).getTime();
@@ -34,6 +39,7 @@ export class PurchasehistComponent implements OnInit {
     this.http.get<any>(this._baseURL + 'orderhist?readerID=' + this.readerId).subscribe(res => {
       this.purchaseHist = res;
       console.log(res);
+      this.filtersLoaded = Promise.resolve(true);
     },
       err => {
         console.log(err);
@@ -47,12 +53,11 @@ export class PurchasehistComponent implements OnInit {
   }
   cofirmRefund() {
     this.http.get<any>(this._baseURL + 'refund?purchaseId=' + this.bookIdtoRefund).subscribe(res => {
-      alert('Done');
-      window.location.reload();
+      document.getElementById('myrefundSuccess')?.click();
     },
       err => {
         console.log(err);
-        alert(err);
+        document.getElementById('myrefundfailed')?.click();
       })
   }
 

@@ -11,43 +11,55 @@ import { ReaderModule } from './reader.module';
 })
 export class ReaderComponent implements OnInit {
   private _baseURL = 'https://localhost:44320/api/Reader';
-  errmsg:string="";
+  errmsg: string = "";
   isEditReader = false;
 
   ngOnInit(): void {
-    //this.GetDataFromServer();
+    this.GetAllbooks();
   }
 
   constructor(private http: HttpClient) {
 
   }
-  GetDataFromServer() {
-    console.log(this._baseURL+'?Title='+this.ReaderModel.Title+'&AuthorName='+this.ReaderModel.AuthorName+'&Publisher='
-    +this.ReaderModel.Publisher+'&ReleasedDate='+this.ReaderModel.ReleasedDate);
+  GetAllbooks() {
     this.http.get
-    (this._baseURL+'?Title='+this.ReaderModel.Title+'&AuthorName='+this.ReaderModel.AuthorName+'&Publisher='
-    +this.ReaderModel.Publisher+'&ReleasedDate='+this.ReaderModel.ReleasedDate).subscribe((res: any) => {
-      this.Success(res);
-      //console.log(res);
-      if(res.length<=0){
-        this.errmsg="No Book Found with your Search Parameters...<br/>";
-        document.getElementById('btnNoBook')?.click();
-        console.log(this.errmsg);
-        //this.errmsg="";
-      };
-    },
-    (err)=>{
-      // if (err.status == 401)
-      // this._loginS.logout();
-      console.log(err);
-    }
+      (this._baseURL).subscribe((res: any) => {
+        this.Success(res);
+        //console.log(res);
+        if (res.length <= 0) {
+
+        };
+      },
+        (err) => {
+          console.log(err);
+        }
       );
+  }
+  GetDataFromServer() {
+    this.http.get
+      (this._baseURL + '?Title=' + this.ReaderModel.Title + '&AuthorName=' + this.ReaderModel.AuthorName + '&Publisher='
+        + this.ReaderModel.Publisher + '&ReleasedDate=' + this.ReaderModel.ReleasedDate).subscribe((res: any) => {
+          this.Success(res);
+          //console.log(res);
+          if (res.length <= 0) {
+            this.errmsg = "No Book Found with your Search Parameters...<br/>";
+            document.getElementById('btnNoBook')?.click();
+            console.log(this.errmsg);
+            //this.errmsg="";
+          };
+        },
+          (err) => {
+            // if (err.status == 401)
+            // this._loginS.logout();
+            console.log(err);
+          }
+        );
   }
   Success(input: any) {
     this.ReaderModels = input;
   }
-  
-  PostSuccess(){
+
+  PostSuccess() {
     this.GetDataFromServer();
   }
 
@@ -58,7 +70,7 @@ export class ReaderComponent implements OnInit {
   showBooks() {
     // this.ReaderModels.push(this.ReaderModel);
     // console.log(this.ReaderModel);
-    this.http.post(this._baseURL,this.ReaderModel).subscribe(res=>this.PostSuccess());
+    this.http.post(this._baseURL, this.ReaderModel).subscribe(res => this.PostSuccess());
   }
   // idCus?:any = undefined;
   // editReader(){
@@ -68,7 +80,7 @@ export class ReaderComponent implements OnInit {
   //   this.http.put(this._baseURL+this.idCus.Id,this.ReaderModel).subscribe(res=>this.GetDataFromServer(),res=>console.log(res));
   //   this.isEditReader=false;
   // }
-  clearInput(){
+  clearInput() {
     window.location.reload();
   }
   // dropReader(_input:number) {

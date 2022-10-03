@@ -18,6 +18,7 @@ export class AllmybooksComponent implements OnInit {
   _deleteBookId:number=0;
   ngOnInit(): void {
   }
+  filtersLoaded: Promise<boolean> | undefined;
   _allmyBooks: Array<allmyBooks> = new Array<allmyBooks>();
   myBook: allmyBooks = new allmyBooks();
 
@@ -27,10 +28,12 @@ export class AllmybooksComponent implements OnInit {
     this.http.post<any>(this._baseURL+'getallmyBooks/', _iObj).subscribe(res => {
       this._toast.success({ detail: "Success Message", summary: "Book Fetched successfully", duration: 5000});
       this._allmyBooks = res;
+      this.filtersLoaded = Promise.resolve(true);
       //console.log('Data :: ' + res);
     },
       err => {
         console.log(err);
+        this.filtersLoaded = Promise.resolve(true);
       });
   }
   captureidBook(_input:any){

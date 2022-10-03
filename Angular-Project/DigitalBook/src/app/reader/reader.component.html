@@ -1,9 +1,10 @@
+
 <h1 style="text-align: center;">Search Books</h1>
 <div class="mb-3" style="font-size: 16px; font-weight: bolder;">
-Title : <input [(ngModel)]="ReaderModel.Title" type="text" class="form-control" />
-Author : <input [(ngModel)]="ReaderModel.AuthorName" type="text" class="form-control" />
-Publisher : <input [(ngModel)]="ReaderModel.Publisher" type="text" class="form-control" />
-Released Date : <input [(ngModel)]="ReaderModel.ReleasedDate" type="text" class="form-control" /><br/>
+Title : <input [(ngModel)]="ReaderModel.Title" type="text" class="form-control" placeholder="Default: Any Title"/>
+Author : <input [(ngModel)]="ReaderModel.AuthorName" type="text" class="form-control" placeholder="Default: Any Author"/>
+Publisher : <input [(ngModel)]="ReaderModel.Publisher" type="text" class="form-control" placeholder="Default: Any Publisher"/>
+Released Date : <input [(ngModel)]="ReaderModel.ReleasedDate" type="text" class="form-control" placeholder="Default: Any Date"/><br/>
 <input *ngIf="!isEditReader" type="submit" value="Search" (click)="GetDataFromServer()" class="btn btn-primary"/> &nbsp;
 <br><br>
 <h2 *ngIf="ReaderModels.length > 0">Books List</h2>
