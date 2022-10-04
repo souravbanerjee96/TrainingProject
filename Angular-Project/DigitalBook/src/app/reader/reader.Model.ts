@@ -3,4 +3,5 @@ export class Reader{
     AuthorName:String = ''
     Publisher:String = ''
     ReleasedDate:String = ''
+    Category:String = ''
 }

@@ -99,4 +99,8 @@ export class GridUiComponent implements OnInit {
 
     //console.log(this._readerAuth);
   }
+  
+  priceParser(_input: any): string {
+    return (parseFloat(_input) + parseFloat(_input)*15/100).toFixed(2);
+  }
 }

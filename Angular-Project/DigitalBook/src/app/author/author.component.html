@@ -1,21 +1,3 @@
-<!-- <h1>Add Books</h1>
-Supplier Code : <input [(ngModel)]="SupplierModel.SupplierCode" type="text" /><br/><br/>
-Supplier Name : <input [(ngModel)]="SupplierModel.SupplierName" type="text" /><br/><br/>
-Supplier Salary : <input [(ngModel)]="SupplierModel.SupplierSalary" type="number" /><br/><br/>
-<input *ngIf="!isEditSupplier" type="submit" value="Add-Suppliers" (click)="SupplierIdValidator(); showSupplier()" /> &nbsp;
-<button *ngIf="isEditSupplier" class="btn btn-primary" (click)="editSupplier(); clearInput()">Update Supplier</button>&nbsp;
-<button *ngIf="isEditSupplier" class="btsn btn-danger" (click)="isEditSupplier=false; clearInput()">Cancel Update</button>
-
-<br><br>
-<h2>Suppliers List</h2>
-<app-grid-ui [grid-columns]="[{'colname':'SupplierCode'},{'colname':'SupplierName'},{'colname':'SupplierSalary'}]"
-[grid-data]="SupplierModels" 
-(grid-selected)="SelectforEditSupplier($event); isEditSupplier=true" 
-(grid-deleted)="dropSupplier($event)"
->
-
-</app-grid-ui> -->
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

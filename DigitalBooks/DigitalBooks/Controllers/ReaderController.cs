@@ -37,13 +37,41 @@ namespace DigitalBooks.Controllers
                  p.Publisher,
                  p.ReleasedDate,
                  p.Category,
-                 p.Price,
-                 p.BookContent
+                 p.Price
              });
                 if (data != null)
                     return data;
                 else
                     return null;
+            }
+        }
+        [HttpGet]
+        [Route("readbooks")]
+        public IQueryable<Object> readBooks(string readerID)
+        {
+            try
+            {
+                var data = (from bp in db.BookPurchases
+                            join bd in db.Books on bp.Bookid equals Convert.ToString(bd.Id)
+                            where (bp.Userid == readerID && bp.IsRefunded==0)
+                            orderby bp.PurchaseTime descending
+                            select new
+                            {
+                                bp.Id,
+                                bp.PurchaseTime,
+                                bp.IsRefunded,
+                                bd.IsActive,
+                                bd.Title,
+                                bd.Category,
+                                bd.Image,
+                                bd.BookContent
+                            });
+
+                return data;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
         [HttpGet]

@@ -61,3 +61,13 @@
        transform: rotate(360deg);
    }
   }
+
+  .blink_me {
+    animation: blinker 0.5s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }

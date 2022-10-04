@@ -19,13 +19,20 @@
                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link">
-                        <p style="color: yellow; font-family: cursive;">
+                        <p style="color: yellow; font-family: cursive; font-size: 12px;">
                             {{today | date:'fullDate'}} {{today | date:'h:mm:ss a'}}
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="isLogin(false)" [routerLink]="['reader/add']">Reader</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page">
+                        <!-- <img src="../../assets/image/diwali.gif" height="60"/> -->
+                        <p class="text-white mb-0 small blink_me"><strong> 
+                            💥 💥 💥 15% OFF on Every Book , Hurry !</strong></p>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="isLogin(true)" [routerLink]="['author/add']">Author</a>
@@ -56,15 +63,19 @@
 
                 <!-- Reader Menu -->
                 <li class="nav-item">
-                    <a class="nav-link active" *ngIf="isLoginReader(true)" aria-current="page">Hello , {{userName}}
-                        &nbsp; 🙂 &nbsp;</a>
+                    <a class="nav-link active" *ngIf="isLoginReader(true)" aria-current="page" style="font-size: 13px;">
+                        Hello , {{userName}} 🙂</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" *ngIf="isLoginReader(true)" aria-current="page"
-                        [routerLink]="['purchase/history']">Purchase History</a>
+                    <a class="nav-link active" *ngIf="isLoginReader(true)" aria-current="page" style="font-size: 13px;"
+                        [routerLink]="['read/books']">Read Books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="isLoginReader(true)" (click)="logoutUser()"
+                    <a class="nav-link active" *ngIf="isLoginReader(true)" aria-current="page" style="font-size: 13px;"
+                        [routerLink]="['purchase/history']">Order History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLoginReader(true)" (click)="logoutUser()" style="font-size: 13px;"
                         [routerLink]="['reader/add']">Log
                         Off</a>
                 </li>

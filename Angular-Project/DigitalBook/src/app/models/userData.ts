@@ -47,3 +47,14 @@ export class orderDetails {
     PurchaseTime: Date = new Date();
     IsRefunded: number = 0;
 }
+
+export class readBooks {
+    Id: number = 0;
+    Title: string = '';
+    PurchaseTime: Date = new Date();
+    IsActive: number = 0;
+    IsRefunded: number = 0;
+    Category: String = ''
+    Image: String = ''
+    BookContent: String = ''
+}
