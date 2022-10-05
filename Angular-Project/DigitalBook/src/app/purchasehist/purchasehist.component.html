@@ -1,5 +1,3 @@
-
-
 <section class="h-100 gradient-custom" *ngIf="(filtersLoaded | async) && purchaseHist.length>0">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -56,12 +54,15 @@
                         <p class="text-muted mt-1 mb-0 small ms-xl-5">Access given</p>
                       </div>
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button *ngIf="hist.IsRefunded==0 && finddateDiff(hist.PurchaseTime)<=24" type="button" class="btn btn-info"
-                          (click)="refundOrder(hist.Id)">Refund</button>
+                        <button *ngIf="hist.IsRefunded==0 && finddateDiff(hist.PurchaseTime)<=24" type="button"
+                          class="btn btn-info" (click)="refundOrder(hist.Id)">Refund</button>
                         <button *ngIf="hist.IsRefunded==1" type="button" class="btn btn-danger" disabled>Order Cancelled
                           and Refunded</button>
-                          <button *ngIf="hist.IsRefunded==0 && finddateDiff(hist.PurchaseTime)>24" type="button" class="btn btn-dark" disabled>Refund Option
-                            Expired</button>
+                        <button *ngIf="hist.IsRefunded==0 && finddateDiff(hist.PurchaseTime)>24" type="button"
+                          class="btn btn-dark" disabled>Refund Option
+                          Expired</button>
+                        <button  type="button" class="btn btn-success" (click)="downloadInvoice(hist)">
+                          Download Invoice</button>
                       </div>
                     </div>
                   </div>
@@ -76,17 +77,16 @@
   </div>
 </section>
 <div *ngIf="filtersLoaded | async">
-<img  *ngIf="purchaseHist.length<=0" src="../../assets/image/dino.png" class="img-fluid" 
-style="pointer-events: none;" />
+  <img *ngIf="purchaseHist.length<=0" src="../../assets/image/dino.png" class="img-fluid"
+    style="pointer-events: none;" />
 </div>
 
-<button type="button" style="display: none;" class="btn" data-bs-toggle="modal" href="#refundmodal"
- id="bookRefund">
-     Refund Hidden Button
+<button type="button" style="display: none;" class="btn" data-bs-toggle="modal" href="#refundmodal" id="bookRefund">
+  Refund Hidden Button
 </button>
 
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
- aria-hidden="true" id="refundmodal">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+  id="refundmodal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -94,10 +94,10 @@ style="pointer-events: none;" />
         <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button> -->
       </div>
-      <div class="modal-body">      
+      <div class="modal-body">
         <p class="text-center" id="refundmodalBody"><strong>
-         P.S. - You will lose access to your book.
-        </strong></p>
+            P.S. - You will lose access to your book.
+          </strong></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" id="refund-btn-yes" (click)="cofirmRefund()">Yes , Refund</button>
@@ -109,40 +109,40 @@ style="pointer-events: none;" />
 
 <div id="refundSuccessModal" class="modal fade">
   <div class="modal-dialog modal-confirm">
-      <div class="modal-content">
-          <div class="modal-header justify-content-center">
-              <div class="icon-box">
-                  <i class="material-icons">&#xE876;</i>
-              </div>
-              <button type="button" class="close" (click)="refresh()" aria-label="Close">X</button>
-          </div>
-          <div class="modal-body text-center">
-              <h4>Done!</h4>
-              <p><strong>✔️ Refund has been initiated from our end.</strong></p>
-              <p><em>⏳ Refund amount will be adjusted with your E-book payment system.</em></p>
-          </div>
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" (click)="refresh()" aria-label="Close">X</button>
       </div>
+      <div class="modal-body text-center">
+        <h4>Done!</h4>
+        <p><strong>✔️ Refund has been initiated from our end.</strong></p>
+        <p><em>⏳ Refund amount will be adjusted with your E-book payment system.</em></p>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="modal fade" id="refundfailedModal" aria-hidden="true" aria-labelledby="AuthorModalToggleLabel" >
+<div class="modal fade" id="refundfailedModal" aria-hidden="true" aria-labelledby="AuthorModalToggleLabel">
   <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-          <div class="modal-header" style="background-color: rgb(184, 17, 17);">
-              <b>Error</b>
-              <button type="button" class="close" (click)="refresh()" aria-label="Close">&times;</button>
-          </div>
-              <div class="modal-body" style="background-color: rosybrown;">
-                  <h5>Error !</h5>
-                  Something wrong with Refund !<br/>
-                  Try again later
-              </div>
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: rgb(184, 17, 17);">
+        <b>Error</b>
+        <button type="button" class="close" (click)="refresh()" aria-label="Close">&times;</button>
       </div>
+      <div class="modal-body" style="background-color: rosybrown;">
+        <h5>Error !</h5>
+        Something wrong with Refund !<br />
+        Try again later
+      </div>
+    </div>
   </div>
 </div>
-  <!-- Button HTML (to Trigger Modal) -->
-  <a style="display: none;" href="#refundSuccessModal" class="trigger-btn" id = "myrefundSuccess" 
-  data-bs-toggle="modal" role="button">Success</a>
+<!-- Button HTML (to Trigger Modal) -->
+<a style="display: none;" href="#refundSuccessModal" class="trigger-btn" id="myrefundSuccess" data-bs-toggle="modal"
+  role="button">Success</a>
 
-  <a style="display: none;" href="#refundfailedModal" class="trigger-btn" data-bs-toggle="modal" 
-  id = "myrefundfailed" role="button">Failed</a>
+<a style="display: none;" href="#refundfailedModal" class="trigger-btn" data-bs-toggle="modal" id="myrefundfailed"
+  role="button">Failed</a>

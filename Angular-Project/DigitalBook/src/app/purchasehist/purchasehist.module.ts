@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { GridUIModule } from '../utilities/grid-ui/grid-ui.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginServiceService } from '../services/login-service.service';
@@ -21,7 +21,7 @@ import { purchasehistroutes } from '../routing/purchasehistroutes';
     GridUIModule,
     HttpClientModule
   ],
-  providers: [LoginServiceService,{provide:HTTP_INTERCEPTORS,useClass:TokenInceptorService,multi:true}],
+  providers: [LoginServiceService,DatePipe,{provide:HTTP_INTERCEPTORS,useClass:TokenInceptorService,multi:true}],
   bootstrap: [PurchasehistComponent]
 })
 export class PurchaseHistModule { }
