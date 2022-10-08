@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Common;
+using MassTransit;
+using CustomerApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerAPP
 {
@@ -70,7 +73,19 @@ namespace CustomerAPP
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:Key"]))
                     };
                 });
+            services.AddDbContext<CustomerDBContext>(x => x.UseSqlServer(Configuration.GetConnectionString("CustomerDbConnection")));
             services.AddControllers();
+            services.AddMassTransit(x => {
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+                {
+                    config.Host(new Uri("rabbitmq://localhost/"), h =>
+                    {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+                }));
+            });
+            services.AddMassTransitHostedService();
             services.AddConsulConfig(Configuration);
         }
 

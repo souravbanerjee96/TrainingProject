@@ -1,0 +1,30 @@
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\bin\Debug\netcoreapp3.1\Common.deps.json
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\bin\Debug\netcoreapp3.1\Common.dll
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\bin\Debug\netcoreapp3.1\Common.pdb
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\obj\Debug\netcoreapp3.1\Common.csproj.AssemblyReference.cache
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\obj\Debug\netcoreapp3.1\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfoInputs.cache
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfo.cs
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\obj\Debug\netcoreapp3.1\Common.csproj.CoreCompileInputs.cache
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\obj\Debug\netcoreapp3.1\Common.dll
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\Dot-Net-Sep-2022-Conz\Microservice\Common\obj\Debug\netcoreapp3.1\Common.pdb
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\bin\Debug\netcoreapp3.1\Common.deps.json
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\bin\Debug\netcoreapp3.1\Common.dll
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\bin\Debug\netcoreapp3.1\Common.pdb
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\obj\Debug\netcoreapp3.1\Common.csproj.AssemblyReference.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\obj\Debug\netcoreapp3.1\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfoInputs.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfo.cs
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\obj\Debug\netcoreapp3.1\Common.csproj.CoreCompileInputs.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\obj\Debug\netcoreapp3.1\Common.dll
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerApp\Common\obj\Debug\netcoreapp3.1\Common.pdb
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\bin\Debug\netcoreapp3.1\Common.deps.json
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\bin\Debug\netcoreapp3.1\Common.dll
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\bin\Debug\netcoreapp3.1\Common.pdb
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Debug\netcoreapp3.1\Common.csproj.AssemblyReference.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Debug\netcoreapp3.1\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfoInputs.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfo.cs
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Debug\netcoreapp3.1\Common.csproj.CoreCompileInputs.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Debug\netcoreapp3.1\Common.dll
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Debug\netcoreapp3.1\Common.pdb

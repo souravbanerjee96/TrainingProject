@@ -1,15 +1,19 @@
 using Common;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SupplierApp.Consumers;
+using SupplierApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,7 +74,26 @@ namespace SupplierApp
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:Key"]))
                     };
                 });
+            services.AddDbContext<CustomerDBContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SupplierDbConnection")));
             services.AddControllers();
+            services.AddMassTransit(x => {
+                x.AddConsumer<OrderConsumer>();
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+                {
+                    config.Host(new Uri("rabbitmq://localhost/"), h =>
+                    {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+
+                    config.ReceiveEndpoint("orderQueue", ep => {
+                        ep.ConfigureConsumer<OrderConsumer>(provider);
+                    });
+                }));
+
+            });
+            //services.AddDbContext<CustomerDBContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SupplierDbConnection")));
+            services.AddMassTransitHostedService();
             services.AddConsulConfig(Configuration);
         }
 

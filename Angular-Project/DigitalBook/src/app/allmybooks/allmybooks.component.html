@@ -1,60 +1,135 @@
 <h1>Your Books</h1>
 
 <div *ngIf="filtersLoaded | async" class="row border border-0 border-Secondary p-3 rounded rounded-3">
-    <div *ngFor="let book of _allmyBooks" class="col-sm-6">
-        <div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="container">
-                        <img *ngIf="book.Image!=null && book.Image!=''" class="card-img-top" src="https://localhost:44320/{{book.Image}}"
-                            height="280" style="opacity: 70%;" />
-                        <img *ngIf="book.Image==null || book.Image==''" class="card-img-top"
-                            src="https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
-                            height="280" />
-                        <button class="ebtn" ><i class="fa fa-edit" style="font-size:24px"></i></button>&nbsp;
-                        <button class="dbtn" (click)="captureidBook(book.Id)"><i class="fa fa-trash" style="font-size:24px;color:red"></i></button>
-                    </div>
-                    <h5 class="card-title"><a [routerLink]=""
-                            style="text-decoration: none;cursor:pointer;color:blue">{{book.Title}}</a></h5>
-                    <div class="card-text">
-                        <span>Publisher: <b>{{book.Publisher}}</b></span><br>
-                        <span>Released On: {{book.ReleasedDate}}</span><br>
-                        <span>Category: {{book.Category}}</span><br>
-                        <span class="list-group-item">Price: {{ book.Price }} INR </span><br>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="_allmyBooks?.length === 0" class="badge bg-primary text-wrap" style="width: 100rem; font-size: large;">
-        You have not added any books yet.
-    </div>
-</div>
-
-
-<!-- Button trigger modal-->
-<button style="display: none;" class="btn btn-primary" data-bs-toggle="modal" 
-href="#ConfirmDelete" role="button" id ="btnDelBook">DeleteBookData</button>
-  
-  <!--Modal: modalConfirmDelete-->
-  <div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" 
-  aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-notify modal-danger modal-dialog-centered" role="document">
-      <div class="modal-content text-center">
-        <div class="modal-header d-flex justify-content-center">
-          <p class="heading">Are you sure?</p>
-        </div>
-        <div class="modal-body">
-          <img class="media-object" src='https://t4.ftcdn.net/jpg/03/46/38/39/360_F_346383913_JQecl2DhpHy2YakDz1t3h0Tk3Ov8hikq.jpg' width="100" height="100" />
-        </div>
-        <div class="modal-footer flex-center">
-          <a class="btn btn-outline-danger" (click)="deleteBook()">Yes</a>
-          <a type="button" class="btn  btn-danger waves-effect" data-bs-dismiss="modal">No</a>
+  <div *ngFor="let book of _allmyBooks" class="col-sm-6">
+    <div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="container">
+            <img *ngIf="book.Image!=null && book.Image!=''" class="card-img-top"
+              src="https://localhost:44320/{{book.Image}}" height="280" style="opacity: 70%;" />
+            <img *ngIf="book.Image==null || book.Image==''" class="card-img-top"
+              src="https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
+              height="280" />
+            <button class="ebtn" (click)="captureEditbook(book)"><i class="fa fa-edit" style="font-size:24px"></i></button>&nbsp;
+            <button class="dbtn" (click)="captureidBook(book.Id)"><i class="fa fa-trash"
+                style="font-size:24px;color:red"></i></button>
+          </div>
+          <h5 class="card-title"><a [routerLink]=""
+              style="text-decoration: none;cursor:pointer;color:blue">{{book.Title}}</a></h5>
+          <div class="card-text">
+            <span>Publisher: <b>{{book.Publisher}}</b></span><br>
+            <span>Released On: {{book.ReleasedDate}}</span><br>
+            <span>Category: {{book.Category}}</span><br>
+            <span class="list-group-item">Price: {{ book.Price }} INR </span><br>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <!--Modal: modalConfirmDelete-->
+  <div *ngIf="_allmyBooks?.length === 0" class="badge bg-primary text-wrap" style="width: 100rem; font-size: large;">
+    You have not added any books yet.
+  </div>
+</div>
 
 
- 
+<!-- Button trigger modal-->
+<button style="display: none;" class="btn btn-primary" data-bs-toggle="modal" href="#ConfirmDelete" role="button"
+  id="btnDelBook">DeleteBookData</button>
+
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger modal-dialog-centered" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Are you sure?</p>
+      </div>
+      <div class="modal-body">
+        <img class="media-object"
+          src='https://t4.ftcdn.net/jpg/03/46/38/39/360_F_346383913_JQecl2DhpHy2YakDz1t3h0Tk3Ov8hikq.jpg' width="100"
+          height="100" />
+      </div>
+      <div class="modal-footer flex-center">
+        <a class="btn btn-outline-danger" (click)="deleteBook()">Yes</a>
+        <a type="button" class="btn  btn-danger waves-effect" data-bs-dismiss="modal">No</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal: modalConfirmDelete-->
+
+<!-- Modal: EditBook -->
+<button class="btn btn-primary" style="display: none;" data-bs-toggle="modal" href="#editBookModal" role="button"
+  id="btnEditBook">EditBookData</button>
+
+<div class="modal fade modal-xl" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Edit Your Book</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form method="POST" enctype="multipart/form-data" method="post" id="EditbookForm"
+          #updateBookForm="ngForm" (ngSubmit)="updatebooks()">
+
+          <div class="form-group">
+            <label for="Title">Title</label>
+            <input type="text" [(ngModel)]="authorModel.Title" [ngModelOptions]="{standalone: true}" class="form-control" id="Title" required>
+          </div>
+          <div class="form-group">
+            <label for="Publisher">Publisher</label>
+            <input type="text" [(ngModel)]="authorModel.Publisher" [ngModelOptions]="{standalone: true}" class="form-control" id="Publisher"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="ReleasedDate">Released Date</label>
+            <input type="date" [(ngModel)]="authorModel.ReleasedDate" [ngModelOptions]="{standalone: true}" class="form-control" id="ReleasedDate"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="Price">Price</label>
+            <input type="number" [(ngModel)]="authorModel.Price" [ngModelOptions]="{standalone: true}" class="form-control" id="Price"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="Image">Image</label>
+            <input type="file" name="mobilePhone" class="form-control" id="Image" accept="image/*"
+              (change)="onFileSelected($event)">
+          </div>
+          <div class="form-group">
+            <label for="Category">Category</label>
+            <select class="form-control" id="Category" [(ngModel)]="authorModel.Category" [ngModelOptions]="{standalone: true}">
+              <option value="Stories">Stories</option>
+              <option value="Tales">Tales</option>
+              <option value="Biography">Biography</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="IsActive">Active?</label>
+            <select class="form-control" id="IsActive" [(ngModel)]="authorModel.IsActive" [ngModelOptions]="{standalone: true}">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="BookContent">Book Content</label>
+            <input type="textarea" [(ngModel)]="authorModel.BookContent" [ngModelOptions]="{standalone: true}" class="form-control"
+              id="BookContent" required>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+            <input type="submit" id="updateBookButton" class="btn btn-primary" value="Save Changes"
+            [disabled]="authorModel.Title=='' || authorModel.Publisher=='' || authorModel.ReleasedDate=='' || authorModel.Category=='' || authorModel.BookContent==''">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

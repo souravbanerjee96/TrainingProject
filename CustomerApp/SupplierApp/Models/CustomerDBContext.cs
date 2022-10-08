@@ -20,6 +20,8 @@ namespace SupplierApp.Models
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerAuth> CustomerAuths { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<TblOrder> TblOrders { get; set; }
+        public virtual DbSet<TblProduct> TblProducts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -71,6 +73,26 @@ namespace SupplierApp.Models
                 entity.Property(e => e.SupplierCode).HasMaxLength(50);
 
                 entity.Property(e => e.SupplierName).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<TblOrder>(entity =>
+            {
+                entity.ToTable("TblOrder");
+
+                entity.Property(e => e.OrderNumber).HasMaxLength(50);
+
+                entity.Property(e => e.ProductColor).HasMaxLength(50);
+
+                entity.Property(e => e.ProductName).HasMaxLength(50);
+
+                entity.Property(e => e.ProductSize).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<TblProduct>(entity =>
+            {
+                entity.ToTable("TblProduct");
+
+                entity.Property(e => e.ProductName).HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);
