@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Shared.Model</id>
+    <version>1.0.0</version>
+    <authors>Shared.Model</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Shared.Model\bin\Release\netcoreapp3.1\win-x64\Shared.Model.dll" target="lib\netcoreapp3.1\Shared.Model.dll" />
+  </files>
+</package>

@@ -3,7 +3,7 @@ import { author } from './author.authorModel';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginServiceService } from '../services/login-service.service';
 import { NgForm } from '@angular/forms';
-
+import { GlobalVariable } from '../global';
 @Component({
   selector: 'app-author',
   templateUrl: './author.component.html',
@@ -21,7 +21,8 @@ export class AuthorComponent implements OnInit {
   imagedata: any;
   bookAddSuccess = 0;
   bookErrorMsg = '';
-  private _baseURL = 'https://localhost:44320/api/Author/';
+  private _baseURL = GlobalVariable.BASE_API_URL + 'Author';
+  public _imgURL = GlobalVariable.IMG_URL;
   isEditauthor = false;
   getSharedData() {
     this.http.get(this._baseURL).subscribe(res => this.getSuccess(res),
@@ -81,14 +82,14 @@ export class AuthorComponent implements OnInit {
     //console.log(this.authorModel);
     this.idCus = this.authorModel;
     //console.log(this._baseURL+this.idCus.id);
-    this.http.put(this._baseURL + this.idCus.Id, this.authorModel).subscribe(res => this.getSharedData());
+    this.http.put(this._baseURL +'/'+ this.idCus.Id, this.authorModel).subscribe(res => this.getSharedData());
     this.isEditauthor = false;
   }
   clearInput() {
     window.location.reload();
   }
   dropauthor(_input: number) {
-    this.http.delete(this._baseURL + _input).subscribe(res => this.getSharedData());
+    this.http.delete(this._baseURL +'/'+ _input).subscribe(res => this.getSharedData());
   }
   authorTest() {
     window.alert("ok");

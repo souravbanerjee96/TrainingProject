@@ -23,7 +23,7 @@ export class allmyBooks {
     Price: String = ''
     BookContent: String = ''
     AuthorId: String | null = localStorage.getItem('AuthorId')
-    isActive: String = ''
+    IsActive: String = ''
 }
 
 

@@ -67,8 +67,8 @@ namespace DigitalBooks.Controllers
             }
 
         }
-        [HttpPut]
-        [Route("editBook")]
+        [HttpPut, DisableRequestSizeLimit]
+        [Route("editBook/{Id:int}")]
         public IActionResult editBook(int Id, [FromForm] string BookData, [FromForm] IFormFile BookImg)
         {
             try

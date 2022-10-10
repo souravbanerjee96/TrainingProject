@@ -9,7 +9,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 var htmlToPdfmake = require("html-to-pdfmake");
 import * as $ from "jquery";
 import { DatePipe } from '@angular/common';
-
+import { GlobalVariable } from '../global';
 @Component({
   selector: 'app-purchasehist',
   templateUrl: './purchasehist.component.html',
@@ -26,7 +26,9 @@ export class PurchasehistComponent implements OnInit {
   @ViewChild('pdfTable') pdfTable: ElementRef | undefined;
 
   filtersLoaded: Promise<boolean> | undefined;
-  private _baseURL = 'https://localhost:44320/api/Reader/';
+  private _baseURL = GlobalVariable.BASE_API_URL + 'Reader';
+  public _imgURL = GlobalVariable.IMG_URL;
+
   userName: any;
   readerId: any;
   bookIdtoRefund: any;
@@ -45,7 +47,7 @@ export class PurchasehistComponent implements OnInit {
     var userId = localStorage.getItem('readerName');
     this.userName = atob(userId == null ? '' : userId);
     this.readerId = localStorage.getItem('readerId');
-    this.http.get<any>(this._baseURL + 'orderhist?readerID=' + this.readerId).subscribe(res => {
+    this.http.get<any>(this._baseURL +'/'+ 'orderhist?readerID=' + this.readerId).subscribe(res => {
       this.purchaseHist = res;
       console.log(res);
       this.filtersLoaded = Promise.resolve(true);
@@ -61,7 +63,7 @@ export class PurchasehistComponent implements OnInit {
 
   }
   cofirmRefund() {
-    this.http.get<any>(this._baseURL + 'refund?purchaseId=' + this.bookIdtoRefund).subscribe(res => {
+    this.http.get<any>(this._baseURL +'/'+ 'refund?purchaseId=' + this.bookIdtoRefund).subscribe(res => {
       document.getElementById('myrefundSuccess')?.click();
     },
       err => {

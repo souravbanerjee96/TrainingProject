@@ -1,24 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { GlobalVariable } from '../global';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginServiceService {
 
-  private _loginURL = "https://localhost:44320/api/Authentication/";
-  private _registerURL = "https://localhost:44320/api/Authentication/";
+  private _loginURL = GlobalVariable.BASE_API_URL + "Authentication";
+  private _readerloginURL = GlobalVariable.BASE_API_URL + "ReaderAuth";
+  private _registerURL = GlobalVariable.BASE_API_URL + "Authentication";
   constructor(private http: HttpClient, private _router: Router) { }
 
   login(_input: any) {
     //console.log(this._loginURL);
     localStorage.clear();
-    return this.http.post<any>(this._loginURL + 'Validate/', _input);
+    return this.http.post<any>(this._loginURL +'/'+ 'Validate', _input);
   }
   register(_input: any) {
     console.log(_input);
-    return this.http.post<any>(this._registerURL + 'Register/', _input);
+    return this.http.post<any>(this._registerURL + 'Register', _input);
   }
   gettoken() {
     if (localStorage.getItem('token') != null)
@@ -36,7 +37,7 @@ export class LoginServiceService {
   readerRegister(_input: any) {
     //console.log(this._loginURL);
     localStorage.clear();
-    return this.http.post<any>(this._loginURL + 'Register-Reader/', _input).subscribe(
+    return this.http.post<any>(this._readerloginURL +'/'+ 'Register-Reader', _input).subscribe(
       res => {
         console.log(res);
         localStorage.setItem('r_token', res.r_token);

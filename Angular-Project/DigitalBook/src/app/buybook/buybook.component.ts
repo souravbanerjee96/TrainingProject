@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { buyBook } from '../models/userData';
 import * as $ from "jquery";
-
+import { GlobalVariable } from '../global';
 @Component({
   selector: 'app-buybook',
   templateUrl: './buybook.component.html',
@@ -16,7 +16,9 @@ export class BuybookComponent implements OnInit {
   ngOnInit(): void {
     this.buybooksetData();
   }
-  private _baseURL = 'https://localhost:44320/api/Reader/';
+  private _baseURL = GlobalVariable.BASE_API_URL + 'Order';
+  public _imgURL = GlobalVariable.IMG_URL;
+
   _buybook: buyBook = new buyBook();
   bookImage: any;
   bookName: any;
@@ -34,7 +36,7 @@ export class BuybookComponent implements OnInit {
 
   buyBook() {
     //console.log(this._buybook);
-    this.http.post<any>(this._baseURL+'CreateOrder/',this._buybook).subscribe(res=>{
+    this.http.post<any>(this._baseURL+'/'+'CreateOrder',this._buybook).subscribe(res=>{
       console.log(res);
       this.InvoiceNo=res.InvoiceNo;
       this.PaymentId=res.PaymentId;
@@ -46,8 +48,8 @@ export class BuybookComponent implements OnInit {
       
     },
     err=>{
-      this.Errormsg=err.error.message;
-      console.log("BookOrder Error :: "+err.error.message);
+      this.Errormsg=err.message;
+      console.log("BookOrder Error :: "+err.message);
       window.setTimeout(() => {
          $(".alert").fadeTo(500, 0).slideDown(500, function(){
         $(this).remove(); 

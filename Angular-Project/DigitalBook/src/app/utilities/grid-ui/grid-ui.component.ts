@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { __createBinding } from 'tslib';
 import { readerAuth } from '../../models/userData'
-
+import { GlobalVariable } from 'src/app/global';
 @Component({
   selector: 'app-grid-ui',
   templateUrl: './grid-ui.component.html',
@@ -11,7 +11,8 @@ import { readerAuth } from '../../models/userData'
 })
 export class GridUiComponent implements OnInit {
 
-
+  private _baseURL = GlobalVariable.BASE_API_URL + 'Reader';
+  public _imgURL = GlobalVariable.IMG_URL;
   Readmsg: string = '';
   email_reg = /[a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
   gridColumn: Array<any> = new Array<any>();
@@ -68,7 +69,7 @@ export class GridUiComponent implements OnInit {
     for (var _i = 0; _i < this.gridBook.length; _i++) {
       if (values[_i] != null && values[_i] != '') {
         if (keys[_i] == 'Image')
-          values[_i] = '<img class="media-object" src="https://localhost:44320/' + values[_i] + '" width="84" height="100"/><br/>';
+          values[_i] = '<img class="media-object" src="' + this._imgURL + values[_i] + '" width="84" height="100"/><br/>';
 
         this.Readmsg = this.Readmsg + this.gridBook[_i] + values[_i] + '<br/>';
       }

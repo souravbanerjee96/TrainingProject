@@ -4,13 +4,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoginServiceService } from '../services/login-service.service';
 import { Reader } from './reader.Model';
 import { ReaderModule } from './reader.module';
-
+import { GlobalVariable } from '../global';
 @Component({
   selector: 'app-root',
-  templateUrl: './reader.component.html'
+  templateUrl: './reader.component.html',
+  styleUrls: ['./reader.component.css']
 })
 export class ReaderComponent implements OnInit {
-  private _baseURL = 'https://localhost:44320/api/Reader';
+  private _baseURL = GlobalVariable.BASE_API_URL + 'Reader';
+  public _imgURL = GlobalVariable.IMG_URL;
   errmsg: string = "";
   isEditReader = false;
 

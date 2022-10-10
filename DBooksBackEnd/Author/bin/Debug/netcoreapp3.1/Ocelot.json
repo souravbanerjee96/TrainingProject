@@ -3,7 +3,8 @@
     {
       "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Authentication",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
+     
       "ServiceName": "authorService",
       "UpstreamPathTemplate": "/api/gateway/Authentication",
       "UpstreamHttpMethod": [ "Get" ]
@@ -11,7 +12,8 @@
     {
       "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Authentication/Register",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
+      
       "ServiceName": "authorService",
       "UpstreamPathTemplate": "/api/gateway/Authentication/Register",
       "UpstreamHttpMethod": [ "Post" ]
@@ -19,7 +21,8 @@
     {
       "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Authentication/Validate",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
+     
       "ServiceName": "authorService",
       "UpstreamPathTemplate": "/api/gateway/Authentication/Validate",
       "UpstreamHttpMethod": [ "Post" ]
@@ -27,39 +30,53 @@
     {
       "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Author/getallmyBooks",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "ServiceName": "authorService",
+     
       "UpstreamPathTemplate": "/api/gateway/Author/getallmyBooks",
       "UpstreamHttpMethod": [ "Post" ]
     },
     {
       "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Author",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
+      
       "ServiceName": "authorService",
       "UpstreamPathTemplate": "/api/gateway/Author",
       "UpstreamHttpMethod": [ "Post" ]
     },
     {
       "UseServiceDiscovery": true,
-      "DownstreamPathTemplate": "/api/Author/",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Author/{Id}",
+      "DownstreamScheme": "http",
+      
       "ServiceName": "authorService",
-      "UpstreamPathTemplate": "/api/gateway/Author/",
+      "UpstreamPathTemplate": "/api/gateway/Author/{Id}",
       "UpstreamHttpMethod": [ "Delete" ]
     },
     {
       "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Author/editBook/{Id}",
+      "DownstreamScheme": "http",
+      "ServiceName": "authorService",
+      
+      "UpstreamPathTemplate": "/api/gateway/Author/editBook/{Id}",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/ReaderAuth",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "ServiceName": "readerService",
+      
       "UpstreamPathTemplate": "/api/gateway/ReaderAuth",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
       "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/ReaderAuth/Register-Reader",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
+      
       "ServiceName": "readerService",
       "UpstreamPathTemplate": "/api/gateway/ReaderAuth/Register-Reader",
       "UpstreamHttpMethod": [ "Post" ]
@@ -67,40 +84,56 @@
     {
       "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Reader",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "ServiceName": "readerService",
+     
       "UpstreamPathTemplate": "/api/gateway/Reader",
       "UpstreamHttpMethod": [ "Get" ]
     },
+
     {
       "UseServiceDiscovery": true,
-      "DownstreamPathTemplate": "/api/Reader/readbooks",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Reader/{everything}",
+      "DownstreamScheme": "http",
       "ServiceName": "readerService",
-      "UpstreamPathTemplate": "/api/gateway/Reader/readbooks",
+     
+      "UpstreamPathTemplate": "/api/gateway/Reader/{everything}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Reader/readbooks?readerID={readerID}",
+      "DownstreamScheme": "http",
+      "ServiceName": "readerService",
+      
+      "UpstreamPathTemplate": "/api/gateway/Reader/readbooks?readerID={readerID}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
       "UseServiceDiscovery": true,
-      "DownstreamPathTemplate": "/api/Reader/orderhist",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Reader/orderhist?readerID={everything}",
+      "DownstreamScheme": "http",
       "ServiceName": "readerService",
-      "UpstreamPathTemplate": "/api/gateway/Reader/orderhist",
+      
+      "UpstreamPathTemplate": "/api/gateway/Reader/orderhist?readerID={everything}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
       "UseServiceDiscovery": true,
-      "DownstreamPathTemplate": "/api/Reader/refund",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Reader/refund?purchaseId={purchaseId}",
+      "DownstreamScheme": "http",
       "ServiceName": "readerService",
-      "UpstreamPathTemplate": "/api/gateway/Reader/refund",
+      
+      "UpstreamPathTemplate": "/api/gateway/Reader/refund?purchaseId={purchaseId}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
       "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Order/CreateOrder",
-      "DownstreamScheme": "https",
-      "ServiceName": "bookorderService",
+      "DownstreamScheme": "http",
+      
+      "ServiceName": "readerService",
       "UpstreamPathTemplate": "/api/gateway/Order/CreateOrder",
       "UpstreamHttpMethod": [ "Post" ]
     }

@@ -5,13 +5,17 @@
           <div class="card" style="cursor: pointer;">
             <div class="d-flex justify-content-between p-3">
               <p class="lead mb-0">{{rBook.Category}}</p>
-              <div class="bg-success rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
-                style="width: 40px; height: 40px;">
+              <div *ngIf="rBook.IsActive!=0" class="bg-success rounded d-flex align-items-center justify-content-center shadow-1-strong"
+                style="width: 50px; height: 40px;">
                 <p class="text-white mb-0 small"><strong>Read</strong></p>
+              </div>
+              <div *ngIf="rBook.IsActive==0" class="bg-danger rounded d-flex align-items-center justify-content-center shadow-1-strong"
+                style="width: 60px; height: 39px;">
+                <p class="text-white mb-0 small"><strong>Inactive</strong></p>
               </div>
             </div>
             <img *ngIf="rBook.Image!=null && rBook.Image!=''" style="pointer-events: none;"
-              src='https://localhost:44320/{{rBook.Image}}' height="300" class="card-img-top" alt="Book" />
+              src='{{_imgURL}}{{rBook.Image}}' height="300" class="card-img-top" alt="Book" />
             <img *ngIf="rBook.Image==null || rBook.Image==''" style="pointer-events: none;"
               src='https://drupal.nypl.org/sites-drupal/default/files/blogs/sJ3CT4V.gif' height="300" class="card-img-top"
               alt="Book" />
@@ -21,7 +25,8 @@
               <div class="d-flex justify-content-between mb-3">
                 <h5 class="mb-0">{{rBook.Title}}</h5>
               </div>
-              <a class="stretched-link" (click)="prepareBook(rBook)"></a>
+              <a *ngIf="rBook.IsActive!=0" class="stretched-link" (click)="prepareBook(rBook)"></a>
+              <a *ngIf="rBook.IsActive==0" [ngStyle]="{'cursor': 'not-allowed'}" class="stretched-link"></a>
             </div>
           </div>
         </div>

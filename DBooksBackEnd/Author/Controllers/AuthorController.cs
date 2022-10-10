@@ -69,6 +69,57 @@ namespace DigitalBooks.Controllers
             }
 
         }
+        [HttpPut, DisableRequestSizeLimit]
+        [Route("editBook/{Id:int}")]
+        public IActionResult editBook(int Id, [FromForm] string BookData, [FromForm] IFormFile BookImg)
+        {
+            try
+            {
+                var data = db.Books.Where(x => x.Id == Id).FirstOrDefault();
+                if (data != null)
+                {
+                    var model = JsonConvert.DeserializeObject<Book>(BookData);
+
+                    var originalImagePath = "";
+                    var File = BookImg;
+                    var folderName = "Images";
+                    var pathtoUse = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                    if (File != null && File.Length > 0)
+                    {
+                        var filename = ContentDispositionHeaderValue.Parse(File.ContentDisposition).FileName.Trim('"');
+                        var newFileName = "Img_" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                        filename = newFileName.Trim() + Path.GetExtension(filename);
+
+                        var fullPath = Path.Combine(pathtoUse, filename);
+                        originalImagePath = Path.Combine(folderName, filename);
+                        using (var stream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            File.CopyTo(stream);
+                        }
+                        model.Image = originalImagePath;
+                    }
+
+                    data.Title = model.Title;
+                    data.Publisher = model.Publisher;
+                    data.ReleasedDate = model.ReleasedDate;
+                    data.Category = model.Category;
+                    data.Image = String.IsNullOrEmpty(model.Image) ? data.Image : model.Image;
+                    data.Price = model.Price;
+                    data.BookContent = model.BookContent;
+                    data.IsActive = model.IsActive;
+
+                    db.SaveChanges();
+                    return Ok(new { Status = "Success Update" });
+                }
+                else
+                    return Conflict(new { message = "No Book found to update" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.InnerException + " Error Coming From Author Book Update " });
+            }
+        }
 
         [HttpDelete("{Id:int}")]
         public IActionResult deleteBook(int Id)

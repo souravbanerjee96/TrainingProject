@@ -7,13 +7,15 @@
         <div class="card-body">
           <div class="container">
             <img *ngIf="book.Image!=null && book.Image!=''" class="card-img-top"
-              src="https://localhost:44320/{{book.Image}}" height="280" style="opacity: 70%;" />
+              src="{{_imgURL}}{{book.Image}}" height="280" style="opacity: 70%;" />
             <img *ngIf="book.Image==null || book.Image==''" class="card-img-top"
               src="https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
               height="280" />
-            <button class="ebtn" (click)="captureEditbook(book)"><i class="fa fa-edit" style="font-size:24px"></i></button>&nbsp;
+            <button class="ebtn" (click)="captureEditbook(book)"><i class="fa fa-edit"
+                style="font-size:24px"></i></button>&nbsp;
             <button class="dbtn" (click)="captureidBook(book.Id)"><i class="fa fa-trash"
                 style="font-size:24px;color:red"></i></button>
+                <div *ngIf="book.IsActive=='0'" class="centeredtext">Book Inactive</div>
           </div>
           <h5 class="card-title"><a [routerLink]=""
               style="text-decoration: none;cursor:pointer;color:blue">{{book.Title}}</a></h5>
@@ -64,47 +66,52 @@
   id="btnEditBook">EditBookData</button>
 
 <div class="modal fade modal-xl" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-  aria-hidden="true">
+  aria-hidden="true" style="background: linear-gradient(90deg, #000 0%, #fff 100%);">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content" style="background: radial-gradient( #34C1B9 0%, #fff 100%);">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel">Edit Your Book</h5>
+        <h5 class="modal-title" id="ModalLabel">Edit Your Book 📚 </h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" id="buttonCloseEditBook">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-        <form method="POST" enctype="multipart/form-data" method="post" id="EditbookForm"
-          #updateBookForm="ngForm" (ngSubmit)="updatebooks()">
+        <form method="POST" enctype="multipart/form-data" method="post" id="EditbookForm" #updateBookForm="ngForm"
+          (ngSubmit)="updatebooks()">
 
           <div class="form-group">
             <label for="Title">Title</label>
-            <input type="text" [(ngModel)]="authorModel.Title" [ngModelOptions]="{standalone: true}" class="form-control" id="Title" required>
+            <input type="text" [(ngModel)]="authorModel.Title" [ngModelOptions]="{standalone: true}"
+              class="form-control" id="Title" required>
           </div>
           <div class="form-group">
             <label for="Publisher">Publisher</label>
-            <input type="text" [(ngModel)]="authorModel.Publisher" [ngModelOptions]="{standalone: true}" class="form-control" id="Publisher"
-              required>
+            <input type="text" [(ngModel)]="authorModel.Publisher" [ngModelOptions]="{standalone: true}"
+              class="form-control" id="Publisher" required>
           </div>
           <div class="form-group">
             <label for="ReleasedDate">Released Date</label>
-            <input type="date" [(ngModel)]="authorModel.ReleasedDate" [ngModelOptions]="{standalone: true}" class="form-control" id="ReleasedDate"
-              required>
+            <input type="date" [(ngModel)]="authorModel.ReleasedDate" [ngModelOptions]="{standalone: true}"
+              class="form-control" id="ReleasedDate" required>
           </div>
           <div class="form-group">
             <label for="Price">Price</label>
-            <input type="number" [(ngModel)]="authorModel.Price" [ngModelOptions]="{standalone: true}" class="form-control" id="Price"
-              required>
+            <input type="number" [(ngModel)]="authorModel.Price" [ngModelOptions]="{standalone: true}"
+              class="form-control" id="Price" required>
           </div>
           <div class="form-group">
-            <label for="Image">Image</label>
+            <label for="Image">Image</label>&nbsp;
+            <span style="padding-right:3px; padding-top: 3px; display:inline-block;">
+              <img class="media-object" src="{{_imgURL}}{{authorModel.Image}}" height="45" width="45">
+            </span>
             <input type="file" name="mobilePhone" class="form-control" id="Image" accept="image/*"
               (change)="onFileSelected($event)">
           </div>
           <div class="form-group">
             <label for="Category">Category</label>
-            <select class="form-control" id="Category" [(ngModel)]="authorModel.Category" [ngModelOptions]="{standalone: true}">
+            <select class="form-control" id="Category" [(ngModel)]="authorModel.Category"
+              [ngModelOptions]="{standalone: true}">
               <option value="Stories">Stories</option>
               <option value="Tales">Tales</option>
               <option value="Biography">Biography</option>
@@ -113,22 +120,66 @@
           </div>
           <div class="form-group">
             <label for="IsActive">Active?</label>
-            <select class="form-control" id="IsActive" [(ngModel)]="authorModel.IsActive" [ngModelOptions]="{standalone: true}">
+            <select class="form-control" id="IsActive" [(ngModel)]="authorModel.IsActive"
+              [ngModelOptions]="{standalone: true}">
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
           </div>
           <div class="form-group">
             <label for="BookContent">Book Content</label>
-            <input type="textarea" [(ngModel)]="authorModel.BookContent" [ngModelOptions]="{standalone: true}" class="form-control"
-              id="BookContent" required>
+            <textarea [(ngModel)]="authorModel.BookContent" [ngModelOptions]="{standalone: true}" class="form-control"
+              id="BookContent" rows="8" cols="40" required></textarea>
           </div>
           <div class="modal-footer">
             <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
             <input type="submit" id="updateBookButton" class="btn btn-primary" value="Save Changes"
-            [disabled]="authorModel.Title=='' || authorModel.Publisher=='' || authorModel.ReleasedDate=='' || authorModel.Category=='' || authorModel.BookContent==''">
+              [disabled]="authorModel.Title=='' || authorModel.Publisher=='' || authorModel.ReleasedDate=='' || authorModel.Category=='' || authorModel.BookContent==''">
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Book Edited Confirmation -->
+
+<button style="display: none;" class="btn btn-primary" data-bs-toggle="modal" href="#ignismyModal" role="button"
+  id="btnsuccessEdit">Book Edited</button>
+<button style="display: none;" class="btn btn-primary" data-bs-toggle="modal" href="#updatebookFailed" role="button"
+  id="btnfailedEdit">Book Edited Failed</button>
+
+<div class="modal fade" id="ignismyModal" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="display:flex; justify-content:flex-end;">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label=""
+          id="btnSuccessEditClose"><span>×</span></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="thank-you-pop">
+          <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+          <h1>Thank You!</h1>
+          <p>Your book has been updated</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="updatebookFailed" aria-hidden="true" aria-labelledby="BookUpdateFailedLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: rgb(165, 56, 56); border:0px;">
+        <b>Error</b>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="background-color: rosybrown;">
+        <h5>Error updating your book 😔</h5>
+        Try again later !
       </div>
     </div>
   </div>

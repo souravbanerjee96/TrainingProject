@@ -77,7 +77,7 @@ namespace Author
                     };
                 });
             services.AddDbContext<DigitalBookContext>(x => x.UseSqlServer(Configuration.GetConnectionString("AuthorDbConnection")));
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddMassTransit(x => {
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
                 {

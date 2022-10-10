@@ -1,0 +1,9 @@
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\bin\Release\netcoreapp3.1\win-x64\Common.deps.json
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\bin\Release\netcoreapp3.1\win-x64\Common.dll
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\bin\Release\netcoreapp3.1\win-x64\Common.pdb
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Release\netcoreapp3.1\win-x64\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Release\netcoreapp3.1\win-x64\Common.AssemblyInfoInputs.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Release\netcoreapp3.1\win-x64\Common.AssemblyInfo.cs
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Release\netcoreapp3.1\win-x64\Common.csproj.CoreCompileInputs.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Release\netcoreapp3.1\win-x64\Common.dll
+C:\Users\cogdotnet1706\Desktop\TrainingProject\DBooksBackEnd\Common\obj\Release\netcoreapp3.1\win-x64\Common.pdb

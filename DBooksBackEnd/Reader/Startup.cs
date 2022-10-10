@@ -72,8 +72,8 @@ namespace Reader
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:Key"]))
                     };
                 });
-            services.AddDbContext<DigitalBookContext>(x => x.UseSqlServer(Configuration.GetConnectionString("ReaderDbConnection")));
-            services.AddControllers();
+            services.AddDbContext<DigitalBookContext>(x => x.UseSqlServer(Configuration.GetConnectionString("readerDbConnection")));
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddMassTransit(x => {
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
                 {
@@ -100,7 +100,8 @@ namespace Reader
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwagger();
             app.UseSwaggerUI(c => {

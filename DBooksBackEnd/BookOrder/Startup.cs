@@ -1,3 +1,4 @@
+using BookOrder.Consumers;
 using BookOrder.Models;
 using Common;
 using MassTransit;
@@ -13,7 +14,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using SupplierApp.Consumers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,13 +86,13 @@ namespace BookOrder
                         h.Password("guest");
                     });
 
-                    config.ReceiveEndpoint("orderQueue", ep => {
+                    config.ReceiveEndpoint("bookPurchaseQueue", ep => {
                         ep.ConfigureConsumer<OrderConsumer>(provider);
                     });
                 }));
 
             });
-            //services.AddDbContext<CustomerDBContext>(x => x.UseSqlServer(Configuration.GetConnectionString("BookOrderDbConnection")));
+            //services.AddDbContext<DigitalBookContext>(x => x.UseSqlServer(Configuration.GetConnectionString("bookorderDbConnection")));
             services.AddMassTransitHostedService();
             services.AddConsulConfig(Configuration);
         }
@@ -108,7 +108,7 @@ namespace BookOrder
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthorization();
             app.UseSwagger();
             app.UseSwaggerUI(c => {

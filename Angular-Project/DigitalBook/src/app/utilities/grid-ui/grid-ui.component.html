@@ -26,7 +26,7 @@
             </div>
           </div>
           <img *ngIf="griddat['Image']!=null && griddat['Image']!=''" style="pointer-events: none;"
-            src='https://localhost:44320/{{griddat["Image"]}}' height="300" class="card-img-top" alt="Book" />
+            src='{{_imgURL}}{{griddat["Image"]}}' height="300" class="card-img-top" alt="Book" />
           <img *ngIf="griddat['Image']==null || griddat['Image']==''" style="pointer-events: none;"
             src='https://drupal.nypl.org/sites-drupal/default/files/blogs/sJ3CT4V.gif' height="300" class="card-img-top"
             alt="Book" />

@@ -19,7 +19,7 @@
                       <img *ngIf="hist.Image==null || hist.Image==''"
                         src="https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
                         class="img-fluid" alt="Phone">
-                      <img *ngIf="hist.Image!=null && hist.Image!=''" src="https://localhost:44320/{{hist.Image}}"
+                      <img *ngIf="hist.Image!=null && hist.Image!=''" src="{{_imgURL}}{{hist.Image}}"
                         class="img-fluid" alt="Phone">
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">

@@ -34,16 +34,16 @@ namespace CustomerApp.Controllers
                 var data = db.BookPurchases.Any(x => x.Bookid == bp.Bookid && x.Userid == bp.Userid && x.IsRefunded == 0);
                 if (!data)
                 {
-                    Uri uri = new Uri("rabbitmq:localhost/orderQueue");
+                    Uri uri = new Uri("rabbitmq:localhost/bookPurchaseQueue");
                     var endpoint = await bus.GetSendEndpoint(uri);
-                    Order o = new Order();
-                    o.Bookid = bp.Bookid;
-                    o.Userid = bp.Userid;
-                    o.InvoiceNo = bp.InvoiceNo;
-                    o.PaymentId = bp.PaymentId;
-                    await endpoint.Send(o);
-                    //db.BookPurchases.Add(bp);
-                    //db.SaveChanges();
+                    Order orderMessage = new Order();
+                    orderMessage.Bookid = bp.Bookid;
+                    orderMessage.Userid = bp.Userid;
+                    orderMessage.InvoiceNo = bp.InvoiceNo;
+                    orderMessage.PaymentId = bp.PaymentId;
+                    //await endpoint.Send(orderMessage);
+                    db.BookPurchases.Add(bp);
+                    db.SaveChanges();
                     return Ok(new { message = "Order Placed", InvoiceNo = bp.InvoiceNo, PaymentId = bp.PaymentId });
                 }
                 else
@@ -51,7 +51,7 @@ namespace CustomerApp.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.InnerException });
+                return BadRequest(new { message = ex.Message });
             }
 
         }
