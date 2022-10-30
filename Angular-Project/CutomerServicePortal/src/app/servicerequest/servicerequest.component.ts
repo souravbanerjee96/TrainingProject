@@ -1,0 +1,74 @@
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { servicereq } from './servicerequest.Model';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { LoginServiceService } from '../services/login-service.service';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { GlobalVariable } from '../global';
+import { DatePipe } from '@angular/common';
+import { debug } from 'console';
+@Component({
+  selector: 'app-servicerequest',
+  templateUrl: './servicerequest.component.html',
+  styleUrls: ['./css/style.css']
+})
+export class ServicerequestComponent implements OnInit {
+
+  ngOnInit(): void {
+  }
+  @ViewChild('myInputVariable', { static: false })
+  myInput!: ElementRef;
+
+  @ViewChild('requestForm') myForm!: NgForm;
+
+  dataloaded:boolean=true;
+  imagedata: any;
+  reqAddSuccess = 0;
+  reqErrorMsg = '';
+  req_form: FormGroup;
+  private _baseURL = GlobalVariable.BASE_API_URL + 'ServiceReq';
+  isEditauthor = false;
+  constructor(private http: HttpClient, private _loginS: LoginServiceService, fb: FormBuilder,public datepipe: DatePipe) {
+    this.req_form = fb.group({
+      'ServiceName': [null, Validators.required],
+      'RequiredDate': [null, Validators.required],
+      'ServiceType': [null, Validators.required],
+      'ServiceDetails': [null, Validators.compose([Validators.required, Validators.pattern(/^.{50,5000}$/s)])],
+    });
+   
+  }
+  currdt:Date = new Date();
+  currD = this.currdt.setDate(this.currdt.getDate()+1);
+  todayDate = this.datepipe.transform((this.currD), 'yyyy-MM-dd');
+
+  getSuccess(_input: any) {
+    this.serviceReqs = _input;
+  }
+  serviceReq: servicereq = new servicereq();
+  serviceReqs: Array<servicereq> = new Array<servicereq>();
+
+  addrequest() {
+    //console.log(this.serviceReq);
+    this.dataloaded = false;
+    this.http.post<any>(this._baseURL, this.serviceReq).subscribe(res => {
+      console.log(res);
+      this.reqAddSuccess = 1;
+      this.dataloaded = true;
+      document.getElementById('myreqSuccess')?.click();
+      //this.myInput.nativeElement.value = "";
+      this.myForm.form.markAsPristine();
+      this.myForm.form.markAsUntouched();
+      this.serviceReq = new servicereq();
+    },
+      err => {
+        console.log("error = > "+JSON.stringify(err.error.errors));
+        //this.reqErrorMsg = err.error.message;
+        document.getElementById('reqAddfailed')?.click();
+      });
+
+
+  }
+  clearInput() {
+    window.location.reload();
+  }
+  
+}

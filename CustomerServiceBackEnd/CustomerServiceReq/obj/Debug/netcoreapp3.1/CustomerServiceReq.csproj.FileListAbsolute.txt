@@ -1,0 +1,9 @@
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerServiceBackEnd\CustomerServiceReq\obj\Debug\netcoreapp3.1\CustomerServiceReq.csproj.AssemblyReference.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerServiceBackEnd\CustomerServiceReq\obj\Debug\netcoreapp3.1\CustomerServiceReq.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerServiceBackEnd\CustomerServiceReq\obj\Debug\netcoreapp3.1\CustomerServiceReq.AssemblyInfoInputs.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerServiceBackEnd\CustomerServiceReq\obj\Debug\netcoreapp3.1\CustomerServiceReq.AssemblyInfo.cs
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerServiceBackEnd\CustomerServiceReq\obj\Debug\netcoreapp3.1\CustomerServiceReq.csproj.CoreCompileInputs.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerServiceBackEnd\CustomerServiceReq\obj\Debug\netcoreapp3.1\CustomerServiceReq.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerServiceBackEnd\CustomerServiceReq\obj\Debug\netcoreapp3.1\CustomerServiceReq.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerServiceBackEnd\CustomerServiceReq\obj\Debug\netcoreapp3.1\CustomerServiceReq.dll
+C:\Users\cogdotnet1706\Desktop\TrainingProject\CustomerServiceBackEnd\CustomerServiceReq\obj\Debug\netcoreapp3.1\CustomerServiceReq.pdb

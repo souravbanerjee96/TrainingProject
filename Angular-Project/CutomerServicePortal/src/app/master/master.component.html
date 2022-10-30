@@ -1,0 +1,71 @@
+<div id="work-in-progress">
+    <div class="work-spinner"></div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../../assets/image/cs_portal_icon.png" width="40" height="40"/>&nbsp;&nbsp;
+            Customer Service Portal
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 40px;">
+                <!-- <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['home']">Home</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <p style="color: yellow; font-family: cursive; font-size: 12px;">
+                            {{today | date:'fullDate'}} {{today | date:'h:mm:ss a'}}
+                        </p>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page">
+                        <p class="text-white mb-0 small blink_me"><strong> 
+                            💥 💥 💥 15% OFF on Every Book , Hurry !</strong></p>
+                    </a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(true)" aria-current="page" style="color: rgb(88, 236, 20);" 
+                    >Hello , {{userNameCust}} 🟢‍ &nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLogin(true)" [routerLink]="['service/add']">Service Request</a>
+                </li>
+            </ul>
+            <!-- Right Portion Menu for bootstrap -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="--bs-scroll-height: 40px;">
+                <li class="nav-item me-auto float-end">
+                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page"
+                        [routerLink]="['register']">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page"
+                        [routerLink]="['login/auth']">Login
+                        &nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(true)" aria-current="page" style="font-size: 14px;"
+                        [routerLink]="['allmyrequests/all']">View Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(true)" aria-current="page" style="font-size: 14px;"
+                        [routerLink]="['edituser']">Update Profile 🛠 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLogin(true)" (click)="logoutUser()" style="font-size: 14px;" 
+                    [routerLink]="['reader/add']">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+
+    <router-outlet></router-outlet>
+</div>

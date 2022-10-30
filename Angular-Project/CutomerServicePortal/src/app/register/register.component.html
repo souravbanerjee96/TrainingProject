@@ -1,0 +1,200 @@
+
+<section class="vh-100 gradient-custom">
+  <div class="container py-3 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5" [formGroup]="reg_form">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
+                    <img src="../../assets/image/loading-6.gif" style=" width: 50%; height: 50%;"></div>
+                  <div class="alert alert-danger center-errormsg position-absolute top-50 start-50 translate-middle" *ngIf="Errormsg!=null">
+                    <strong>Error!</strong> {{Errormsg}}
+                  </div>
+                  <div class="form-outline" >
+                    <input type="text" [(ngModel)]="regData.FirstName" formControlName="FirstName" placeholder="Your First Name" id="firstName"
+                      class="form-control form-control-lg" >
+                    <label class="form-label" for="firstName">First Name</label>
+                  </div>
+                  <span class="text-danger"
+                    *ngIf="reg_form.controls['FirstName'].hasError('required') && (reg_form.controls['FirstName'].dirty || reg_form.controls['FirstName'].touched)">This
+                    field is required</span>
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" [(ngModel)]="regData.LastName" formControlName="LastName" placeholder="Your Last Name" id="lastName"
+                      class="form-control form-control-lg">
+                    <label class="form-label" for="lastName">Last Name</label>
+                  </div>
+                  <span class="text-danger"
+                    *ngIf="reg_form.controls['LastName'].hasError('required') && (reg_form.controls['LastName'].dirty || reg_form.controls['LastName'].touched)">This
+                    field is required</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="email" [(ngModel)]="regData.Email" formControlName="Email" placeholder="abc@example.com" id="emailAddress"
+                      class="form-control form-control-lg">
+                    <label class="form-label" for="emailAddress">Email</label>
+                  </div>
+                  <span class="text-danger" *ngIf="reg_form.controls['Email'].hasError('required') && (reg_form.controls['Email'].dirty || reg_form.controls['Email'].touched)">This field is required</span>
+                  <span class="text-danger" *ngIf="reg_form.controls['Email'].hasError('pattern') && (reg_form.controls['Email'].dirty || reg_form.controls['Email'].touched)">Please enter valid email address</span>
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="tel" [(ngModel)]="regData.PhoneNo" formControlName="PhoneNo" placeholder="9999000990" pattern="[0-9]{10}"
+                      id="phoneNumber" class="form-control form-control-lg">
+                    <label class="form-label" for="phoneNumber">Phone Number</label>
+                  </div>
+                  <span class="text-danger" *ngIf="reg_form.controls['PhoneNo'].hasError('required') && (reg_form.controls['PhoneNo'].dirty || reg_form.controls['PhoneNo'].touched)">This field is required</span>
+                  <span class="text-danger" *ngIf="reg_form.controls['PhoneNo'].hasError('pattern') && (reg_form.controls['PhoneNo'].dirty || reg_form.controls['PhoneNo'].touched)">Please enter valid phone number</span>
+               
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                  <div class="form-outline datepicker w-100">
+                    <input type="date" [(ngModel)]="regData.DOB" formControlName="DOB" class="form-control form-control-lg" id="birthdayDate">
+                    <label for="birthdayDate" class="form-label">Date Of Birth</label>
+                  </div>
+                  <span class="text-danger"
+                  *ngIf="reg_form.controls['DOB'].hasError('required') && (reg_form.controls['DOB'].dirty || reg_form.controls['DOB'].touched)">This
+                  field is required</span>
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <h6 class="mb-2 pb-1">Contact Preference</h6>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="phonePref"
+                    formControlName="ContactPref" [(ngModel)]="regData.ContactPref" value="Phone">
+                    <label class="form-check-label" for="phonePref">Phone</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="emailPref"
+                    formControlName="ContactPref" [(ngModel)]="regData.ContactPref" value="E-mail">
+                    <label class="form-check-label" for="emailPref">E-mail</label>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-5 mb-4 pb-2">
+                  <select id="country" name="country" formControlName="Country" class="select form-control-lg" [(ngModel)]="regData.Country">
+                    <option value="">Select Country</option>
+                    <option value="India">India</option>
+                  </select>
+                  <span class="text-danger"
+                  *ngIf="reg_form.controls['Country'].hasError('required') && (reg_form.controls['Country'].dirty || reg_form.controls['Country'].touched)">Please
+                  Select Country</span>
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <!--- India states -->
+                  <select id="country-state" name="country-state" class="select form-control-lg" formControlName="State"
+                    [(ngModel)]="regData.State">
+                    <option value="">Select State</option>
+                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                    <option value="Daman and Diu">Daman and Diu</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Ladakh">Ladakh</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Puducherry">Puducherry</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                  </select>
+                  <span class="text-danger"
+                  *ngIf="reg_form.controls['State'].hasError('required') && (reg_form.controls['State'].dirty || reg_form.controls['State'].touched)">Please
+                  Select State</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" formControlName="Address" [(ngModel)]="regData.Address" placeholder="123,George St,Kolkata" id="Address"
+                      class="form-control form-control-lg">
+                    <label class="form-label" for="Address">Address</label>
+                  </div>
+                  <span class="text-danger"
+                  *ngIf="reg_form.controls['Address'].hasError('required') && (reg_form.controls['Address'].dirty || reg_form.controls['Address'].touched)">Please
+                  Enter your Address</span>
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" formControlName="PanNo" [(ngModel)]="regData.PanNo" placeholder="ABCTY1234D" id="PanNo"
+                      class="form-control form-control-lg">
+                    <label class="form-label" for="PanNo">PAN No</label>
+                  </div>
+                  <span class="text-danger" *ngIf="reg_form.controls['PanNo'].hasError('required') && (reg_form.controls['PanNo'].dirty || reg_form.controls['PanNo'].touched)">This field is required</span>
+                  <span class="text-danger" *ngIf="reg_form.controls['PanNo'].hasError('pattern') && (reg_form.controls['PanNo'].dirty || reg_form.controls['PanNo'].touched)">Please enter valid PAN number</span>
+               
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+
+                  <div class="float-start form-outline">
+                    <input type="password" formControlName="Password" [(ngModel)]="regData.Password" id="password"
+                      class="form-control form-control-lg">
+                    <label class="form-label" for="password">Password</label>
+                  </div>
+                  <span class="text-danger"
+                  *ngIf="reg_form.controls['Password'].hasError('required') && (reg_form.controls['Password'].dirty || reg_form.controls['Password'].touched)">Please
+                  Enter your Password</span>
+                </div>
+                <div class="col">
+                  <div class="float-end">
+                    <input class="btn btn-primary btn-lg btn-disable" type="submit"  
+                    [disabled]="!(reg_form.valid)" value="Submit" (click)="regUser()">
+                  </div>
+                </div>
+              </div>
+              <p class="text-center text-muted mt-2 mb-0">Have already an account? <a routerLink="/login/auth"><u>Login
+                    here</u></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,60 @@
+{
+  "Routes": [
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Users",
+      "DownstreamScheme": "https",
+      "ServiceName": "customerServiceUsers",
+      "UpstreamPathTemplate": "/api/gateway/Users",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Users/Register",
+      "DownstreamScheme": "https",
+      "ServiceName": "customerServiceUsers",
+      "UpstreamPathTemplate": "/api/gateway/Users/Register",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Users/Login",
+      "DownstreamScheme": "https",
+      "ServiceName": "customerServiceUsers",
+      "UpstreamPathTemplate": "/api/gateway/Users/Login",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/ServiceReq/{id}",
+      "DownstreamScheme": "https",
+      "ServiceName": "ServiceRequests",
+      "UpstreamPathTemplate": "/api/gateway/ServiceReq/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/ServiceReq/{id}",
+      "DownstreamScheme": "https",
+      "ServiceName": "ServiceRequests",
+      "UpstreamPathTemplate": "/api/gateway/ServiceReq/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/ServiceReq/{id}",
+      "DownstreamScheme": "https",
+      "ServiceName": "ServiceRequests",
+      "UpstreamPathTemplate": "/api/gateway/ServiceReq/{id}",
+      "UpstreamHttpMethod": [ "Put" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    //"BaseUrl": "http://localhost:44363"
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": "8500",
+      "Type": "Consul"
+    }
+  }
+}

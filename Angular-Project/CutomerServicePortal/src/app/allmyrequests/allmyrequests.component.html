@@ -1,0 +1,160 @@
+<!-- <h1>Your Requests</h1> -->
+<div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
+  <img src="../../assets/image/loading-37.gif" style=" width: 50%; height: 50%;"></div>
+<div *ngIf="filtersLoaded | async" class="row border border-0 border-Secondary p-3 rounded rounded-3">
+  <div *ngFor="let req of allmyReqs" class="col-sm-4">
+    <div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="container">
+
+            <button class="ebtn" (click)="captureEditreq(req)"><i class="fa fa-edit"
+                style="font-size:24px"></i></button>&nbsp;
+            <button class="dbtn" (click)="captureidreq(req.Id)"><i class="fa fa-trash"
+                style="font-size:24px;color:red"></i></button>
+                <div *ngIf="req.isDeleted=='1'" class="centeredtext">Request Inactive</div>
+          </div>
+          <h5 class="card-title"><a [routerLink]=""
+              style="text-decoration: none;cursor:pointer;color:blue">{{formatName(req.ServiceName)}} 🔧</a></h5>
+          <div class="card-text">
+            <span>Required Date: {{req.RequiredDate}}</span><br>
+            <span>Service Type: {{req.ServiceType}}</span><br>
+            <span>Added On: {{ timeFormat(req.AddedDate) }} </span><br><br>
+            <span><textarea style="border-style: inset;border-width: 2px; border-color: brown; background-color: cornsilk; resize: none;" 
+              placeholder="{{req.ServiceDetails}}" rows="2" cols="40" disabled></textarea></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="allmyReqs?.length === 0" class="badge bg-primary text-wrap" style="width: 100rem; font-size: large;">
+    You have not added any Requests yet.
+  </div>
+</div>
+
+
+<!-- Button trigger modal-->
+<button style="display: none;" class="btn btn-primary" data-bs-toggle="modal" href="#ConfirmDelete" role="button"
+  id="btnDelreq">DeletereqData</button>
+
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+  aria-hidden="true" style="background: linear-gradient(90deg, rgb(151, 58, 58) 0%, #fff 100%);">
+  <div class="modal-dialog modal-sm modal-notify modal-danger modal-dialog-centered" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Are you sure?</p>
+      </div>
+      <div class="modal-body">
+        <img class="media-object"
+          src='https://t4.ftcdn.net/jpg/03/46/38/39/360_F_346383913_JQecl2DhpHy2YakDz1t3h0Tk3Ov8hikq.jpg' width="100"
+          height="100" />
+      </div>
+      <div class="modal-footer flex-center">
+        <a class="btn btn-outline-danger" (click)="deleteReq()">Yes</a>
+        <a type="button" class="btn  btn-danger waves-effect" data-bs-dismiss="modal">No</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal: modalConfirmDelete-->
+
+<!-- Modal: Editreq -->
+<button class="btn btn-primary" style="display: none;" data-bs-toggle="modal" href="#editreqModal" role="button"
+  id="btnEditReq">EditreqData</button>
+
+<div class="modal fade modal-xl" id="editreqModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+  aria-hidden="true" style="background: linear-gradient(90deg, #000 0%, #fff 100%);">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background: radial-gradient( #34C1B9 0%, #fff 100%);">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Edit Your Request ⚙️ </h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" id="buttonCloseEditreq">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form method="POST" id="EditreqForm" #updatereqForm="ngForm"
+          (ngSubmit)="updateReqs()">
+
+          <div class="form-group">
+            <label for="Name">Service Name</label>
+            <input type="text" [(ngModel)]="updateReq.ServiceName" [ngModelOptions]="{standalone: true}"
+              class="form-control" id="Title" required>
+          </div>
+          <div class="form-group">
+            <label for="RequiredDate">Required Date</label>
+            <input type="date" [min]="todayDate" [(ngModel)]="updateReq.RequiredDate" [ngModelOptions]="{standalone: true}"
+              class="form-control" id="ReleasedDate" required>
+          </div>
+          <div class="form-group">
+            <label for="ServiceType">Service Type</label>
+            <select class="form-control" id="Category" [(ngModel)]="updateReq.ServiceType"
+              [ngModelOptions]="{standalone: true}">
+              <option value="Business">Business</option>
+              <option value="Banking">Banking</option>
+              <option value="Technology">Technology</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Communication">Communication</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ServiceDetails">Service Details (Min 50 characters) </label>
+            <textarea [(ngModel)]="updateReq.ServiceDetails" [ngModelOptions]="{standalone: true}" class="form-control"
+              id="reqContent" rows="8" cols="40" required></textarea>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+            <input type="submit" id="updatereqButton" class="btn btn-primary" value="Save Changes"
+              [disabled]="updateReq.ServiceName=='' || updateReq.RequiredDate=='' || updateReq.ServiceDetails=='' || updateReq.ServiceDetails.length < 50">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- req Edited Confirmation -->
+
+<button style="display: none;" class="btn btn-primary" data-bs-toggle="modal" href="#ignismyModal" role="button"
+  id="btnsuccessEdit">Request Edited</button>
+<button style="display: none;" class="btn btn-primary" data-bs-toggle="modal" href="#updatereqFailed" role="button"
+  id="btnfailedEdit">Request Edited Failed</button>
+
+<div class="modal fade" id="ignismyModal" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="display:flex; justify-content:flex-end;">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label=""
+          id="btnSuccessEditClose"><span>×</span></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="thank-you-pop">
+          <img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+          <h1>Thank You!</h1>
+          <p>Your Request has been updated</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="updatereqFailed" aria-hidden="true" aria-labelledby="reqUpdateFailedLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: rgb(165, 56, 56); border:0px;">
+        <b>Error</b>
+        <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="background-color: rosybrown;">
+        <h5>Error updating your Request 😔</h5>
+        Try again later !
+      </div>
+    </div>
+  </div>
+</div>
