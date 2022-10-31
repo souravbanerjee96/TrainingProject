@@ -1,3 +1,3 @@
-scaffold-Dbcontext "Data Source=CTSDOTNET858;Initial Catalog=CustomerServiceRequests;User ID=sa;Password=pass@word1" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+scaffold-Dbcontext "Data Source=CTSDOTNET858;Initial Catalog=CustomerServiceUsers;User ID=sa;Password=pass@word1" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
-Need 5 Million resistors, PCB and MOSFET for rescue drone production at CloudSoft , Bangalore . Contact soon for the tender. Budget 4 Million INR.
+[ApiExplorerSettings(IgnoreApi = true)]

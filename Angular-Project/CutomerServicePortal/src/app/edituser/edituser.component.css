@@ -1,0 +1,23 @@
+
+    
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+        }
+        .card-registration .select-arrow {
+        top: 13px;
+        }
+        .btn-disable[disabled] {
+            cursor: not-allowed;
+            pointer-events: all !important;
+            background-color: #e91717;
+          }
+    
+          .center-errormsg {
+            margin: auto;
+            width: 50%;
+            border: 3px solid rgb(241, 13, 13);
+            padding: 10px;
+            }

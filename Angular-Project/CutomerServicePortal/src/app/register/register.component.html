@@ -3,7 +3,7 @@
   <div class="container py-3 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px; background-color: antiquewhite;">
           <div class="card-body p-4 p-md-5" [formGroup]="reg_form">
               <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
               <div class="row">
@@ -48,7 +48,7 @@
                 <div class="col-md-6 mb-4 pb-2">
 
                   <div class="form-outline">
-                    <input type="tel" [(ngModel)]="regData.PhoneNo" formControlName="PhoneNo" placeholder="9999000990" pattern="[0-9]{10}"
+                    <input type="tel" [(ngModel)]="regData.PhoneNo" formControlName="PhoneNo" placeholder="9999000990"
                       id="phoneNumber" class="form-control form-control-lg">
                     <label class="form-label" for="phoneNumber">Phone Number</label>
                   </div>

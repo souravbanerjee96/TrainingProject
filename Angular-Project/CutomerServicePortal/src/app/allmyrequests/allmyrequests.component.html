@@ -46,6 +46,8 @@
         <p class="heading">Are you sure?</p>
       </div>
       <div class="modal-body">
+        <div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
+          <img src="../../assets/image/loading-51.gif" style=" width: 90%; height: 90%;"></div>
         <img class="media-object"
           src='https://t4.ftcdn.net/jpg/03/46/38/39/360_F_346383913_JQecl2DhpHy2YakDz1t3h0Tk3Ov8hikq.jpg' width="100"
           height="100" />
@@ -74,6 +76,8 @@
         </button>
       </div>
       <div class="modal-body">
+        <div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
+          <img src="../../assets/image/loading-37.gif" style=" width: 50%; height: 50%;"></div>
 
         <form method="POST" id="EditreqForm" #updatereqForm="ngForm"
           (ngSubmit)="updateReqs()">

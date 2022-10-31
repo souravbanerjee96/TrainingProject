@@ -59,9 +59,11 @@ export class AllmyrequestsComponent implements OnInit {
     document.getElementById('btnDelreq')?.click();
   }
   deleteReq() {
+    this.dataloaded=false;
     console.log("Captured Data : " + this._deleteReqId);
     this.http.delete(this._baseURL + '/' + this._deleteReqId).subscribe(res => {
       console.log(res);
+      this.dataloaded=true;
       window.location.reload();
     },
       err => {
@@ -74,11 +76,13 @@ export class AllmyrequestsComponent implements OnInit {
   }
 
   updateReqs() {
+    this.dataloaded=false;
     this.http.put(this._baseURL + '/' + this.updateReq.Id, this.updateReq).subscribe(res => {
       console.log(res);
       //this.ReqAddSuccess = 1;
       document.getElementById('btnsuccessEdit')?.click();
       window.setTimeout(() => {
+        this.dataloaded=true;
         document.getElementById('btnSuccessEditClose')?.click();
         window.location.reload();
       }, 1500);

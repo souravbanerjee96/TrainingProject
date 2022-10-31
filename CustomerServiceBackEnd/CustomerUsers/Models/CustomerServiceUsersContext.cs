@@ -38,15 +38,11 @@ namespace CustomerUsers.Models
 
                 entity.Property(e => e.Address).HasMaxLength(50);
 
-                entity.Property(e => e.ContactPref)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.ContactPref).HasMaxLength(20);
 
-                entity.Property(e => e.Country)
-                    .HasMaxLength(10)
-                    .IsFixedLength(true);
+                entity.Property(e => e.Country).HasMaxLength(20);
 
-                entity.Property(e => e.Dob)
+                entity.Property(e => e.DOB)
                     .HasMaxLength(50)
                     .HasColumnName("DOB");
 
