@@ -60,9 +60,10 @@ export class ServicerequestComponent implements OnInit {
       this.serviceReq = new servicereq();
     },
       err => {
+        this.dataloaded = true;
+        document.getElementById('myreqFailed')?.click();
         console.log("error = > "+JSON.stringify(err.error.errors));
         //this.reqErrorMsg = err.error.message;
-        document.getElementById('reqAddfailed')?.click();
       });
 
 

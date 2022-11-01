@@ -114,19 +114,18 @@
         </div>
     </div>
 
-    <div class="modal fade" id="reqAddfailedModal" aria-hidden="true" aria-labelledby="ServiceModalToggleLabel"
+    <div class="modal fade modal-top" id="reqAddfailedModal" aria-hidden="true" aria-labelledby="ServiceModalToggleLabel"
         tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="border-radius: 10px;">
+                <div class="modal-header justify-content-center" style="background-color: rgb(201, 123, 123);">
                     <b>Error</b>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                 </div>
-                <div class="alert alert-block alert-danger">
+                <div class="modal-body text-center alert-danger" style="border-radius: 10px;">
                     <h5>Error !</h5>
-                    Request Add Failed !<br/>
-                    
-                </div>
+                    <p>Request Add Failed !</p>
+            </div>
             </div>
         </div>
     </div>
@@ -134,6 +133,6 @@
     <a style="display: none;" href="#myreqSuccessModal" class="trigger-btn" id="myreqSuccess" data-bs-toggle="modal"
         role="button">Success</a>
 
-    <a style="display: none;" href="#reqAddfailedModal" class="trigger-btn" data-bs-toggle="modal" id="reqAddfailed"
+    <a style="display: none;" href="#reqAddfailedModal" class="trigger-btn" data-bs-toggle="modal" id="myreqFailed"
         role="button">Failed</a>
 </body>

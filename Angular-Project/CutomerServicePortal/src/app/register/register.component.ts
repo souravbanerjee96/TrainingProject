@@ -4,6 +4,7 @@ import { userAuth } from '../models/userData';
 import { LoginServiceService } from '../services/login-service.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   reg_form: FormGroup;
   dataloaded: boolean = true;
 
-  constructor(private loginService: LoginServiceService, private router: Router, fb: FormBuilder) {
+  constructor(private loginService: LoginServiceService, private router: Router, fb: FormBuilder,public datepipe:DatePipe) {
     this.reg_form = fb.group({
       'Email': [null, Validators.compose([Validators.required, Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/)])],
       'PhoneNo': [null, Validators.compose([Validators.required, Validators.pattern(/^[6-9]\d{9}$/)])],
@@ -32,6 +33,10 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  currdt: Date = new Date();
+  currD = this.currdt.setDate(this.currdt.getDate());
+  todayDate = this.datepipe.transform((this.currD), 'yyyy-MM-dd');
+
   ngOnInit(): void {
   }
 
@@ -42,6 +47,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['login/auth']);
     },
       err => {
+        this.dataloaded = true;
         this.Errormsg = err.error.message;
         window.setTimeout(() => {
           this.Errormsg = null;

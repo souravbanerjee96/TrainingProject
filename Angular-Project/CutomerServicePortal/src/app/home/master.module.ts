@@ -10,6 +10,7 @@ import { Mainroutes } from '../routing/mainroutes';
 import { ServicerequestguardService } from '../services/servicerequestguard.service';
 import { LoginServiceService } from '../services/login-service.service';
 import { HomeComponent } from './home.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { HomeComponent } from './home.component';
     RouterModule.forRoot(Mainroutes),
     HttpClientModule
   ],
-  providers: [ServicerequestguardService,LoginServiceService],
+  providers: [ServicerequestguardService,LoginServiceService,DatePipe],
   bootstrap: [MasterComponent]
 })
 export class MasterModule { }

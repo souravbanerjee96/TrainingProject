@@ -475,7 +475,3 @@ body {
 	display: inline-block;
 	margin: 100px auto;
 }
-
-.form-v10-content input.error, .form-v10-content textarea.error, .form-v10-content select.error {
-    border: 2px solid red;
-}
