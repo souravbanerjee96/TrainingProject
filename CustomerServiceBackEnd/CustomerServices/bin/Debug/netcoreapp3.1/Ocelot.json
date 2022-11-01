@@ -26,11 +26,35 @@
     },
     {
       "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Users/getUser/{id}",
+      "DownstreamScheme": "https",
+      "ServiceName": "customerServiceUsers",
+      "UpstreamPathTemplate": "/api/gateway/Users/getUser/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Users/updateUser/{id}",
+      "DownstreamScheme": "https",
+      "ServiceName": "customerServiceUsers",
+      "UpstreamPathTemplate": "/api/gateway/Users/updateUser/{id}",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/ServiceReq/{id}",
       "DownstreamScheme": "https",
       "ServiceName": "ServiceRequests",
       "UpstreamPathTemplate": "/api/gateway/ServiceReq/{id}",
       "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/ServiceReq",
+      "DownstreamScheme": "https",
+      "ServiceName": "ServiceRequests",
+      "UpstreamPathTemplate": "/api/gateway/ServiceReq",
+      "UpstreamHttpMethod": [ "Post" ]
     },
     {
       "UseServiceDiscovery": true,

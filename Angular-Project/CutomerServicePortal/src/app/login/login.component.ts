@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       this.Errormsg = 'ok';
       window.setTimeout(() => {
         this.dataloaded = true;
-        this._router.navigate(['service/add']);
+        this._router.navigate(['allmyrequests/all']);
         this.Errorflag = 0;
       }, 1000);
       document.getElementById('loginSuccess')?.click();

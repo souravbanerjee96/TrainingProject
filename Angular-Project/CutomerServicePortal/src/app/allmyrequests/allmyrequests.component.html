@@ -1,4 +1,8 @@
 <!-- <h1>Your Requests</h1> -->
+<div class="d-flex">
+<button class="hoverbutton" style="vertical-align:middle" [routerLink]="['/service/add']"><span>Add Request</span></button>
+</div>
+
 <div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
   <img src="../../assets/image/loading-37.gif" style=" width: 50%; height: 50%;"></div>
 <div *ngIf="filtersLoaded | async" class="row border border-0 border-Secondary p-3 rounded rounded-3">

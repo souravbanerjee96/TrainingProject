@@ -19,7 +19,7 @@ namespace CustomerServiceReq.Controllers
         [HttpGet("{id:int}")]
         public IEnumerable<ServiceRequest> Get(int id)
         {
-            return db.ServiceRequests.Where(x=>x.UserId==id && x.IsDeleted==0);
+            return db.ServiceRequests.Where(x=>x.UserId==id && x.IsDeleted==0).OrderByDescending(x=>x.AddedDate);
         }
         [HttpPost]
         public IActionResult Post(ServiceRequest sr)

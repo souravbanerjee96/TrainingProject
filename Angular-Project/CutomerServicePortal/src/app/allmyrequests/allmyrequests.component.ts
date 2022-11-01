@@ -42,6 +42,8 @@ export class AllmyrequestsComponent implements OnInit {
     },
       err => {
         console.log(err);
+        this.dataloaded=true;
+        alert('Some error occurred , Please Re-login or try later');
         this.filtersLoaded = Promise.resolve(true);
       });
   }
@@ -68,6 +70,8 @@ export class AllmyrequestsComponent implements OnInit {
     },
       err => {
         console.log(err);
+        this.dataloaded=true;
+        alert('Some error occurred , Please Re-login or try later');
       });
   }
   captureEditreq(_input: any) {
@@ -88,9 +92,10 @@ export class AllmyrequestsComponent implements OnInit {
       }, 1500);
     },
       err => {
+        this.dataloaded=true;
+        alert('Some error occurred , Please Re-login or try later');
         document.getElementById('buttonCloseEditReq')?.click();
         console.log(err);
-        //this.updateErrorMsg = err.error.message;
         document.getElementById('btnfailedEdit')?.click();
       });
 
