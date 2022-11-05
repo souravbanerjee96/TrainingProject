@@ -26,6 +26,14 @@
     },
     {
       "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Users/AdminLogin",
+      "DownstreamScheme": "https",
+      "ServiceName": "customerServiceUsers",
+      "UpstreamPathTemplate": "/api/gateway/Users/AdminLogin",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Users/getUser/{id}",
       "DownstreamScheme": "https",
       "ServiceName": "customerServiceUsers",

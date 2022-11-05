@@ -18,6 +18,7 @@ namespace CustomerServices.Models
         }
 
         public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
+        public virtual DbSet<ServiceResolution> ServiceResolutions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,13 +39,34 @@ namespace CustomerServices.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+                entity.Property(e => e.IsDeleted)
+                    .HasColumnName("isDeleted")
+                    .HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.RequiredDate).HasMaxLength(50);
 
                 entity.Property(e => e.ServiceType).HasMaxLength(50);
 
                 entity.Property(e => e.UserId).HasColumnName("userID");
+            });
+
+            modelBuilder.Entity<ServiceResolution>(entity =>
+            {
+                entity.ToTable("ServiceResolution");
+
+                entity.Property(e => e.AdminId).HasColumnName("AdminID");
+
+                entity.Property(e => e.IsUserAccepted)
+                    .HasDefaultValueSql("((0))")
+                    .HasComment("0 - Not Accepted\r\n1 - Accepted");
+
+                entity.Property(e => e.RequestId).HasColumnName("RequestID");
+
+                entity.Property(e => e.ResolutionDate)
+                    .HasColumnType("date")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Status).HasMaxLength(3);
             });
 
             OnModelCreatingPartial(modelBuilder);

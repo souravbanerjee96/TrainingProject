@@ -12,9 +12,7 @@ export class userAuth {
     PanNo: string = '';
 }
 
-export class readerAuth {
-    userName: string = '';
+export class adminAuth {
     password: string = '';
-    userType: string = 'R';
-    paymentID: string = '';
+    userName: string = '';
 }

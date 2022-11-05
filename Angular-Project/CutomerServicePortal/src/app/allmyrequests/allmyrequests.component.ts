@@ -56,6 +56,7 @@ export class AllmyrequestsComponent implements OnInit {
     else
       return input;
   }
+
   captureidreq(_input: any) {
     this._deleteReqId = _input;
     document.getElementById('btnDelreq')?.click();

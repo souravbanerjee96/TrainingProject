@@ -17,6 +17,11 @@ export class LoginServiceService {
     localStorage.clear();
     return this.http.post<any>(this._loginURL + '/' + 'Login', _input);
   }
+
+  loginAdmin(_input: any) {
+    localStorage.clear();
+    return this.http.post<any>(this._loginURL + '/' + 'AdminLogin', _input);
+  }
   register(_input: any) {
     console.log(_input);
     return this.http.post<any>(this._registerURL + '/' + 'Register', _input);
@@ -24,16 +29,21 @@ export class LoginServiceService {
   gettoken() {
     if (localStorage.getItem('token') != null)
       return localStorage.getItem('token');
+    else if (localStorage.getItem('a_token') != null)
+      return localStorage.getItem('a_token');
     else
       return null;
   }
   isLoggedin(): Boolean {
     return !!localStorage.getItem('token');
   }
+  isLoggedinAdmin(): Boolean {
+    return !!localStorage.getItem('a_token');
+  }
   logout() {
     localStorage.clear();
     this._router.navigate(['']);
   }
-  
+
 
 }

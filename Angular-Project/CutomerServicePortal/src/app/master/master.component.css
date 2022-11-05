@@ -71,3 +71,34 @@
       opacity: 0;
     }
   }
+
+  .glow {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    animation: glow 0.5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #e60073, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073;
+    }
+    
+    to {
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6;
+    }
+  }
+
+
+  .errorLogin
+    {
+      animation: shake 0.2s ease-in-out 0s 2;
+      box-shadow: 0 0 0.5em red;
+    }
+
+    @keyframes shake {
+      0% { margin-left: 0rem; }
+      25% { margin-left: 0.5rem; }
+      75% { margin-left: -0.5rem; }
+      100% { margin-left: 0rem; }
+    }

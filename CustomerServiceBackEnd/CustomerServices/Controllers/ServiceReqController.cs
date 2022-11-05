@@ -17,10 +17,34 @@ namespace CustomerServiceReq.Controllers
         CustomerServiceRequestsContext db = new CustomerServiceRequestsContext();
 
         [HttpGet("{id:int}")]
-        public IEnumerable<ServiceRequest> Get(int id)
+        public IEnumerable<object> Get(int id)
         {
-            return db.ServiceRequests.Where(x=>x.UserId==id && x.IsDeleted==0).OrderByDescending(x=>x.AddedDate);
+            //return db.ServiceRequests.Where(x=>x.UserId==id && x.IsDeleted==0).OrderByDescending(x=>x.AddedDate);
+            var data = from srq in db.ServiceRequests
+                       join sr in db.ServiceResolutions
+                       on srq.Id equals sr.RequestId
+                       into res_table
+                       from r in res_table.DefaultIfEmpty()
+                       where (srq.UserId == id && srq.IsDeleted == 0)
+                       orderby srq.AddedDate descending
+                       select new
+                       {
+                           Id = srq.Id,
+                           ServiceName = srq.ServiceName,
+                           AddedDate = srq.AddedDate,
+                           RequiredDate = srq.RequiredDate,
+                           ServiceType = srq.ServiceType,
+                           ServiceDetails = srq.ServiceDetails,
+                           UserId = srq.UserId,
+                           IsDeleted = srq.IsDeleted,
+                           Status = r.Status == null ? "O" : r.Status,
+                           Comment = r.Comment == null ? "No Comment" : r.Comment,
+                           IsUserAccepted = r.IsUserAccepted == null ? 0 : r.IsUserAccepted,
+                           UserComment = r.UserComment == null ? "No User Comment" : r.UserComment
+                       };
+            return data;
         }
+
         [HttpPost]
         public IActionResult Post(ServiceRequest sr)
         {
@@ -74,6 +98,6 @@ namespace CustomerServiceReq.Controllers
             }
             return Ok(successmessage);
         }
-       
+
     }
 }

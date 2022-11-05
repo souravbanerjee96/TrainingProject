@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="../../assets/image/cs_portal_icon.png" width="40" height="40"/>&nbsp;&nbsp;
+            <img src="../../assets/image/cs_portal_icon.png" width="40" height="40" />&nbsp;&nbsp;
             Customer Service Portal
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
@@ -31,8 +31,12 @@
                     </a>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link active" *ngIf="isLogin(true)" aria-current="page" style="color: rgb(88, 236, 20);" 
-                    >Hello , {{userNameCust}} 🟢‍ &nbsp;</a>
+                    <a class="nav-link active" *ngIf="isLoginAdmin(true)" aria-current="page"
+                        style="color: rgb(221, 12, 141);">Hello , {{userNameCust}} 🟢‍ &nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(true)" aria-current="page"
+                        style="color: rgb(88, 236, 20);">Hello , {{userNameCust}} 🟢‍ &nbsp;</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" *ngIf="isLogin(true)" [routerLink]="['service/add']">Create Request</a>
@@ -41,12 +45,24 @@
             <!-- Right Portion Menu for bootstrap -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="--bs-scroll-height: 40px;">
                 <li class="nav-item me-auto float-end">
-                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page"
+                    <a class="nav-link active" *ngIf="isLogin(false) && isLoginAdmin(false)" aria-current="page"
                         [routerLink]="['register']">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" *ngIf="isLogin(false)" aria-current="page"
+                    <a class="nav-link active" *ngIf="isLogin(false) && isLoginAdmin(false)" aria-current="page"
                         [routerLink]="['login/auth']">Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin(false) && isLoginAdmin(false)" aria-current="page"
+                        style="color: crimson; font-family: cursive;" data-bs-toggle="modal" href="#loginAdminModal">🛡️
+                        Admin Portal
+                        &nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLoginAdmin(true)" aria-current="page"
+                        style="color: crimson; font-family: cursive;" [routerLink]="['adminportal']">🛡️
+                        Admin
                         &nbsp;</a>
                 </li>
                 <li class="nav-item">
@@ -58,8 +74,8 @@
                         [routerLink]="['edituser']">Update Profile 🛠 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="isLogin(true)" (click)="logoutUser()" style="font-size: 14px;" 
-                    [routerLink]="['reader/add']">Log Out</a>
+                    <a class="nav-link" *ngIf="isLogin(true) || isLoginAdmin(true)" (click)="logoutUser()"
+                        style="font-size: 14px;" [routerLink]="['reader/add']">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -68,4 +84,61 @@
 <div class="container">
 
     <router-outlet></router-outlet>
+</div>
+
+
+
+
+<div class="modal fade" id="loginAdminModal" tabindex="-1" role="dialog" aria-labelledby="ReaderLoginLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content" style="background: linear-gradient(90deg, rgb(202, 99, 14) 0%, rgb(189, 175, 175) 100%);
+      border-radius: 30px; box-shadow: 18px 24px 24px 10px #000; ">
+            <div class="modal-header">
+                <div class="text-justify">
+                    <h4 class="glow" style="font-family: cursive;">
+                        <img src='../../../assets/image/lock.png' height="30" width="30" />&nbsp;
+                        Admin ☠️ Portal
+                    </h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeAdminLogin"></button>
+            </div>
+            <div class="modal-body">
+
+                <!-- Spinning loader -->
+                <div *ngIf="!dataloaded"
+                    class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle"
+                    id="loadingBar">
+                    <img src="../../assets/image/loading-29.gif" style=" width: 90%; height: 90%;">
+                </div>
+
+                <div class="d-flex flex-column text-center">
+                    <div class="form-group">
+                        Admin User Name
+                        <input type="text" [(ngModel)]="_adminAuth.userName" class="form-control m-2"
+                            placeholder="Dear Admin, Your UserName..." readonly
+                            onfocus="this.removeAttribute('readonly');" required>
+                    </div>
+
+                    <div class="form-group">
+                        Admin Password
+                        <input type="password" name="password" [(ngModel)]="_adminAuth.password"
+                            class="form-control m-2" placeholder="Your Secret password..." readonly
+                            onfocus="this.removeAttribute('readonly');" />
+                    </div>
+                    <span class="text-danger errorLogin" *ngIf="errorflag"
+                        style="font-family: cursive; font-size: 20px; text-align: center; background-color: rgb(14, 13, 13);">
+                        Error! Incorrect Login ! </span>
+                    <span class="text-success" *ngIf="successflag"
+                        style="font-family: cursive; font-size: 15px; text-align: center; background-color: rgb(220, 219, 235);">
+                        <strong>Success!</strong> Logged In successfully. </span>
+                    <button type="button" [disabled]=" _adminAuth.password=='' || _adminAuth.userName=='' "
+                        (click)="callAdminlogin()" class="btn btn-primary m-4" style="padding: 8px;">Enter ! </button>
+                    <span>
+                        <p style="font-size: 11px; font-weight: bold;">For Admin Registration , Contact Backend Team</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

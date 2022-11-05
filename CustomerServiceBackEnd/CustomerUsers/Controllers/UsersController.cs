@@ -51,6 +51,21 @@ namespace CustomerApp.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        [Route("AdminLogin")]
+        public IActionResult LoginAdmin(Admin adm)
+        {
+            IActionResult res = Unauthorized();
+            var data = db.Admins.Where(x => x.UserName == adm.UserName && x.Password == adm.Password).FirstOrDefault();
+            if (data != null)
+            {
+                var userName = Convert.ToBase64String(Encoding.UTF8.GetBytes("Admin " + data.AdminName));
+                res = Ok(new { a_token = GenerateToken(), userName = userName, adminId = data.Id });
+            }
+            return res;
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
         [Route("Register")]
         public IActionResult RegisterUser(User u)
         {

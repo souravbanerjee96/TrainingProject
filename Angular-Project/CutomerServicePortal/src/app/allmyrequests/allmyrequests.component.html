@@ -1,10 +1,13 @@
 <!-- <h1>Your Requests</h1> -->
 <div class="d-flex">
-<button class="hoverbutton" style="vertical-align:middle" [routerLink]="['/service/add']"><span>Add Request</span></button>
+  <button class="hoverbutton" style="vertical-align:middle" [routerLink]="['/service/add']"><span>Add
+      Request</span></button>
 </div>
 
-<div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
-  <img src="../../assets/image/loading-37.gif" style=" width: 50%; height: 50%;"></div>
+<div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle"
+  id="loadingBar">
+  <img src="../../assets/image/loading-37.gif" style=" width: 50%; height: 50%;">
+</div>
 <div *ngIf="filtersLoaded | async" class="row border border-0 border-Secondary p-3 rounded rounded-3">
   <div *ngFor="let req of allmyReqs" class="col-sm-4">
     <div>
@@ -16,16 +19,27 @@
                 style="font-size:24px"></i></button>&nbsp;
             <button class="dbtn" (click)="captureidreq(req.Id)"><i class="fa fa-trash"
                 style="font-size:24px;color:red"></i></button>
-                <div *ngIf="req.isDeleted=='1'" class="centeredtext">Request Inactive</div>
+            <div *ngIf="req.isDeleted=='1'" class="centeredtext">Request Inactive</div>
           </div>
           <h5 class="card-title"><a [routerLink]=""
               style="text-decoration: none;cursor:pointer;color:blue">{{formatName(req.ServiceName)}} 🔧</a></h5>
           <div class="card-text">
             <span>Required Date: {{req.RequiredDate}}</span><br>
-            <span>Service Type: {{req.ServiceType}}</span><br>
-            <span>Added On: {{ timeFormat(req.AddedDate) }} </span><br><br>
-            <span><textarea style="border-style: inset;border-width: 2px; border-color: brown; background-color: cornsilk; resize: none;" 
-              placeholder="{{req.ServiceDetails}}" rows="2" cols="40" disabled></textarea></span>
+            <span>Service Type: {{req.ServiceType}} &nbsp; Request Id: {{req.Id}}</span><br>
+            <span>Added On: {{ timeFormat(req.AddedDate) }} </span><br />
+            <span>Service Status:
+              <select id="ServiceStatus" ngModel="{{req.Status}}"
+                style="font-size:medium; font-weight: bold; pointer-events:none;-webkit-appearance: none;"
+                [ngClass]="{greenClass: req.Status=='O', redClass: req.Status=='C', yellowClass: req.Status=='I',blueClass: req.Status=='R'}">
+                <option value="O">Opened</option>
+                <option value="C">Closed</option>
+                <option value="R">Reopened</option>
+                <option value="I">In-Progress</option>
+              </select>
+            </span><br><br>
+            <span><textarea
+                style="border-style: inset;border-width: 2px; border-color: brown; background-color: cornsilk; resize: none;"
+                placeholder="{{req.ServiceDetails}}" rows="2" cols="40" disabled></textarea></span>
           </div>
         </div>
       </div>
@@ -50,8 +64,10 @@
         <p class="heading">Are you sure?</p>
       </div>
       <div class="modal-body">
-        <div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
-          <img src="../../assets/image/loading-51.gif" style=" width: 90%; height: 90%;"></div>
+        <div *ngIf="!dataloaded"
+          class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
+          <img src="../../assets/image/loading-51.gif" style=" width: 90%; height: 90%;">
+        </div>
         <img class="media-object"
           src='https://t4.ftcdn.net/jpg/03/46/38/39/360_F_346383913_JQecl2DhpHy2YakDz1t3h0Tk3Ov8hikq.jpg' width="100"
           height="100" />
@@ -80,11 +96,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
-          <img src="../../assets/image/loading-37.gif" style=" width: 50%; height: 50%;"></div>
+        <div *ngIf="!dataloaded"
+          class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
+          <img src="../../assets/image/loading-37.gif" style=" width: 50%; height: 50%;">
+        </div>
 
-        <form method="POST" id="EditreqForm" #updatereqForm="ngForm"
-          (ngSubmit)="updateReqs()">
+        <form method="POST" id="EditreqForm" #updatereqForm="ngForm" (ngSubmit)="updateReqs()">
 
           <div class="form-group">
             <label for="Name">Service Name</label>
@@ -93,8 +110,8 @@
           </div>
           <div class="form-group">
             <label for="RequiredDate">Required Date</label>
-            <input type="date" [min]="todayDate" [(ngModel)]="updateReq.RequiredDate" [ngModelOptions]="{standalone: true}"
-              class="form-control" id="ReleasedDate" required>
+            <input type="date" [min]="todayDate" [(ngModel)]="updateReq.RequiredDate"
+              [ngModelOptions]="{standalone: true}" class="form-control" id="ReleasedDate" required>
           </div>
           <div class="form-group">
             <label for="ServiceType">Service Type</label>

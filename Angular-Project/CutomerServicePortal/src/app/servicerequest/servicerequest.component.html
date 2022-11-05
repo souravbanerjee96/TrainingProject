@@ -61,8 +61,8 @@
                             {{serviceReq.ServiceDetails.length}}</span>
 
                         <textarea [(ngModel)]="serviceReq.ServiceDetails" formControlName="ServiceDetails"
-                            id="ServiceDetails" rows="8" cols="60"
-                            style="background-color:rgb(182, 155, 106);"></textarea>
+                            id="ServiceDetails" rows="8" cols="60" placeholder="Describe your service details ... " 
+                            style="background-color:blanchedalmond;"></textarea>
 
                         <span class="text-danger" style="font-size: large;"
                             *ngIf="req_form.controls['ServiceDetails'].hasError('required') && (req_form.controls['ServiceDetails'].dirty || req_form.controls['ServiceDetails'].touched)">Please
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
-                    <img src="../../assets/image/loading-34.gif" style=" width: 50%; height: 50%;"></div>
+                    <img src="../../assets/image/loading-34.gif" style=" width: 40%; height: 40%;"></div>
             </form>
             <!-- Form End -->
         </div>

@@ -26,6 +26,14 @@
     },
     {
       "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/Users/AdminLogin",
+      "DownstreamScheme": "https",
+      "ServiceName": "customerServiceUsers",
+      "UpstreamPathTemplate": "/api/gateway/Users/AdminLogin",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "UseServiceDiscovery": true,
       "DownstreamPathTemplate": "/api/Users/getUser/{id}",
       "DownstreamScheme": "https",
       "ServiceName": "customerServiceUsers",
@@ -71,6 +79,22 @@
       "ServiceName": "ServiceRequests",
       "UpstreamPathTemplate": "/api/gateway/ServiceReq/{id}",
       "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/ServiceResolution",
+      "DownstreamScheme": "https",
+      "ServiceName": "ServiceRequests",
+      "UpstreamPathTemplate": "/api/gateway/ServiceResolution",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/ServiceResolution",
+      "DownstreamScheme": "https",
+      "ServiceName": "ServiceRequests",
+      "UpstreamPathTemplate": "/api/gateway/ServiceResolution",
+      "UpstreamHttpMethod": [ "Post" ]
     }
   ],
   "GlobalConfiguration": {

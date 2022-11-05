@@ -1,0 +1,51 @@
+<div *ngIf="!updated" class="d-flex justify-content-center position-fixed top-50 start-50 translate-middle"
+    id="loadingUpdation">
+    <img src="../../assets/image/loading-99.gif" style=" width: 60%; height: 60%;">
+</div>
+
+<div *ngIf="!dataloaded" class="d-flex justify-content-center position-fixed top-50 start-50 translate-middle"
+    id="loadingBar">
+    <img src="../../assets/image/loading-56.gif" style=" width: 40%; height: 40%;">
+</div>
+
+<div *ngIf="filtersLoaded | async" class="container py-3 h-100">
+    <a (click)="getallRequests()" class="btn btn-info btn-sm"> ⟳ Refresh</a>
+    <table class="table">
+        <thead class="table-dark " style="color: blanchedalmond;">
+            <tr>
+                <th scope="col">Request ID</th>
+                <th scope="col">Service Name</th>
+                <th scope="col">Required Date</th>
+                <th scope="col">Service Type</th>
+                <th scope="col">Service Details</th>
+                <th scope="col">Status</th>
+                <th scope="col">Comment</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody style="color:darksalmon; text-align:justify; font-size: small;">
+            <tr *ngFor="let reqs of adminReqs">
+                <th scope="row">{{reqs.Id}}</th>
+                <td><abbr title="{{reqs.ServiceName}}">{{formatName(reqs.ServiceName)}}</abbr></td>
+                <td>{{reqs.RequiredDate}}</td>
+                <td>{{reqs.ServiceType}}</td>
+                <td><textarea title="{{reqs.ServiceDetails}}"
+                        style="border-style: inset;border-width: 2px; border-color: brown; background-color: cornsilk; resize: none;"
+                        placeholder="{{reqs.ServiceDetails}}" rows="2" cols="25" disabled></textarea></td>
+                <td>
+                    <select class="form-control input-dropdown" id="Category" [(ngModel)]="reqs.Status"
+                        style="font-size: small;">
+                        <option value="O" style="background-color: lawngreen;">Opened</option>
+                        <option value="C" style="background-color:red;">Closed</option>
+                        <option value="R" style="background-color: goldenrod;">Reopened</option>
+                        <option value="I" style="background-color: rgb(12, 174, 238);">In-Progress</option>
+                    </select>
+                </td>
+                <td><textarea [(ngModel)]="reqs.Comment" title="{{reqs.Comment}}"
+                        style="border-style: inset;border-width: 2px; border-color:gold; background-color:lightblue; resize: none;"
+                        rows="2" cols="25"></textarea></td>
+                <td><button class="glow-on-hover" type="button" (click)="updateRequest(reqs)">SAVE CHANGE</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

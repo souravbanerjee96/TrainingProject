@@ -2,7 +2,5 @@ scaffold-Dbcontext "Data Source=CTSDOTNET858;Initial Catalog=CustomerServiceUser
 
 [ApiExplorerSettings(IgnoreApi = true)]
 
-default view service request
-
 N-unit
 azure container registry

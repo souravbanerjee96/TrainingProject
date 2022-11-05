@@ -17,6 +17,7 @@ namespace CustomerUsers.Models
         {
         }
 
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,6 +33,28 @@ namespace CustomerUsers.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
+            modelBuilder.Entity<Admin>(entity =>
+            {
+                entity.ToTable("Admin");
+
+                entity.Property(e => e.AddedDate)
+                    .HasColumnType("date")
+                    .HasColumnName("addedDate")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.AdminName)
+                    .HasMaxLength(50)
+                    .HasColumnName("adminName");
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(50)
+                    .HasColumnName("password");
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(50)
+                    .HasColumnName("userName");
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -42,7 +65,7 @@ namespace CustomerUsers.Models
 
                 entity.Property(e => e.Country).HasMaxLength(20);
 
-                entity.Property(e => e.DOB)
+                entity.Property(e => e.Dob)
                     .HasMaxLength(50)
                     .HasColumnName("DOB");
 

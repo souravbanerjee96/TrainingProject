@@ -39,7 +39,7 @@
 
                   <div class="form-outline">
                     <input type="email" [(ngModel)]="regData.Email" formControlName="Email" placeholder="abc@example.com" id="emailAddress"
-                      class="form-control form-control-lg">
+                      class="form-control form-control-lg" readonly onfocus="this.removeAttribute('readonly');">
                     <label class="form-label" for="emailAddress">Email</label>
                   </div>
                   <span class="text-danger" *ngIf="reg_form.controls['Email'].hasError('required') && (reg_form.controls['Email'].dirty || reg_form.controls['Email'].touched)">Email is required</span>
@@ -162,7 +162,7 @@
 
                   <div class="form-outline">
                     <input type="text" formControlName="PanNo" [(ngModel)]="regData.PanNo" placeholder="ABCTY1234D" id="PanNo"
-                      class="form-control form-control-lg">
+                      class="form-control form-control-lg" readonly onfocus="this.removeAttribute('readonly');">
                     <label class="form-label" for="PanNo">PAN No</label>
                   </div>
                   <span class="text-danger" *ngIf="reg_form.controls['PanNo'].hasError('required') && (reg_form.controls['PanNo'].dirty || reg_form.controls['PanNo'].touched)">PAN number is required</span>
@@ -175,7 +175,7 @@
 
                   <div class="float-start form-outline">
                     <input type="password" formControlName="Password" [(ngModel)]="regData.Password" id="password"
-                      class="form-control form-control-lg">
+                      class="form-control form-control-lg" readonly onfocus="this.removeAttribute('readonly');">
                     <label class="form-label" for="password">Password</label>
                   </div>
                   <span class="text-danger"
