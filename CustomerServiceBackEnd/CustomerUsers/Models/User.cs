@@ -13,7 +13,7 @@ namespace CustomerUsers.Models
         public string Email { get; set; }
         public string PhoneNo { get; set; }
         public string Password { get; set; }
-        public string Dob { get; set; }
+        public string DOB { get; set; }
         public string ContactPref { get; set; }
         public string Country { get; set; }
         public string State { get; set; }

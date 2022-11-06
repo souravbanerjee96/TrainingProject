@@ -65,7 +65,7 @@ namespace CustomerUsers.Models
 
                 entity.Property(e => e.Country).HasMaxLength(20);
 
-                entity.Property(e => e.Dob)
+                entity.Property(e => e.DOB)
                     .HasMaxLength(50)
                     .HasColumnName("DOB");
 

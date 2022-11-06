@@ -95,6 +95,14 @@
       "ServiceName": "ServiceRequests",
       "UpstreamPathTemplate": "/api/gateway/ServiceResolution",
       "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/ServiceResolution",
+      "DownstreamScheme": "https",
+      "ServiceName": "ServiceRequests",
+      "UpstreamPathTemplate": "/api/gateway/ServiceResolution",
+      "UpstreamHttpMethod": [ "Put" ]
     }
   ],
   "GlobalConfiguration": {

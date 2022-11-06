@@ -23,6 +23,8 @@ namespace CustomerServices.Controllers
                        join sr in db.ServiceResolutions
                        on srq.Id equals sr.RequestId into res_table
                        from r in res_table.DefaultIfEmpty()
+                       where (srq.IsDeleted == 0 && r.Status != "C")
+                       orderby srq.AddedDate descending
                        select new
                        {
                            Id = srq.Id,
@@ -61,7 +63,40 @@ namespace CustomerServices.Controllers
                     updateService.Status = rs.Status;
                     db.SaveChanges();
                 }
-                
+
+            }
+            catch (Exception ex)
+            {
+                successmessage = new { Status = "Failed ! " + ex.Message };
+            }
+            return Ok(successmessage);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateUserComment(userComment uc)
+        {
+            var successmessage = new { Status = "Success" };
+            try
+            {
+                ServiceResolution sr = new ServiceResolution();
+                var updateService = db.ServiceResolutions.Where(x => x.RequestId == uc.Id).FirstOrDefault();
+                if (updateService != null)
+                {
+                    updateService.UserComment = uc.UserComment;
+                    updateService.IsUserAccepted = uc.IsUserAccepted == null ? 0 : uc.IsUserAccepted;
+                    updateService.Status = uc.Status;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    sr.UserComment = uc.UserComment;
+                    sr.IsUserAccepted = uc.IsUserAccepted == null ? 0 : uc.IsUserAccepted;
+                    sr.Status = uc.Status;
+                    sr.RequestId = uc.Id;
+                    db.ServiceResolutions.Add(sr);
+                    db.SaveChanges();
+                }
+
             }
             catch (Exception ex)
             {
@@ -71,4 +106,6 @@ namespace CustomerServices.Controllers
         }
 
     }
+
+
 }

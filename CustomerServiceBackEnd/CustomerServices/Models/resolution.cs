@@ -12,4 +12,11 @@ namespace CustomerServices.Models
         public string Status { get; set; }
         public int AdminID { get; set; }
     }
+    public class userComment
+    {
+        public int Id { get; set; }
+        public string UserComment { get; set; }
+        public string Status { get; set; }
+        public byte? IsUserAccepted { get; set; }
+    }
 }

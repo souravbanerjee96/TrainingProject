@@ -1,7 +1,9 @@
 <!-- <h1>Your Requests</h1> -->
-<div class="d-flex">
-  <button class="hoverbutton" style="vertical-align:middle" [routerLink]="['/service/add']"><span>Add
+<div class="container">
+  <button class="hoverbutton mt-2" style="vertical-align:middle" [routerLink]="['/service/add']"><span>Add
       Request</span></button>
+  <a class="btn mt-3 text-right float-end" style="margin: 5px; border-radius: 4px; 
+      background-color:thistle;" (click)="getallmyRequests()"> ⭮ Refresh</a>
 </div>
 
 <div *ngIf="!dataloaded" class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle"
@@ -21,7 +23,7 @@
                 style="font-size:24px;color:red"></i></button>
             <div *ngIf="req.isDeleted=='1'" class="centeredtext">Request Inactive</div>
           </div>
-          <h5 class="card-title"><a [routerLink]=""
+          <h5 class="card-title"><a href="#userComment" data-bs-toggle="modal" (click)="captureObjforUsercmnt(req)"
               style="text-decoration: none;cursor:pointer;color:blue">{{formatName(req.ServiceName)}} 🔧</a></h5>
           <div class="card-text">
             <span>Required Date: {{req.RequiredDate}}</span><br>
@@ -179,6 +181,66 @@
       <div class="modal-body" style="background-color: rosybrown;">
         <h5>Error updating your Request 😔</h5>
         Try again later !
+      </div>
+    </div>
+  </div>
+</div>
+
+Request Usercomment Modal
+
+<!-- Form Modal -->
+<!-- <button href="#userComment" data-bs-toggle="modal" class="btn pmd-ripple-effect btn-primary pmd-btn-raised" 
+type="button" id="btnUserCmnt">Form Modal</button> -->
+
+<div tabindex="-1" class="modal pmd-modal fade" id="userComment" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background: url('../../assets/image/modal-bg3.jpg'); color: whitesmoke;">
+      <div class="modal-header pmd-modal-border">
+        <h2 class="modal-title">Request Tracker</h2>
+        <button aria-hidden="true" data-bs-dismiss="modal" class="close" type="button" id="closeUserComment">×</button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="!dataloaded"
+          class="d-flex justify-content-center position-absolute top-50 start-50 translate-middle" id="loadingBar">
+          <img src="../../assets/image/loading-4.gif" style=" width: 130%; height: 130%;">
+        </div>
+        <form>
+          <div class="form-group pmd-textfield pmd-textfield-floating-label">
+            <label for="full-name">Request Status ( You can only Close or Reopen any Request )</label>
+            <select id="ServiceStatus" [(ngModel)]="userCmnt.Status" [ngModelOptions]="{standalone: true}"
+              class="mat-input form-control" style="font-size:medium; font-weight: bold;"
+              [ngClass]="{greenClass: userCmnt.Status=='O', redClass: userCmnt.Status=='C', yellowClass: userCmnt.Status=='I',blueClass: userCmnt.Status=='R'}">
+              <option value="O" disabled="disabled">Opened</option>
+              <option value="C">Closed</option>
+              <option value="R" [disabled]="userCmntClone.Status=='O' || userCmntClone.Status=='I'">Reopen</option>
+              <option value="I" disabled="disabled">In-Progress</option>
+            </select>
+          </div>
+          <div class="form-group pmd-textfield pmd-textfield-floating-label">
+            <label for="Comment">Comment</label>
+            <textarea class="mat-input form-control" [(ngModel)]="userCmnt.Comment" [ngModelOptions]="{standalone: true}" id="Comment" 
+             readonly></textarea>
+          </div>
+          <div class="form-group pmd-textfield pmd-textfield-floating-label">
+            <label for="mobil">Are you satisfied ?</label>
+            <select id="IsUserAccepted" [(ngModel)]="userCmnt.IsUserAccepted" [ngModelOptions]="{standalone: true}"
+              class="mat-input form-control" style="font-size:medium; font-weight: bold;"
+               [disabled]="userCmnt.Status=='O'">
+              <option value="1">Satisfied</option>
+              <option value="0">Not Satisfied</option>
+            </select>
+          </div>
+          <div class="form-group pmd-textfield pmd-textfield-floating-label">
+            <label class="control-label">User Feedback</label>
+            <textarea required class="form-control" [(ngModel)]="userCmnt.UserComment" [ngModelOptions]="{standalone: true}" 
+            [disabled]="userCmnt.Status=='O'"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="button-71" role="button" [disabled]="detectChangeobj(userCmnt,userCmntClone)"
+        [ngStyle]="{'cursor': (detectChangeobj(userCmnt,userCmntClone) ? 'not-allowed':'pointer')}" 
+        (click)="submitUserComment(userCmnt)">Save Changes</button>
       </div>
     </div>
   </div>
