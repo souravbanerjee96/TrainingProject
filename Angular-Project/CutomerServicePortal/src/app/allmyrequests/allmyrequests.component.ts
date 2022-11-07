@@ -38,6 +38,7 @@ export class AllmyrequestsComponent implements OnInit {
   todayDate = this.datepipe.transform((this.currD), 'yyyy-MM-dd');
   getallmyRequests() {
     this.dataloaded=false;
+    this.filtersLoaded = Promise.resolve(false);
     var _iObj = this.allmyReq.userID;
     this.http.get<any>(this._baseURL + '/' + _iObj).subscribe(res => {
       this.allmyReqs = res;

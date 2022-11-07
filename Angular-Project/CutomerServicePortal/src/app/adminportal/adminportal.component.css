@@ -58,3 +58,7 @@
     100% { background-position: 0 0; }
 }
 
+.greenClass{ background-color: rgb(111, 180, 111) }
+.redClass{ background-color: rgb(179, 28, 28) }
+.yellowClass{ background-color: yellow }
+.blueClass{ background-color: blueviolet }

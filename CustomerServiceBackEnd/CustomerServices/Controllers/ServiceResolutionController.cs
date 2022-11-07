@@ -23,7 +23,7 @@ namespace CustomerServices.Controllers
                        join sr in db.ServiceResolutions
                        on srq.Id equals sr.RequestId into res_table
                        from r in res_table.DefaultIfEmpty()
-                       where (srq.IsDeleted == 0 && r.Status != "C")
+                       where (srq.IsDeleted == 0)
                        orderby srq.AddedDate descending
                        select new
                        {
@@ -33,7 +33,9 @@ namespace CustomerServices.Controllers
                            ServiceType = srq.ServiceType,
                            ServiceDetails = srq.ServiceDetails,
                            Status = r.Status == null ? "O" : r.Status,
-                           Comment = r.Comment == null ? "No Comment" : r.Comment
+                           Comment = r.Comment == null ? "No Comment" : r.Comment,
+                           IsUserAccepted = r.IsUserAccepted == null ? 0 : r.IsUserAccepted,
+                           UserComment = r.UserComment == null ? "No User Comment" : r.UserComment
                        };
             return data;
         }

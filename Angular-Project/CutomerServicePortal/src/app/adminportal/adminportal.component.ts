@@ -18,7 +18,7 @@ export class AdminportalComponent implements OnInit {
   dataloaded: boolean = false;
   updated: boolean = true;
   filtersLoaded: Promise<boolean> | undefined;
-
+  closedReqflag: boolean = false;
   constructor(private http: HttpClient, private _router: Router, public datepipe: DatePipe) {
 
   }
@@ -32,6 +32,25 @@ export class AdminportalComponent implements OnInit {
       return input.substring(0, 15) + '...'
     else
       return input;
+  }
+
+  dayDiff(input: any): any {
+    const date1 = new Date().valueOf();
+    const date2 = new Date(input).valueOf();
+    const diffTime = (date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    //console.log(diffDays);
+    return diffDays;
+  }
+
+  checkRequest(e: any) {
+    if (e.target.checked) {
+      this.closedReqflag = true;
+      //console.log("Checked...");     
+    }
+    else
+      this.closedReqflag = false;
+    //console.log("Not Checked...");
   }
 
   getallRequests() {
@@ -52,8 +71,8 @@ export class AdminportalComponent implements OnInit {
       })
   }
   updateRequest(input: any) {
-    this.updated=false;
-    input.AdminID=Number(localStorage.getItem('adminId'));
+    this.updated = false;
+    input.AdminID = Number(localStorage.getItem('adminId'));
     this.http.post(this._baseURL, input).subscribe(res => {
       //console.log(input);
       window.setTimeout(() => {

@@ -48,7 +48,8 @@ export class EdituserComponent implements OnInit {
       //window.location.reload();
     },
       err => {
-        this.Errormsg = err.error.message;
+        this.dataloaded = true;
+        this.Errormsg = 'Error getting data...';
         window.setTimeout(() => {
           this.Errormsg = null;
         }, 2000);
@@ -65,11 +66,16 @@ export class EdituserComponent implements OnInit {
       window.location.reload();
     },
       err => {
-        this.Errormsg = err.error.message;
+        this.dataloaded = true;
+        this.Errormsg = 'Error updating data...';
         window.setTimeout(() => {
           this.Errormsg = null;
         }, 2000);
       });
+    }
+
+    testUpdateUser(input:boolean):boolean{
+      return true;
     }
 
 }

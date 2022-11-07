@@ -10,8 +10,13 @@
 
 <div *ngIf="filtersLoaded | async" class="container py-3 h-100">
     <a (click)="getallRequests()" class="btn btn-info btn-sm mb-3"> ⟳ Refresh</a>
+    <p class="mb-3 text-right float-end text-white"> 🟥 - Requires Attention</p>
+    <label class="mb-3 me-4 align-items-center float-end text-white" for="viewClosedReq"> View Closed Requests
+    </label>
+    <input class="form-check-input me-2 float-end" type="checkbox" [checked]="closedReqflag" id="viewClosedReq"
+        (change)="checkRequest($event)">
     <table class="table">
-        <thead class="table-dark " style="color: blanchedalmond;">
+        <thead class="table-dark " style="color: blanchedalmond;font-size: small;text-align:center;">
             <tr>
                 <th scope="col">Request ID</th>
                 <th scope="col">Service Name</th>
@@ -21,30 +26,38 @@
                 <th scope="col">Status</th>
                 <th scope="col">Comment</th>
                 <th scope="col">Action</th>
+                <th scope="col">👤❔</th>
             </tr>
         </thead>
         <tbody style="color:darksalmon; text-align:justify; font-size: small;">
-            <tr *ngFor="let reqs of adminReqs">
-                <th scope="row">{{reqs.Id}}</th>
-                <td><abbr title="{{reqs.ServiceName}}">{{formatName(reqs.ServiceName)}}</abbr></td>
-                <td>{{reqs.RequiredDate}}</td>
-                <td>{{reqs.ServiceType}}</td>
-                <td><textarea title="{{reqs.ServiceDetails}}"
-                        style="border-style: inset;border-width: 2px; border-color: brown; background-color: cornsilk; resize: none;"
-                        placeholder="{{reqs.ServiceDetails}}" rows="2" cols="25" disabled></textarea></td>
-                <td>
-                    <select class="form-control input-dropdown" id="Category" [(ngModel)]="reqs.Status"
-                        style="font-size: small;">
-                        <option value="O" style="background-color: lawngreen;">Opened</option>
-                        <option value="C" style="background-color:red;">Closed</option>
-                        <option value="R" style="background-color: goldenrod;">Reopened</option>
-                        <option value="I" style="background-color: rgb(12, 174, 238);">In-Progress</option>
-                    </select>
-                </td>
-                <td><textarea [(ngModel)]="reqs.Comment" title="{{reqs.Comment}}"
-                        style="border-style: inset;border-width: 2px; border-color:gold; background-color:lightblue; resize: none;"
-                        rows="2" cols="25"></textarea></td>
-                <td><button class="glow-on-hover" type="button" (click)="updateRequest(reqs)">SAVE CHANGE</button></td>
+            <tr *ngFor="let reqs of adminReqs"
+                [ngClass]="{redClass: dayDiff(reqs.RequiredDate) < 1 && reqs.Status=='O'}">
+                <ng-container *ngIf="(reqs.Status=='C') == closedReqflag">
+                    <th scope="row">{{reqs.Id}}</th>
+                    <td><abbr title="{{reqs.ServiceName}}">{{formatName(reqs.ServiceName)}}</abbr></td>
+                    <td>{{reqs.RequiredDate}}</td>
+                    <td>{{reqs.ServiceType}}</td>
+                    <td><textarea title="{{reqs.ServiceDetails}}"
+                            style="border-style: inset;border-width: 2px; border-color: brown; background-color: cornsilk; resize: none;"
+                            placeholder="{{reqs.ServiceDetails}}" rows="2" cols="25" disabled></textarea></td>
+                    <td>
+                        <select class="form-control input-dropdown" id="Category" [(ngModel)]="reqs.Status"
+                            style="font-size: small;">
+                            <option value="O" style="background-color: lawngreen;" disabled>Opened</option>
+                            <option value="C" style="background-color:red;">Closed</option>
+                            <option value="R" style="background-color: goldenrod;" disabled>Reopened</option>
+                            <option value="I" style="background-color: rgb(12, 174, 238);">In-Progress</option>
+                        </select>
+                    </td>
+                    <td><textarea [(ngModel)]="reqs.Comment" title="{{reqs.Comment}}"
+                            style="border-style: inset;border-width: 2px; border-color:gold; background-color:lightblue; resize: none;"
+                            rows="2" cols="25"></textarea></td>
+                    <td><button class="glow-on-hover" type="button" (click)="updateRequest(reqs)">SAVE CHANGE</button>
+                    </td>
+                    <td>
+                        <abbr *ngIf="reqs.Status!='O'" title="{{reqs.UserComment}}">❓</abbr>
+                    </td>
+                </ng-container>
             </tr>
         </tbody>
     </table>

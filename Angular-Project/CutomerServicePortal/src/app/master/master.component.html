@@ -124,7 +124,7 @@
                         Admin Password
                         <input type="password" name="password" [(ngModel)]="_adminAuth.password"
                             class="form-control m-2" placeholder="Your Secret password..." readonly
-                            onfocus="this.removeAttribute('readonly');" />
+                            onfocus="this.removeAttribute('readonly');" (keyup.enter)="callAdminlogin()" />
                     </div>
                     <span class="text-danger errorLogin" *ngIf="errorflag"
                         style="font-family: cursive; font-size: 20px; text-align: center; background-color: rgb(14, 13, 13);">
@@ -133,7 +133,7 @@
                         style="font-family: cursive; font-size: 15px; text-align: center; background-color: rgb(220, 219, 235);">
                         <strong>Success!</strong> Logged In successfully. </span>
                     <button type="button" [disabled]=" _adminAuth.password=='' || _adminAuth.userName=='' "
-                        (click)="callAdminlogin()" class="btn btn-primary m-4" style="padding: 8px;">Enter ! </button>
+                     (click)="callAdminlogin()" class="btn btn-primary m-4" style="padding: 8px;">Enter ! </button>
                     <span>
                         <p style="font-size: 11px; font-weight: bold;">For Admin Registration , Contact Backend Team</p>
                     </span>

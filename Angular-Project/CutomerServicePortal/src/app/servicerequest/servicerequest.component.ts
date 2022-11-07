@@ -5,7 +5,6 @@ import { LoginServiceService } from '../services/login-service.service';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { GlobalVariable } from '../global';
 import { DatePipe } from '@angular/common';
-import { debug } from 'console';
 @Component({
   selector: 'app-servicerequest',
   templateUrl: './servicerequest.component.html',
@@ -67,9 +66,6 @@ export class ServicerequestComponent implements OnInit {
       });
 
 
-  }
-  clearInput() {
-    window.location.reload();
   }
   
 }

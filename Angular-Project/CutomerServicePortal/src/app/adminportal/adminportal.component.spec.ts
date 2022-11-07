@@ -1,5 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { DatePipe } from '@angular/common';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LoginServiceService } from '../services/login-service.service';
 import { AdminportalComponent } from './adminportal.component';
 
 describe('AdminportalComponent', () => {
@@ -8,9 +12,14 @@ describe('AdminportalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminportalComponent ]
+      imports: [
+        RouterTestingModule,
+        HttpClientModule
+      ],
+      providers: [HttpClient, DatePipe, FormBuilder, HttpHandler, LoginServiceService],
+      declarations: [AdminportalComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AdminportalComponent);
     component = fixture.componentInstance;
@@ -20,4 +29,19 @@ describe('AdminportalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Admin should have GetallRequests', async(() => {
+    fixture = TestBed.createComponent(AdminportalComponent);
+    component = fixture.debugElement.componentInstance;
+    let data = component.getallRequests();
+    expect(data).toEqual();
+  }));
+
+  it('should update request', async(() => {
+    fixture = TestBed.createComponent(AdminportalComponent);
+    component = fixture.debugElement.componentInstance;
+    var obj = {};
+    let data = component.updateRequest(obj);
+    expect(data).toEqual();
+  }));
 });
