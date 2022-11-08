@@ -74,8 +74,4 @@ export class EdituserComponent implements OnInit {
       });
     }
 
-    testUpdateUser(input:boolean):boolean{
-      return true;
-    }
-
 }

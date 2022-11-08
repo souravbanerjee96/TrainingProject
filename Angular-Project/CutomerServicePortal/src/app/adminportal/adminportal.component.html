@@ -31,8 +31,8 @@
         </thead>
         <tbody style="color:darksalmon; text-align:justify; font-size: small;">
             <tr *ngFor="let reqs of adminReqs"
-                [ngClass]="{redClass: dayDiff(reqs.RequiredDate) < 1 && reqs.Status=='O'}">
-                <ng-container *ngIf="(reqs.Status=='C') == closedReqflag">
+                [ngClass]="{redClass: dayDiff(reqs.RequiredDate) < 1 && reqs.StatusState==1}">
+                <ng-container *ngIf="(reqs.StatusState==2) == closedReqflag">
                     <th scope="row">{{reqs.Id}}</th>
                     <td><abbr title="{{reqs.ServiceName}}">{{formatName(reqs.ServiceName)}}</abbr></td>
                     <td>{{reqs.RequiredDate}}</td>
@@ -55,7 +55,7 @@
                     <td><button class="glow-on-hover" type="button" (click)="updateRequest(reqs)">SAVE CHANGE</button>
                     </td>
                     <td>
-                        <abbr *ngIf="reqs.Status!='O'" title="{{reqs.UserComment}}">❓</abbr>
+                        <abbr *ngIf="reqs.StatusState!=1" title="{{reqs.UserComment}}">❓</abbr>
                     </td>
                 </ng-container>
             </tr>

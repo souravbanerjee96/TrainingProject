@@ -5,6 +5,7 @@ export class adminreq {
     ServiceType: String = ''
     ServiceDetails: String = ''
     Status: String = ''
+    StatusState: Number = 0
     Comment: String = ''
     AdminID: Number = Number(localStorage.getItem('adminId'))
     IsUserAccepted: any

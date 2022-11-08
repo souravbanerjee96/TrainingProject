@@ -33,6 +33,7 @@ namespace CustomerServices.Controllers
                            ServiceType = srq.ServiceType,
                            ServiceDetails = srq.ServiceDetails,
                            Status = r.Status == null ? "O" : r.Status,
+                           StatusState = r.Status == null ? 1 : r.Status == "C" ? 2 : r.Status == "R" ? 3 : r.Status == "I" ? 4 : 99, //StatusState for Mutipurpose
                            Comment = r.Comment == null ? "No Comment" : r.Comment,
                            IsUserAccepted = r.IsUserAccepted == null ? 0 : r.IsUserAccepted,
                            UserComment = r.UserComment == null ? "No User Comment" : r.UserComment

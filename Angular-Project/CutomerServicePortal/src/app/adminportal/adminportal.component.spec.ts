@@ -44,4 +44,17 @@ describe('AdminportalComponent', () => {
     let data = component.updateRequest(obj);
     expect(data).toEqual();
   }));
+  it('should format name', async(() => {
+    fixture = TestBed.createComponent(AdminportalComponent);
+    component = fixture.debugElement.componentInstance;
+    let data = component.formatName('aaaaaaaaaaaaaaaaa');
+    expect(data).toEqual('aaaaaaaaaaaaaaa...');
+  }));
+  it('should differentiate date', async(() => {
+    fixture = TestBed.createComponent(AdminportalComponent);
+    component = fixture.debugElement.componentInstance;
+    let data = component.dayDiff('2022/12/08');
+    expect(data).toEqual(30);
+  }));
+
 });

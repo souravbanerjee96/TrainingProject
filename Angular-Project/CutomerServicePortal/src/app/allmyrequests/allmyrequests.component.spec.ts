@@ -49,6 +49,14 @@ describe('AllmyrequestsComponent', () => {
     expect(data).toEqual('Abcvvvsishjjjjjjjjjjjjjjjjj...');
   }));
 
+  it('should format time', async(() => {
+    fixture = TestBed.createComponent(AllmyrequestsComponent);
+    component = fixture.debugElement.componentInstance;
+    var obj = "2022-10-30 13:10:31.167";
+    let data = component.timeFormat(obj);
+    expect(data).toEqual('2022/10/30 1:10:31 PM');
+  }));
+
   it('should submit user comment', async(() => {
     fixture = TestBed.createComponent(AllmyrequestsComponent);
     component = fixture.debugElement.componentInstance;
@@ -78,5 +86,18 @@ describe('AllmyrequestsComponent', () => {
     expect(data).toEqual(false);
   }));
 
+  it('should Capture Edit Request', async(() => {
+    fixture = TestBed.createComponent(AllmyrequestsComponent);
+    component = fixture.debugElement.componentInstance;
+    let data = component.captureEditreq(1);
+    expect(data).toEqual();
+  }));
+
+  it('should Capture Edit Object', async(() => {
+    fixture = TestBed.createComponent(AllmyrequestsComponent);
+    component = fixture.debugElement.componentInstance;
+    let data = component.captureEditreq({});
+    expect(data).toEqual();
+  }));
 
 });

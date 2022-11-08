@@ -17,7 +17,7 @@ namespace CustomerServiceReq.Controllers
         CustomerServiceRequestsContext db = new CustomerServiceRequestsContext();
 
         [HttpGet("{id:int}")]
-        public IEnumerable<object> Get(int id)
+        public Object[] Get(int id)
         {
             //return db.ServiceRequests.Where(x=>x.UserId==id && x.IsDeleted==0).OrderByDescending(x=>x.AddedDate);
             var data = from srq in db.ServiceRequests
@@ -38,11 +38,12 @@ namespace CustomerServiceReq.Controllers
                            UserId = srq.UserId,
                            IsDeleted = srq.IsDeleted,
                            Status = r.Status == null ? "O" : r.Status,
+                           StatusState = r.Status == null ? 1 : r.Status == "C" ? 2 : r.Status == "R" ? 3 : r.Status == "I" ? 4 : 99, //StatusState for Mutipurpose
                            Comment = r.Comment == null ? "No Comment" : r.Comment,
                            IsUserAccepted = r.IsUserAccepted == null ? 0 : r.IsUserAccepted,
                            UserComment = r.UserComment == null ? "No User Comment" : r.UserComment
                        };
-            return data;
+            return data.ToArray();
         }
 
         [HttpPost]

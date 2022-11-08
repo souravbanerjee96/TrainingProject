@@ -25,6 +25,7 @@ namespace CustomerApp.Controllers
             _configuration = conf;
         }
 
+
         CustomerServiceUsersContext db = new CustomerServiceUsersContext();
 
         [AllowAnonymous]
@@ -115,6 +116,8 @@ namespace CustomerApp.Controllers
                     //data.PanNo = sr.PanNo;
                     db.SaveChanges();
                 }
+                else
+                    return NotFound();
             }
             catch (Exception ex)
             {

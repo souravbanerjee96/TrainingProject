@@ -1,0 +1,44 @@
+        [Test]
+        public void isRestApiWorking()
+        {
+            RestClient client = new RestClient("http://api.zippopotam.us");
+            RestRequest request = new RestRequest("nl/3825", Method.Get);
+            var response = client.Execute(request);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        }
+
+Assert.That(response.ContentType, Is.EqualTo("application/json"));
+
+[TestCase("nl", "3825", HttpStatusCode.OK, TestName = "Check status code for NL zip code 7411")]
+[TestCase("lv", "1050", HttpStatusCode.NotFound, TestName = "Check status code for LV zip code 1050")]
+public void StatusCodeTest(string countryCode, string zipCode, HttpStatusCode expectedHttpStatusCode)
+{
+    // arrange
+    RestClient client = new RestClient("http://api.zippopotam.us");
+    RestRequest request = new RestRequest($"{countryCode}/{zipCode}", Method.GET);
+
+    // act
+    IRestResponse response = client.Execute(request);
+
+    // assert
+    Assert.That(response.StatusCode, Is.EqualTo(expectedHttpStatusCode));
+}
+
+[Test]
+public void StateSerializationTest()
+{
+    // arrange
+    RestClient client = new RestClient("http://api.zippopotam.us");
+    RestRequest request = new RestRequest("us/12345", Method.GET);
+
+    // act
+    IRestResponse response = client.Execute(request);
+    LocationResponse locationResponse =
+        new JsonDeserializer().
+        Deserialize<LocationResponse>(response);
+
+    // assert
+    Assert.That(locationResponse.Places[0].State, Is.EqualTo("New York"));
+}
+
+

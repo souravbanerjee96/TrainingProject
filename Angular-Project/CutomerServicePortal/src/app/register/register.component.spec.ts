@@ -44,4 +44,13 @@ describe('RegisterComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h3')?.textContent).toContain('Registration Form');
   });
+
+  it('should register user', async(() => {
+    fixture = TestBed.createComponent(RegisterComponent);
+    component = fixture.debugElement.componentInstance;
+    let data = component.regUser();
+    expect(data).toEqual();
+  }));
+
+
 });

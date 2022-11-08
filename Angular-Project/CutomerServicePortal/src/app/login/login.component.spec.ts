@@ -43,4 +43,13 @@ describe('LoginComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h2')?.textContent).toContain('Customer Login');
   });
+
+  it('should login user', async(() => {
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.debugElement.componentInstance;
+    let data = component.loginUser();
+    expect(data).toEqual();
+  }));
+
+
 });

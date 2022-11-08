@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LoginServiceService } from '../services/login-service.service';
 import { userAuth } from '../models/userData';
 import { Router } from '@angular/router';
-import { NgToastService } from 'ng-angular-popup';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -50,7 +49,7 @@ export class LoginComponent implements OnInit {
           document.getElementById('loginFail')?.click();
         }
         window.setTimeout(() => {
-          this._router.navigate(['login/auth']);
+          //this._router.navigate(['login/auth']);
           this.Errorflag = 0;
         }, 1000);
         //document.getElementById('btnErrormsg')?.click();

@@ -58,6 +58,7 @@ export class AdminportalComponent implements OnInit {
     this.http.get<any>(this._baseURL).subscribe(res => {
       this.filtersLoaded = Promise.resolve(true);
       this.adminReqs = res;
+      console.log(res);
       window.setTimeout(() => {
         this.dataloaded = true;
       }, 1000);
