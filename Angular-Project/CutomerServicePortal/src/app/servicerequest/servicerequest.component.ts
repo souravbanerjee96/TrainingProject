@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { servicereq } from './servicerequest.Model';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { LoginServiceService } from '../services/login-service.service';
@@ -11,32 +11,51 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./css/style.css']
 })
 export class ServicerequestComponent implements OnInit {
-
+  mobile: boolean = false;
+  public getScreenWidth: any;
+  public getScreenHeight: any;
   ngOnInit(): void {
+    // if (window.screen.width < 600) {
+    //   this.mobile = true;
+    // }
   }
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.screen.width;
+    this.getScreenHeight = window.screen.height;
+    if (this.getScreenWidth < 600){
+      //console.log(this.getScreenWidth);
+      this.mobile = true;
+    }
+    else{
+      //console.log(this.getScreenWidth);
+      this.mobile = false;
+    }
+  }
+
   @ViewChild('myInputVariable', { static: false })
   myInput!: ElementRef;
 
   @ViewChild('requestForm') myForm!: NgForm;
 
-  dataloaded:boolean=true;
+  dataloaded: boolean = true;
   imagedata: any;
   reqAddSuccess = 0;
   reqErrorMsg = '';
   req_form: FormGroup;
   private _baseURL = GlobalVariable.BASE_API_URL + 'ServiceReq';
   isEditauthor = false;
-  constructor(private http: HttpClient, private _loginS: LoginServiceService, fb: FormBuilder,public datepipe: DatePipe) {
+  constructor(private http: HttpClient, private _loginS: LoginServiceService, fb: FormBuilder, public datepipe: DatePipe) {
     this.req_form = fb.group({
       'ServiceName': [null, Validators.required],
       'RequiredDate': [null, Validators.required],
       'ServiceType': [null, Validators.required],
       'ServiceDetails': [null, Validators.compose([Validators.required, Validators.pattern(/^.{50,5000}$/s)])],
     });
-   
+
   }
-  currdt:Date = new Date();
-  currD = this.currdt.setDate(this.currdt.getDate()+1);
+  currdt: Date = new Date();
+  currD = this.currdt.setDate(this.currdt.getDate() + 1);
   todayDate = this.datepipe.transform((this.currD), 'yyyy-MM-dd');
 
   getSuccess(_input: any) {
@@ -61,11 +80,11 @@ export class ServicerequestComponent implements OnInit {
       err => {
         this.dataloaded = true;
         document.getElementById('myreqFailed')?.click();
-        console.log("error = > "+JSON.stringify(err.error.errors));
+        console.log("error = > " + JSON.stringify(err.error.errors));
         //this.reqErrorMsg = err.error.message;
       });
 
 
   }
-  
+
 }

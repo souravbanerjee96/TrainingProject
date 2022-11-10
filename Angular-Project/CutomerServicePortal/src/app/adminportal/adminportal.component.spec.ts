@@ -53,7 +53,7 @@ describe('AdminportalComponent', () => {
   it('should differentiate date', async(() => {
     fixture = TestBed.createComponent(AdminportalComponent);
     component = fixture.debugElement.componentInstance;
-    let data = component.dayDiff('2022/12/08');
+    let data = component.dayDiff('2022/12/09');
     expect(data).toEqual(30);
   }));
 

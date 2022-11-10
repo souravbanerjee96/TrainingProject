@@ -1,6 +1,5 @@
 ﻿using CustomerServiceReq.Controllers;
-using CustomerUsers.Models;
-using Microsoft.Extensions.Configuration;
+using CustomerServices.Models;
 using NUnit.Framework;
 using RestSharp;
 using System.Collections;
@@ -27,7 +26,36 @@ namespace CustomerServiceTest
         {
             int id = 4;
             dynamic result = serviceReqController.Get(id);
-            Assert.That(result[0].ServiceType, Is.EqualTo("Technology"));
+            Assert.IsNotNull(result[0]);
+        }
+        [Test]
+        public void PostRequest_check()
+        {
+            ServiceRequest sr = new ServiceRequest
+            {
+                ServiceName = "testService",
+                ServiceType = "Test"
+            };
+            dynamic result = serviceReqController.Post(sr);
+            Assert.That(result.StatusCode, Is.EqualTo(200));
+        }
+
+        [Test]
+        public void UpdateRequestCheck_with_InvalidID()
+        {
+            ServiceRequest sr = new ServiceRequest
+            {
+                ServiceName = "testService",
+                ServiceType = "Test"
+            };
+            dynamic result = serviceReqController.UpdateReq(99,sr);
+            Assert.That(result.StatusCode, Is.EqualTo(404));
+        }
+        [Test]
+        public void DeleteRequestCheck_with_InvalidID()
+        {
+            dynamic result = serviceReqController.DeleteReq(9999);
+            Assert.That(result.StatusCode, Is.EqualTo(404));
         }
 
     }

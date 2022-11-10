@@ -33,7 +33,7 @@
                 
               <div class="form-outline form-white mb-2">
                 <input type="password" [(ngModel)]="userA.Password" id="typePasswordX"
-                  class="form-control form-control-lg" />
+                  class="form-control form-control-lg" (keyup.enter)="loginUser()"/>
                 <label class="form-label" for="typePasswordX">Password</label>
               </div>
 

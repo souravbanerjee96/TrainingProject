@@ -88,8 +88,9 @@
 
 
               <div class="row">
-                <div class="col-md-5 mb-4 pb-2 ">
-                  <select id="country" name="country" formControlName="Country" class="select form-control-lg" [(ngModel)]="regData.Country">
+                <div class="col-md-6 mb-4 pb-2">
+                  <select id="country" name="country" formControlName="Country" 
+                  class="select form-control-lg selection_overflow" [(ngModel)]="regData.Country"  style="width: 300px">
                     <option value="">Select Country</option>
                     <option value="India">India</option>
                   </select>
@@ -100,7 +101,7 @@
                 <div class="col-md-6 mb-4 pb-2">
 
                   <!--- India states -->
-                  <select id="country-state" name="country-state" class="select form-control-lg" formControlName="State"
+                  <select id="country-state" name="country-state" class="select form-control-lg selection_overflow" formControlName="State"
                     [(ngModel)]="regData.State">
                     <option value="">Select State</option>
                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>

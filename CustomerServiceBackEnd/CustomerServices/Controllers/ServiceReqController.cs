@@ -76,6 +76,8 @@ namespace CustomerServiceReq.Controllers
                     data.ServiceDetails = sr.ServiceDetails;
                     db.SaveChanges();
                 }
+                else
+                    return NotFound();
             }
             catch (Exception ex)
             {
@@ -90,8 +92,14 @@ namespace CustomerServiceReq.Controllers
             try
             {
                 var data = db.ServiceRequests.Where(x => x.Id == id).FirstOrDefault();
-                data.IsDeleted = 1;
-                db.SaveChanges();
+                if (data != null)
+                {
+                    data.IsDeleted = 1;
+                    db.SaveChanges();
+                }
+                else
+                    return NotFound();
+
             }
             catch (Exception ex)
             {

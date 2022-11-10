@@ -2,5 +2,6 @@ scaffold-Dbcontext "Data Source=CTSDOTNET858;Initial Catalog=CustomerServiceUser
 
 [ApiExplorerSettings(IgnoreApi = true)]
 
-N-unit
-azure container registry
+Server=tcp:customerservicereq.database.windows.net,1433;Initial Catalog=CustomerServiceUsers;Persist Security Info=False;User ID=cs;Password=pass@6235;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+Server=tcp:customerserviceresolution.database.windows.net,1433;Initial Catalog=CustomerServiceRequests;Persist Security Info=False;User ID=cs;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
